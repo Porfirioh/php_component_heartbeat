@@ -24,7 +24,7 @@ interface HeartbeatClientInterface
     public function knock();
 
     /**
-     * Returns uptime of the current client.
+     * Returns uptime of the current client in seconds.
      *
      * @return integer - runtime in seconds
      * @author stev leibelt <artodeto@arcor.de>
