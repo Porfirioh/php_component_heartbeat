@@ -48,11 +48,17 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
     public function attachHeartbeat(HeartbeatInterface $heartbeat)
     {
         $pulse = $this->getPulse($heartbeat);
+        $hash = spl_object_hash($heartbeat);
 
         if (!isset($this->heartbeats[$pulse])) {
             $this->heartbeats[$pulse][] = array();
         }
-        $this->heartbeats[$pulse][] = $heartbeat;
+        if (isset($this->heartbeats[$pulse][$hash])) {
+            throw new InvalidArgumentException(
+                'Can not add attached heartbeat.'
+            );
+        }
+        $this->heartbeats[$pulse][$hash] = $heartbeat;
     }
 
     /**
@@ -61,9 +67,13 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
     public function detachHeartbeat(HeartbeatInterface $heartbeat)
     {
         $pulse = $this->getPulse($heartbeat);
+        $hash = spl_object_hash($heartbeat);
 
-        if (!isset($this->heartbeats[$pulse])) {
-            $this->heartbeats[$pulse][] = array();
+        if ((!isset($this->heartbeats[$pulse]))
+            || (isset($this->heartbeats[$pulse][$hash]))) {
+            throw new InvalidArgumentException(
+                'Can not detach not attached heartbeat.'
+            );
         }
         $this->heartbeats[$pulse][] = $heartbeat;
     }
