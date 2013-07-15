@@ -7,13 +7,15 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class Heartbeat
+ * Class HeartbeatAbstract.
+ * You have to implement the knock method. The implementation depends on your client.
+ * If you need to call a url or what ever.
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-class Heartbeat implements HeartbeatInterface, PulseableInterface
+abstract class HeartbeatAbstract implements HeartbeatInterface, PulseableInterface
 {
     /**
      * @var integer
@@ -37,14 +39,6 @@ class Heartbeat implements HeartbeatInterface, PulseableInterface
     {
         $this->pulse = 5;
         $this->startTime = time();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function knock()
-    {
-        return time();
     }
 
     /**
