@@ -7,13 +7,13 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatClient
+ * Class Heartbeat
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-class HeartbeatClient implements HeartbeatClientInterface, PulseableInterface
+class Heartbeat implements HeartbeatInterface, PulseableInterface
 {
     /**
      * @var integer

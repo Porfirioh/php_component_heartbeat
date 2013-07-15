@@ -6,13 +6,13 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatClientInterface
+ * Class HeartbeatInterface
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-11
  */
-interface HeartbeatClientInterface
+interface HeartbeatInterface
 {
     /**
      * This method returns the current timestamp as heartbeat.
@@ -29,6 +29,7 @@ interface HeartbeatClientInterface
      * @return integer - runtime in seconds
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
+     * @todo discuss if it makes sense to put this into an other interface
      */
     public function getUptime();
 
@@ -38,6 +39,7 @@ interface HeartbeatClientInterface
      * @return integer - memory usage in bytes
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
+     * @todo discuss if it makes sense to put this into an other interface
      */
     public function getMemoryUsage();
 }

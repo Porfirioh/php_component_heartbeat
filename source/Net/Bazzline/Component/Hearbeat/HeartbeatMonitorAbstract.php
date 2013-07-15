@@ -7,13 +7,13 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatServerAbstract
+ * Class HeartbeatMonitorAbstract
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-abstract class HeartbeatServerAbstract implements HeartbeatServerInterface
+abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
 {
     /**
      * @var array
@@ -34,13 +34,13 @@ abstract class HeartbeatServerAbstract implements HeartbeatServerInterface
     /**
      * Adds a client to the observer
      *
-     * @param HeartbeatClientInterface $client
+     * @param HeartbeatInterface $client
      *
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since  2013-07-14
      */
-    public function addClient(HeartbeatClientInterface $client)
+    public function addHeartbeat(HeartbeatInterface $client)
     {
         if ($client instanceof PulseableInterface) {
             $pulse = $client->getPulse();
