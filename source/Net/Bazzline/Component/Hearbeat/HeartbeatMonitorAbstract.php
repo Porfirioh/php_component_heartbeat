@@ -6,6 +6,7 @@
 
 namespace Net\Bazzline\Component\Heartbeat;
 
+use InvalidArgumentException;
 use RuntimeException;
 
 /**
@@ -44,13 +45,22 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
     /**
      * {@inheritDoc}
      */
-    public function addHeartbeat(HeartbeatInterface $heartbeat)
+    public function attachHeartbeat(HeartbeatInterface $heartbeat)
     {
-        if ($heartbeat instanceof PulseableInterface) {
-            $pulse = $heartbeat->getPulse();
-        } else {
-            $pulse = 0;
+        $pulse = $this->getPulse($heartbeat);
+
+        if (!isset($this->heartbeats[$pulse])) {
+            $this->heartbeats[$pulse][] = array();
         }
+        $this->heartbeats[$pulse][] = $heartbeat;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function detachHeartbeat(HeartbeatInterface $heartbeat)
+    {
+        $pulse = $this->getPulse($heartbeat);
 
         if (!isset($this->heartbeats[$pulse])) {
             $this->heartbeats[$pulse][] = array();
@@ -93,4 +103,21 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
      * @since 2013-07-15
      */
     abstract protected function handleHeartAttack(HeartbeatInterface $heartbeat);
+
+    /**
+     * @param HeartbeatInterface $heartbeat
+     * @return int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-15
+     */
+    private function getPulse(HeartbeatInterface $heartbeat)
+    {
+        if ($heartbeat instanceof PulseableInterface) {
+            $pulse = $heartbeat->getPulse();
+        } else {
+            $pulse = 0;
+        }
+
+        return $pulse;
+    }
 }

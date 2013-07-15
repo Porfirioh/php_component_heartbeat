@@ -29,6 +29,8 @@ interface HeartbeatMonitorInterface
      *
      * @param HeartbeatInterface $heartbeat
      * @return $this
+     * @throws \InvalidArgumentException - if you want to detach a non attached
+     *  heartbeat
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
