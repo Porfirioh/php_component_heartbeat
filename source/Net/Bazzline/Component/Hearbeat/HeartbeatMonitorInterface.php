@@ -17,12 +17,12 @@ interface HeartbeatMonitorInterface
     /**
      * Adds a client to the observer
      *
-     * @param HeartbeatInterface $client
+     * @param HeartbeatInterface $heartbeat
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
-    public function addHeartbeat(HeartbeatInterface $client);
+    public function addHeartbeat(HeartbeatInterface $heartbeat);
 
     /**
      * Listen to each added client. Implement handling of error here.

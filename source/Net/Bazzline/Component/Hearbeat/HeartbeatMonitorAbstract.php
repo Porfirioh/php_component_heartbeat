@@ -34,16 +34,16 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
     /**
      * Adds a client to the observer
      *
-     * @param HeartbeatInterface $client
+     * @param HeartbeatInterface $heartbeat
      *
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since  2013-07-14
      */
-    public function addHeartbeat(HeartbeatInterface $client)
+    public function addHeartbeat(HeartbeatInterface $heartbeat)
     {
-        if ($client instanceof PulseableInterface) {
-            $pulse = $client->getPulse();
+        if ($heartbeat instanceof PulseableInterface) {
+            $pulse = $heartbeat->getPulse();
         } else {
             $pulse = 0;
         }
@@ -51,6 +51,6 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
         if (!isset($this->clients[$pulse])) {
             $this->clients[$pulse][] = array();
         }
-        $this->clients[$pulse][] = $client;
+        $this->clients[$pulse][] = $heartbeat;
     }
 }
