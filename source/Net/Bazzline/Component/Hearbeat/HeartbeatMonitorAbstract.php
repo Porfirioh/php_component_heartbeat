@@ -59,6 +59,8 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
             );
         }
         $this->heartbeats[$pulse][$hash] = $heartbeat;
+
+        return $this;
     }
 
     /**
@@ -75,7 +77,9 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
                 'Can not detach not attached heartbeat.'
             );
         }
-        $this->heartbeats[$pulse][] = $heartbeat;
+        unset($this->heartbeats[$pulse][$hash]);
+
+        return $this;
     }
 
     /**
