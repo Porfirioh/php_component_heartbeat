@@ -16,10 +16,27 @@ namespace Net\Bazzline\Component\Heartbeat;
 class LocalHeartbeat extends HeartbeatAbstract
 {
     /**
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-15
+     */
+    protected $timestamp;
+
+    /**
      * {@inheritDoc}
      */
     public function knock()
     {
-        return time();
+        return $this->timestamp;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function beat()
+    {
+        $this->timestamp = time();
+
+        return $this;
     }
 }

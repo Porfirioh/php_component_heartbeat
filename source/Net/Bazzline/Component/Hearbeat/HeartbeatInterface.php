@@ -27,4 +27,13 @@ interface HeartbeatInterface
      * @since 2013-07-11
      */
     public function knock();
+
+    /**
+     * This method updates the current heartbeat.
+     *
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-15
+     */
+    public function beat();
 }

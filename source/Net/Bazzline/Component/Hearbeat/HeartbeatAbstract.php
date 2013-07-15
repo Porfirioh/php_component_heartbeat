@@ -39,6 +39,7 @@ abstract class HeartbeatAbstract implements HeartbeatInterface, PulseableInterfa
     {
         $this->pulse = 5;
         $this->startTime = time();
+        $this->beat();
     }
 
     /**
