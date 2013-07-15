@@ -6,6 +6,8 @@
 
 namespace Net\Bazzline\Component\Heartbeat;
 
+use RuntimeException;
+
 /**
  * Class HeartbeatMonitorAbstract
  *
@@ -68,9 +70,11 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
         foreach ($availablePulses as $pulse) {
             if ($maximumPulse <= $pulse) {
                 foreach ($this->heartbeats[$pulse] as $heartbeat) {
-                    //how to handle timeout?
-                    //how to handle return value of null?
-                    //how to handle valid return value?
+                    try {
+                        $heartbeat->knock();
+                    } catch (RuntimeException $exception) {
+                        $this->handleHeartAttack($heartbeat);
+                    }
                 }
             }
         }
@@ -79,4 +83,14 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
 
         return $this;
     }
+
+
+
+    /**
+     * @param HeartbeatInterface $heartbeat
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-15
+     */
+    abstract protected function handleHeartAttack(HeartbeatInterface $heartbeat);
 }

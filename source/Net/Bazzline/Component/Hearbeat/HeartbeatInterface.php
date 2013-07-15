@@ -16,6 +16,10 @@ interface HeartbeatInterface
 {
     /**
      * This method returns the current timestamp as heartbeat.
+     * The knock method in each client takes care of the following situations:
+     *  - How to handle timeout?
+     *  - How to handle return value of null?
+     *  - How to handle valid return value?
      *
      * @return integer - current timestamp, if not, the heart is broken
      * @throws \RuntimeException
