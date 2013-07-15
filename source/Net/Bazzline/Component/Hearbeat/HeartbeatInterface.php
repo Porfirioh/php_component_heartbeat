@@ -27,24 +27,4 @@ interface HeartbeatInterface
      * @since 2013-07-11
      */
     public function knock();
-
-    /**
-     * Returns uptime of the current client in seconds.
-     *
-     * @return integer - runtime in seconds
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-11
-     * @todo discuss if it makes sense to put this into an other interface
-     */
-    public function getUptime();
-
-    /**
-     * Returns memory usage of the current client.
-     *
-     * @return integer - memory usage in bytes
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-11
-     * @todo discuss if it makes sense to put this into an other interface
-     */
-    public function getMemoryUsage();
 }
