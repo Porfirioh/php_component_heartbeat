@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
 {
     /**
-     * @var array|
+     * @var array(int => HeartbeatInterface[])
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
