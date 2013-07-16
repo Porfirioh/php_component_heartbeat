@@ -7,6 +7,10 @@ namespace Net\Bazzline\Component\Heartbeat;
 
 /**
  * Class HeartbeatInterface
+ * The knock method in each client takes care of the following situations:
+ *  - How to handle timeout?
+ *  - How to handle return value of null?
+ *  - How to handle valid return value?
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
@@ -16,12 +20,8 @@ interface HeartbeatInterface
 {
     /**
      * This method returns the current timestamp as heartbeat.
-     * The knock method in each client takes care of the following situations:
-     *  - How to handle timeout?
-     *  - How to handle return value of null?
-     *  - How to handle valid return value?
      *
-     * @return integer - current timestamp, if not, the heart is broken
+     * @return integer - timestamp of last beat
      * @throws \RuntimeException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
@@ -36,4 +36,13 @@ interface HeartbeatInterface
      * @since 2013-07-15
      */
     public function beat();
+
+    /**
+     * Handles case if knock throws an error
+     *
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-16
+     */
+    public function handleHeartAttack();
 }
