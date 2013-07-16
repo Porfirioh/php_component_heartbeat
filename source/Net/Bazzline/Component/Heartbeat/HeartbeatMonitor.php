@@ -51,7 +51,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
         $hash = spl_object_hash($heartbeat);
 
         if (!isset($this->heartbeats[$pulse])) {
-            $this->heartbeats[$pulse][] = array();
+            $this->heartbeats[$pulse] = array();
         }
         if (isset($this->heartbeats[$pulse][$hash])) {
             throw new InvalidArgumentException(
@@ -72,7 +72,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
         $hash = spl_object_hash($heartbeat);
 
         if ((!isset($this->heartbeats[$pulse]))
-            || (isset($this->heartbeats[$pulse][$hash]))) {
+            || (!isset($this->heartbeats[$pulse][$hash]))) {
             throw new InvalidArgumentException(
                 'Can not detach not attached heartbeat'
             );
