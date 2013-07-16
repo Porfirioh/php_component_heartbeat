@@ -10,16 +10,16 @@ use InvalidArgumentException;
 use RuntimeException;
 
 /**
- * Class HeartbeatMonitorAbstract
+ * Class HeartbeatMonitor
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
+class HeartbeatMonitor implements HeartbeatMonitorInterface
 {
     /**
-     * @var array(int => HeartbeatInterface[])
+     * @var array
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
@@ -94,10 +94,13 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
         foreach ($availablePulses as $pulse) {
             if ($maximumPulse <= $pulse) {
                 foreach ($this->heartbeats[$pulse] as $heartbeat) {
+                    /**
+                     * @var $heartbeat HeartbeatInterface
+                     */
                     try {
                         $heartbeat->knock();
                     } catch (RuntimeException $exception) {
-                        $this->handleHeartAttack($heartbeat);
+                        $heartbeat->handleHeartAttack();
                     }
                 }
             }
@@ -107,16 +110,6 @@ abstract class HeartbeatMonitorAbstract implements HeartbeatMonitorInterface
 
         return $this;
     }
-
-
-
-    /**
-     * @param HeartbeatInterface $heartbeat
-     * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-15
-     */
-    abstract protected function handleHeartAttack(HeartbeatInterface $heartbeat);
 
     /**
      * @param HeartbeatInterface $heartbeat
