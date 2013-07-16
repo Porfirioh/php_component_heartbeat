@@ -45,7 +45,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     /**
      * {@inheritDoc}
      */
-    public function attachHeartbeat(HeartbeatInterface $heartbeat)
+    public function attach(HeartbeatInterface $heartbeat)
     {
         $pulse = $this->getPulse($heartbeat);
         $hash = spl_object_hash($heartbeat);
@@ -66,7 +66,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     /**
      * {@inheritDoc}
      */
-    public function detachHeartbeat(HeartbeatInterface $heartbeat)
+    public function detach(HeartbeatInterface $heartbeat)
     {
         $pulse = $this->getPulse($heartbeat);
         $hash = spl_object_hash($heartbeat);
