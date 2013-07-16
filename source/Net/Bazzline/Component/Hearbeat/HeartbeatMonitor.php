@@ -38,7 +38,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
      */
     public function __construct()
     {
-        $this->heartbeats = array();
+        $this->detachAll();
         $this->lastListen = time();
     }
 
@@ -78,6 +78,31 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
             );
         }
         unset($this->heartbeats[$pulse][$hash]);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAll()
+    {
+        $heartbeats = array();
+        foreach ($this->heartbeats as $heartbeatsPerPulse) {
+            foreach ($heartbeatsPerPulse as $heartbeat) {
+                $heartbeats[] = $heartbeat;
+            }
+        }
+
+        return $heartbeats;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function detachAll()
+    {
+        $this->heartbeats = array();
 
         return $this;
     }

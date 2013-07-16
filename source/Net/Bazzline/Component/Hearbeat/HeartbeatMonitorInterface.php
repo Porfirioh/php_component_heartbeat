@@ -25,7 +25,7 @@ interface HeartbeatMonitorInterface
     public function attach(HeartbeatInterface $heartbeat);
 
     /**
-     * Removes a client to the observer
+     * Removes an attached client to the observer
      *
      * @param HeartbeatInterface $heartbeat
      * @return $this
@@ -35,6 +35,24 @@ interface HeartbeatMonitorInterface
      * @since 2013-07-14
      */
     public function detach(HeartbeatInterface $heartbeat);
+
+    /**
+     * Returns all attached clients
+     *
+     * @return array|HeartbeatInterface[]
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    public function getAll();
+
+    /**
+     * Removes all attached clients
+     *
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    public function detachAll();
 
     /**
      * Listen to each added client. Implement handling of error here.
