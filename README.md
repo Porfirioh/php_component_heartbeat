@@ -12,6 +12,9 @@ The main idea is to provide a heartbeat over parallel running threads or on diff
 
 Both components are designed to be used on the monitor (observer) as well as on the heartbeat (client) side.
 
+You should create process that uses the monitor that knocks attached heartbeats. The heartbeat is used in the monitor to *knock* and is used in the process to *beat*. The *beat* is called in the process and updates the status informations. The *knock* reads the status information and provides it to the monitor (if needed). The *knock* also throws an exception. If an exception occures, the monitor has to call the heartbeat method *handleHeartAttack* since the heartbeat itself only knows what to do and how to do.  
+The heartbeat can implement a *PulseableInterface*. This can be used to call the heartbeat only every $x seconds. How to handle a call below the pulse can be implemented in the heartbeat. To call the heartbeat in an interval with a minimum of the provided pulse is a gentleman agreement between the monitor and the heartbeat.
+
 ### Heartbeat
 
 The heartbeat itself has a *beat* method.
