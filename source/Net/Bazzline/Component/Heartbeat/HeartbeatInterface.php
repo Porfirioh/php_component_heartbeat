@@ -5,6 +5,8 @@
  */
 namespace Net\Bazzline\Component\Heartbeat;
 
+use \RuntimeException;
+
 /**
  * Class HeartbeatInterface
  * The knock method in each client takes care of the following situations:
@@ -40,9 +42,10 @@ interface HeartbeatInterface
     /**
      * Handles case if knock throws an error
      *
+     * @param \RuntimeException $exception
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-16
      */
-    public function handleHeartAttack();
+    public function handleHeartAttack(RuntimeException $exception);
 }

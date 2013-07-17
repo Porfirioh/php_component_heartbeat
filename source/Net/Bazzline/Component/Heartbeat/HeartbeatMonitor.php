@@ -125,7 +125,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
                     try {
                         $heartbeat->knock();
                     } catch (RuntimeException $exception) {
-                        $heartbeat->handleHeartAttack();
+                        $heartbeat->handleHeartAttack($exception);
                     }
                 }
             }
