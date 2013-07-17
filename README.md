@@ -90,3 +90,11 @@ A simple example is following.
          PRIMARY KEY (`id`),
          INDEX `createdAt` (`created_at`)
     ) Engine=InnoDB DEFAULT CHARSET=utf8 COMMENT='my short comment';
+
+# Examples
+
+## JSON Based Implementation
+
+    php example/Example/JSONBasedImplementation/Example.php
+
+Investigate code if you want to.
