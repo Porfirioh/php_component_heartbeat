@@ -6,8 +6,6 @@
 
 namespace Net\Bazzline\Component\Heartbeat;
 
-use InvalidArgumentException;
-
 /**
  * Class HeartbeatMonitor
  *
@@ -53,7 +51,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
             $this->heartbeats[$pulse] = array();
         }
         if (isset($this->heartbeats[$pulse][$hash])) {
-            throw new InvalidArgumentException(
+            throw new HeartbeatMonitorInvalidArgumentException(
                 'Can not add already attached heartbeat'
             );
         }
@@ -72,7 +70,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
 
         if ((!isset($this->heartbeats[$pulse]))
             || (!isset($this->heartbeats[$pulse][$hash]))) {
-            throw new InvalidArgumentException(
+            throw new HeartbeatMonitorInvalidArgumentException(
                 'Can not detach not attached heartbeat'
             );
         }

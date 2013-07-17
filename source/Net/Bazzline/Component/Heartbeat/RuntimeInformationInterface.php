@@ -3,6 +3,7 @@
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-15
  */
+
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
