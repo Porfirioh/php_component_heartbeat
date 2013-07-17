@@ -4,24 +4,83 @@
  * @since 2013-07-17 
  */
 
-namespace JSONBasedImplementation;
+namespace Example\JSONBasedImplementation;
 
-$example = Example::create()->andRun();
+Example::create()
+    ->andSetupMonitor()
+    ->andSetupHeartbeats(1)
+    ->andRun();
 
+/**
+ * Class Example
+ *
+ * @package Example\JSONBasedImplementation
+ * @author stev leibelt <artodeto@arcor.de>
+ * @since 2013-07-17
+ */
 class Example
 {
+    /**
+     * @var \Net\Bazzline\Component\Heartbeat\HeartbeatMonitorInterface
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    protected $monitor;
+
+    /**
+     * @var \Net\Bazzline\Component\Heartbeat\HeartbeatInterface[]
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    protected $heartbeats;
+
     public static function create()
     {
-        $example = new self();
+        $self = new self();
 
-        return $example;
+        return $self;
     }
 
+    /**
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    public function andSetupMonitor()
+    {
+        $this->monitor = new Monitor();
+
+        return $this;
+    }
+
+    /**
+     * @param int $numberOfHeartbeats
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    public function andSetupHeartbeats($numberOfHeartbeats = 3)
+    {
+        for ($i = 0; $i < $numberOfHeartbeats; $i++) {
+            $heartbeat = new Heartbeat();
+
+            $this->heartbeats[] = $heartbeat;
+
+            $this->monitor->attach($heartbeat);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
     public function andRun()
     {
         //add creation of heartbeats
         //add creation of monitor
-        //implement forking
+
         echo 'Hello';
     }
 }

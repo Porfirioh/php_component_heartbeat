@@ -4,9 +4,18 @@
  * @since 2013-07-17 
  */
 
-namespace JSONBasedImplementation;
+namespace Example\JSONBasedImplementation;
 
+use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
 
-class Monitor {
+/**
+ * Class Monitor
+ *
+ * @package Example\JSONBasedImplementation
+ * @author stev leibelt <artodeto@arcor.de>
+ * @since 2013-07-17
+ */
+class Monitor extends HeartbeatMonitor
+{
 
 }
