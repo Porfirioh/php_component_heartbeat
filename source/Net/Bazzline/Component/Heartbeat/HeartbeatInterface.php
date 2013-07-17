@@ -41,7 +41,7 @@ interface HeartbeatInterface
     /**
      * Handles case if knock throws an error
      *
-     * @param RuntimeException $exception
+     * @param RuntimeException|CriticalRuntimeException|WarningRuntimeException $exception
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-16
