@@ -123,7 +123,10 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
                         $heartbeat->knock();
                     } catch (RuntimeException $exception) {
                         $heartbeat->handleHeartAttack($exception);
-                        $this->detach($heartbeat);
+                        if ($exception instanceof CriticalRuntimeException)
+                        {
+                            $this->detach($heartbeat);
+                        }
                     }
                 }
             }
