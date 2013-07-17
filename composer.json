@@ -24,7 +24,8 @@
     "autoload": {
         "psr-0": {
             "Net\\Bazzline\\Component\\Heartbeat\\": "source/",
-            "Test\\Net\\Bazzline\\Component\\Heartbeat\\": "test/"
+            "Test\\Net\\Bazzline\\Component\\Heartbeat\\": "test/",
+            "Example\\": "example/"
         }
     }
 }
