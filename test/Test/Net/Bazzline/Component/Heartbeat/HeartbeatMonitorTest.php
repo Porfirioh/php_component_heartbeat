@@ -37,7 +37,7 @@ class HeartbeatMonitorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Net\Bazzline\Component\Heartbeat\HeartbeatMonitorInvalidArgumentException
+     * @expectedException \Net\Bazzline\Component\Heartbeat\InvalidArgumentException
      * @expectedExceptionMessage Can not add already attached heartbeat
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
@@ -55,7 +55,7 @@ class HeartbeatMonitorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Net\Bazzline\Component\Heartbeat\HeartbeatMonitorInvalidArgumentException
+     * @expectedException \Net\Bazzline\Component\Heartbeat\InvalidArgumentException
      * @expectedExceptionMessage Can not detach not attached heartbeat
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17

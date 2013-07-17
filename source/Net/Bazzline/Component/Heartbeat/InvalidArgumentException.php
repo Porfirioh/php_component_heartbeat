@@ -6,13 +6,13 @@
 
 namespace Net\Bazzline\Component\Heartbeat;
 
-use InvalidArgumentException;
+use InvalidArgumentException as ParentClass;
 
 /**
- * Class HeartbeatMonitorInvalidArgumentException
+ * Class InvalidArgumentException
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-17
  */
-class HeartbeatMonitorInvalidArgumentException extends InvalidArgumentException {}
+class InvalidArgumentException extends ParentClass {}

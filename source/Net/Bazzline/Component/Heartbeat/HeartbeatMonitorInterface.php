@@ -18,7 +18,7 @@ interface HeartbeatMonitorInterface
      * Adds a client to the observer
      *
      * @param HeartbeatInterface $heartbeat
-     * @throws HeartbeatMonitorInvalidArgumentException - if you want to attach a attached
+     * @throws InvalidArgumentException - if you want to attach a attached
      *  heartbeat
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
@@ -31,7 +31,7 @@ interface HeartbeatMonitorInterface
      *
      * @param HeartbeatInterface $heartbeat
      * @return $this
-     * @throws HeartbeatMonitorInvalidArgumentException - if you want to detach a non attached
+     * @throws InvalidArgumentException - if you want to detach a non attached
      *  heartbeat
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14

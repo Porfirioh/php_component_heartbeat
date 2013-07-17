@@ -51,7 +51,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
             $this->heartbeats[$pulse] = array();
         }
         if (isset($this->heartbeats[$pulse][$hash])) {
-            throw new HeartbeatMonitorInvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Can not add already attached heartbeat'
             );
         }
@@ -70,7 +70,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
 
         if ((!isset($this->heartbeats[$pulse]))
             || (!isset($this->heartbeats[$pulse][$hash]))) {
-            throw new HeartbeatMonitorInvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Can not detach not attached heartbeat'
             );
         }
