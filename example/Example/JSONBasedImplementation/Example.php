@@ -9,8 +9,9 @@ namespace Example\JSONBasedImplementation;
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 Example::create()
-    ->andSetupMonitor()
-    ->andSetupHeartbeats(1)
+    ->setupMonitor()
+    ->setupHeartbeats(1)
+    ->printStatistic()
     ->andRun();
 
 /**
@@ -48,7 +49,7 @@ class Example
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    public function andSetupMonitor()
+    public function setupMonitor()
     {
         $this->monitor = new Monitor();
 
@@ -61,7 +62,7 @@ class Example
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    public function andSetupHeartbeats($numberOfHeartbeats = 3)
+    public function setupHeartbeats($numberOfHeartbeats = 3)
     {
         for ($i = 0; $i < $numberOfHeartbeats; $i++) {
             $heartbeat = new Heartbeat();
@@ -70,6 +71,21 @@ class Example
 
             $this->monitor->attach($heartbeat);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    public function printStatistic()
+    {
+        echo str_repeat('-', 40) . PHP_EOL;
+        echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
+        echo str_repeat('-', 40) . PHP_EOL;
+        echo PHP_EOL;
 
         return $this;
     }
