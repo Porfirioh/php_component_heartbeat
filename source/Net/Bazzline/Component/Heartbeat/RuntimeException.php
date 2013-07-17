@@ -6,7 +6,7 @@
 
 namespace Net\Bazzline\Component\Heartbeat;
 
-use RuntimeException;
+use RuntimeException as ParentClass;
 
 /**
  * Class HeartbeatRuntimeException
@@ -15,4 +15,4 @@ use RuntimeException;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-17
  */
-class HeartbeatRuntimeException extends RuntimeException {}
+class RuntimeException extends ParentClass {}

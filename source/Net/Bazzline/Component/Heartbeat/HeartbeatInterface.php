@@ -23,7 +23,7 @@ interface HeartbeatInterface
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
-     * @throws HeartbeatRuntimeException
+     * @throws RuntimeException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
@@ -41,10 +41,10 @@ interface HeartbeatInterface
     /**
      * Handles case if knock throws an error
      *
-     * @param HeartbeatRuntimeException $exception
+     * @param RuntimeException $exception
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-16
      */
-    public function handleHeartAttack(HeartbeatRuntimeException $exception);
+    public function handleHeartAttack(RuntimeException $exception);
 }
