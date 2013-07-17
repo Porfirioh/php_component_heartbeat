@@ -6,6 +6,8 @@
 
 namespace Example\JSONBasedImplementation;
 
+require_once __DIR__ . '/../../../vendor/autoload.php';
+
 Example::create()
     ->andSetupMonitor()
     ->andSetupHeartbeats(1)
