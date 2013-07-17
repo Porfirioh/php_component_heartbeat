@@ -7,10 +7,10 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class RuntimeCriticalException
+ * Class CriticalRuntimeException
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-17
  */
-class RuntimeCriticalException extends RuntimeException {}
+class CriticalRuntimeException extends RuntimeException {}

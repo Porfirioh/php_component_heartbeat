@@ -23,7 +23,7 @@ interface HeartbeatInterface
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
-     * @throws RuntimeException
+     * @throws RuntimeException|
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
