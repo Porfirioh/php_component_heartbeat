@@ -6,12 +6,14 @@
 
 namespace Example\JSONBasedImplementation;
 
+use Net\Bazzline\Component\ProcessIdentity\Identity;
+
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 Example::create()
-    ->setupMonitor()
-    ->setupHeartbeats(1)
-    ->printStatistic()
+    ->setLoops(10)
+    ->setupHeartbeats(10, 3, 2)
+    ->printSettings()
     ->andRun();
 
 /**
@@ -24,24 +26,95 @@ Example::create()
 class Example
 {
     /**
-     * @var \Net\Bazzline\Component\Heartbeat\HeartbeatMonitorInterface
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    protected $currentLoop;
+
+    /**
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    protected $loops;
+
+    /**
+     * @var \Net\Bazzline\Component\Heartbeat\HeartbeatMonitor
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
     protected $monitor;
 
     /**
-     * @var \Net\Bazzline\Component\Heartbeat\HeartbeatInterface[]
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    protected $sleep;
+
+    /**
+     * @var Heartbeat[]
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
     protected $heartbeats;
 
+    /**
+     * @return Example
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
     public static function create()
     {
         $self = new self();
+        $self->setupMonitor()
+            ->setLoops(30)
+            ->setSleep(1);
 
         return $self;
+    }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    public function __destruct()
+    {
+        foreach ($this->heartbeats as $heartbeat)
+        {
+            $fileName = $heartbeat->getIdentity()->getId() . '.json';
+            if (file_exists($fileName)) {
+                unlink($fileName);
+            }
+        }
+    }
+
+    /**
+     * @param int $duration
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    public function setLoops($duration = 20)
+    {
+        $this->loops = (int) $duration;
+        $this->currentLoop = 0;
+
+        return $this;
+    }
+
+    /**
+     * @param int $sleep
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    public function setSleep($sleep = 1)
+    {
+        $this->sleep = $sleep;
+
+        return $this;
     }
 
     /**
@@ -58,14 +131,27 @@ class Example
 
     /**
      * @param int $numberOfHeartbeats
+     * @param int $numberOfWarning
+     * @param int $numberOfCritical
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    public function setupHeartbeats($numberOfHeartbeats = 3)
+    public function setupHeartbeats($numberOfHeartbeats = 3, $numberOfWarning = 0, $numberOfCritical = 0)
     {
         for ($i = 0; $i < $numberOfHeartbeats; $i++) {
-            $heartbeat = new Heartbeat();
+            $identity = new Identity();
+            $identity->setId('heartbeat_' . $i);
+            touch($identity->getId() . '.json');
+            $heartbeat = new Heartbeat($identity);
+
+            if ($numberOfWarning > 0) {
+                $heartbeat->setFailsOnBeatNumber(rand(1, ($this->loops - 1)));
+                $numberOfWarning--;
+            } else if ($numberOfCritical > 0) {
+                $heartbeat->setFailsOnBeatNumber(rand(1, ($this->loops - 1)), true);
+                $numberOfCritical--;
+            }
 
             $this->heartbeats[] = $heartbeat;
 
@@ -80,10 +166,12 @@ class Example
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    public function printStatistic()
+    public function printSettings()
     {
         echo str_repeat('-', 40) . PHP_EOL;
         echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
+        echo 'loops: ' . $this->loops . PHP_EOL;
+        echo 'sleep: ' . $this->sleep . PHP_EOL;
         echo str_repeat('-', 40) . PHP_EOL;
         echo PHP_EOL;
 
@@ -96,9 +184,16 @@ class Example
      */
     public function andRun()
     {
-        //add creation of heartbeats
-        //add creation of monitor
+        while ($this->currentLoop < $this->loops) {
+            echo 'loop: ' . $this->currentLoop . '/' . $this->loops . PHP_EOL;
+            foreach ($this->heartbeats as $heartbeat) {
+                $heartbeat->beat();
+            }
+            $this->monitor->listen();
+            sleep($this->sleep);
+            $this->currentLoop++;
+        }
 
-        echo 'Hello';
+        echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
     }
 }
