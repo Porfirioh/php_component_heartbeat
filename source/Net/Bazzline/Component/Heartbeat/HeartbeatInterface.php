@@ -3,9 +3,8 @@
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-11
  */
-namespace Net\Bazzline\Component\Heartbeat;
 
-use \RuntimeException;
+namespace Net\Bazzline\Component\Heartbeat;
 
 /**
  * Class HeartbeatInterface
@@ -24,7 +23,7 @@ interface HeartbeatInterface
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
-     * @throws \RuntimeException
+     * @throws HeartbeatRuntimeException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
@@ -42,10 +41,10 @@ interface HeartbeatInterface
     /**
      * Handles case if knock throws an error
      *
-     * @param \RuntimeException $exception
+     * @param HeartbeatRuntimeException $exception
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-16
      */
-    public function handleHeartAttack(RuntimeException $exception);
+    public function handleHeartAttack(HeartbeatRuntimeException $exception);
 }

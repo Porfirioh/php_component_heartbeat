@@ -7,7 +7,6 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 use InvalidArgumentException;
-use RuntimeException;
 
 /**
  * Class HeartbeatMonitor
@@ -124,7 +123,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
                      */
                     try {
                         $heartbeat->knock();
-                    } catch (RuntimeException $exception) {
+                    } catch (HeartbeatRuntimeException $exception) {
                         $heartbeat->handleHeartAttack($exception);
                     }
                 }
