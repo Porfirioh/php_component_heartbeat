@@ -142,7 +142,6 @@ class Example
         for ($i = 0; $i < $numberOfProcesses; $i++) {
             $identity = new Identity();
             $identity->setId('process_' . $i);
-            touch($identity->getId() . '.json');
             $heartbeat = new Heartbeat($identity);
 
             if ($numberOfWarning > 0) {
