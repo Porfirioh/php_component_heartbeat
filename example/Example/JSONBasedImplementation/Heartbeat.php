@@ -90,6 +90,12 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
      */
     public function knock()
     {
+        if (!file_exists($this->fileName)) {
+            //this should never happen, have you done a beat before?
+            throw new RuntimeException(
+                'no data process file (' . $this->fileName . ') for data exchange found'
+            );
+        }
         $file = json_decode(file_get_contents($this->fileName));
 
         $timeDifference = $this->lastTimeStamp - $file->timestamp;
