@@ -12,7 +12,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 Example::create()
     ->setLoops(10)
-    ->setupHeartbeats(10, 3, 2)
+    ->setupProcesses(10, 3, 2)
     ->printSettings()
     ->andRun();
 
@@ -54,11 +54,11 @@ class Example
     protected $sleep;
 
     /**
-     * @var Heartbeat[]
+     * @var Process[]
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    protected $heartbeats;
+    protected $processes;
 
     /**
      * @return Example
@@ -81,9 +81,9 @@ class Example
      */
     public function __destruct()
     {
-        foreach ($this->heartbeats as $heartbeat)
+        foreach ($this->processes as $process)
         {
-            $fileName = $heartbeat->getIdentity()->getId() . '.json';
+            $fileName = $process->getHeartbeat()->getIdentity()->getId() . '.json';
             if (file_exists($fileName)) {
                 unlink($fileName);
             }
@@ -130,18 +130,18 @@ class Example
     }
 
     /**
-     * @param int $numberOfHeartbeats
+     * @param int $numberOfProcesses
      * @param int $numberOfWarning
      * @param int $numberOfCritical
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    public function setupHeartbeats($numberOfHeartbeats = 3, $numberOfWarning = 0, $numberOfCritical = 0)
+    public function setupProcesses($numberOfProcesses = 3, $numberOfWarning = 0, $numberOfCritical = 0)
     {
-        for ($i = 0; $i < $numberOfHeartbeats; $i++) {
+        for ($i = 0; $i < $numberOfProcesses; $i++) {
             $identity = new Identity();
-            $identity->setId('heartbeat_' . $i);
+            $identity->setId('process_' . $i);
             touch($identity->getId() . '.json');
             $heartbeat = new Heartbeat($identity);
 
@@ -153,7 +153,9 @@ class Example
                 $numberOfCritical--;
             }
 
-            $this->heartbeats[] = $heartbeat;
+            $process = new Process();
+            $process->setHeartbeat($heartbeat);
+            $this->processes[] = $process;
 
             $this->monitor->attach($heartbeat);
         }
@@ -186,8 +188,8 @@ class Example
     {
         while ($this->currentLoop < $this->loops) {
             echo 'loop: ' . $this->currentLoop . '/' . $this->loops . PHP_EOL;
-            foreach ($this->heartbeats as $heartbeat) {
-                $heartbeat->beat();
+            foreach ($this->processes as $process) {
+                $process->execute();
             }
             $this->monitor->listen();
             sleep($this->sleep);
