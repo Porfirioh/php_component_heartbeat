@@ -151,7 +151,11 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     {
         $indent = "\t";
         echo $indent . str_repeat('-', 20) . PHP_EOL;
-        echo $indent . 'Heartbeat with identity ' . $this->getIdentity()->getId() . ' had a heart attack.' . PHP_EOL;
+        if ($exception instanceof CriticalRuntimeException) {
+            echo $indent . 'Heartbeat with identity ' . $this->getIdentity()->getId() . ' had a heart attack.' . PHP_EOL;
+        } else {
+            echo $indent . 'Heartbeat with identity ' . $this->getIdentity()->getId() . ' had an arrythmia.' . PHP_EOL;
+        }
         echo $indent . 'Exception class ' . get_class($exception) . PHP_EOL;
         echo $indent . 'Exception message ' . $exception->getMessage() . PHP_EOL;
         if ($exception instanceof CriticalRuntimeException) {
