@@ -150,6 +150,7 @@ class Client
             $this->heartbeat->beat();
             sleep(1);
         }
+        //$this->heartbeat->getIdentity()->getId();
         $monitor->detach($this->heartbeat);
     }
 }
