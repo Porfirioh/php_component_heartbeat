@@ -114,12 +114,12 @@ class Example
             }
 
             $pid = 'process_' . $i;
-            exec('/usr/local/bin/php ' . __DIR__ . '/Client.php ' .
+            exec('php ' . __DIR__ . '/Client.php ' .
                 $pid . ' ' .
                 $loopsPerClient . ' ' .
                 $fails . ' ' .
                 $failsCritical . ' ' .
-                '  2>/dev/null &');
+                '  1>/dev/null &');
         }
 
         return $this;

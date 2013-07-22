@@ -10,6 +10,8 @@ namespace Example\JSONAndFork;
 use Example\JSONBasedImplementation\Monitor;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
 
+require_once __DIR__ . '/../../../vendor/autoload.php';
+
 if ($argc != 5) {
     echo 'No valid arguments supplied' . PHP_EOL;
     exit(1);
@@ -24,7 +26,7 @@ Client::create()
     ->setPid($pid)
     ->setNumberOfLoops($numberOfLoops)
     ->setFails($fails)
-    ->setFailsCritial($failsCritical)
+    ->setFailsCritical($failsCritical)
     ->andRun();
 
 /**
