@@ -6,8 +6,6 @@
 
 namespace Example\JSONAndFork;
 
-use Example\JSONBasedImplementation\Monitor;
-
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 Example::create()
@@ -65,7 +63,17 @@ class Example
     public function __construct()
     {
         $this->monitor = new Monitor();
+        $this->monitor->createFile();
         $this->sleep = 1;
+    }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-22
+     */
+    public function __destruct()
+    {
+        $this->monitor->deleteFile();
     }
 
     /**
