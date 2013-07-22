@@ -7,6 +7,7 @@
 
 namespace Example\JSONAndFork;
 
+use Example\JSONBasedImplementation\Monitor;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
 
 if ($argc != 5) {
@@ -128,7 +129,7 @@ class Client
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
      */
-    public function setFailsCritial($failsCritical)
+    public function setFailsCritical($failsCritical)
     {
         if ($failsCritical) {
             $this->heartbeat->setFailsOnBeatNumber(rand(1, ($this->numberOfLoops - 1)), true);
@@ -143,9 +144,12 @@ class Client
      */
     public function andRun()
     {
+        $monitor = new Monitor();
+        $monitor->attach($this->heartbeat);
         while ($this->currentLoop < $this->numberOfLoops) {
             $this->heartbeat->beat();
             sleep(1);
         }
+        $monitor->detach($this->heartbeat);
     }
 }
