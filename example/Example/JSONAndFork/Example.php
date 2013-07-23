@@ -149,6 +149,7 @@ class Example
     public function andRun()
     {
         while ($this->currentLoop < $this->loops) {
+            echo PHP_EOL;
             echo 'loop: ' . $this->currentLoop . '/' . $this->loops . PHP_EOL;
             echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
             $this->monitor->listen();
