@@ -232,6 +232,16 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     }
 
     /**
+     * @return bool
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
+    public function shouldFailCritical()
+    {
+        return (!is_null($this->failsCritical) && ($this->failsCritical));
+    }
+
+    /**
      * @return stdClass
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-23
