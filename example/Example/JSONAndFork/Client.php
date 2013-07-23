@@ -22,6 +22,8 @@ $numberOfLoops = (int) $argv[2];
 $fails = (bool) $argv[3];
 $failsCritical = (bool) $argv[4];
 
+echo 'pid: ' . $pid . PHP_EOL;
+
 Client::create()
     ->setPid($pid)
     ->setNumberOfLoops($numberOfLoops)
@@ -79,6 +81,15 @@ class Client
         $self->numberOfLoops = 0;
 
         return $self;
+    }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-22
+     */
+    public function __destruct()
+    {
+        $this->heartbeat->deleteFile();
     }
 
     /**

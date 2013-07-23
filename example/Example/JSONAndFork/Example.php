@@ -114,12 +114,13 @@ class Example
             }
 
             $pid = 'process_' . $i;
-            exec('php ' . __DIR__ . '/Client.php ' .
+            $processStarted = exec('php ' . __DIR__ . '/Client.php ' .
                 $pid . ' ' .
                 $loopsPerClient . ' ' .
                 $fails . ' ' .
                 $failsCritical . ' ' .
                 '  1>/dev/null &');
+            echo 'Called client with pid "' . $pid . '": ' . $processStarted . PHP_EOL;
         }
 
         return $this;

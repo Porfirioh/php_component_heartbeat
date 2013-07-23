@@ -210,6 +210,18 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     }
 
     /**
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
+    public function deleteFile()
+    {
+        $this->removeFile();
+
+        return $this;
+    }
+
+    /**
      * @return stdClass
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-23
