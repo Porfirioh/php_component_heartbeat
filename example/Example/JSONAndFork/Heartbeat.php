@@ -222,6 +222,16 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     }
 
     /**
+     * @return bool
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
+    public function shouldFail()
+    {
+        return (!is_null($this->failsOnBeatNumber));
+    }
+
+    /**
      * @return stdClass
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-23
