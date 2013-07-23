@@ -83,10 +83,13 @@ class Monitor extends HeartbeatMonitor
      */
     public function attach(HeartbeatInterface $heartbeat)
     {
+        /**
+         * @var Heartbeat $heartbeat
+         */
         $hash = spl_object_hash($heartbeat);
         $content = $this->getFileContent();
         $content->heartbeats[$hash] = array(
-            'pid' => $heartbeat->getIdentity()->getPid(),
+            'pid' => $heartbeat->getIdentity()->getId(),
             'uptime' => $heartbeat->getUptime(),
             'memoryUsage' => $heartbeat->getMemoryUsage()
         );
