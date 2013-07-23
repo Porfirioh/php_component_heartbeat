@@ -150,6 +150,7 @@ class Client
     }
 
     /**
+     * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
      */
@@ -158,6 +159,7 @@ class Client
         echo PHP_EOL;
         echo str_repeat('-', 40) . PHP_EOL;
         echo 'pid: ' . $this->pid . PHP_EOL;
+        echo 'heartbeat id: ' . $this->heartbeat->getIdentity()->getId() . PHP_EOL;
         echo 'Should fail: ' . ($this->heartbeat->shouldFail() ? 'yes' : 'no') . PHP_EOL;
         echo 'Should fail critical: ' . ($this->heartbeat->shouldFailCritical() ? 'yes' : 'no') . PHP_EOL;
         echo str_repeat('-', 40) . PHP_EOL;
