@@ -117,6 +117,7 @@ class Example
             $processCall = __DIR__ . '/Client.php ' .  $pid . ' ' . $loopsPerClient . ' ' . $fails . ' ' . $failsCritical;
             echo 'Process call: ' . $processCall . PHP_EOL;
             exec('php ' . $processCall . '  > /dev/null &');
+            usleep(500000);
         }
 
         return $this;

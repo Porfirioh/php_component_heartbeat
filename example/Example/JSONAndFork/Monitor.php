@@ -56,14 +56,6 @@ class Monitor extends HeartbeatMonitor
      */
     public function createFile()
     {
-        $this->removeFile();
-
-        $content = new stdClass();
-        $content->numberOfHeartbeats = 0;
-        $content->heartbeats = array();
-
-        $this->setFileContent($content);
-
         return $this;
     }
 
@@ -88,13 +80,24 @@ class Monitor extends HeartbeatMonitor
          * @var Heartbeat $heartbeat
          */
         $hash = spl_object_hash($heartbeat);
-        $content = $this->getFileContent();
-        $content->heartbeats[$hash] = array(
+        $file = $this->getFile();
+        $content = json_decode($file->fpassthru());
+        if (!is_array($content)) {
+            $content = array();
+        }
+echo 'Trying to attach: ' . var_export(array('hash' => $hash, 'heartbeat' => $heartbeat), true) . PHP_EOL;
+        if (!isset($content['heartbeats'])) {
+            $content['heartbeats'] = array();
+        }
+        $content['heartbeats'][$hash] = array(
             'pid' => $heartbeat->getIdentity()->getId(),
             'uptime' => $heartbeat->getUptime(),
             'memoryUsage' => $heartbeat->getMemoryUsage()
         );
-        $this->setFileContent($content);
+        $file->fwrite(json_encode($content));
+        $file->fflush();
+        $file->flock(LOCK_UN);
+        unset($file);
 
         return $this;
     }
@@ -105,12 +108,15 @@ class Monitor extends HeartbeatMonitor
     public function detach(HeartbeatInterface $heartbeat)
     {
         $hash = spl_object_hash($heartbeat);
-        $content = $this->getFileContent();
-        if (isset($content->heartbeats)){
-            $heartbeats = (array) $content->heartbeats;
-            unset($heartbeats[$hash]);
-            $content->heartbeats = $heartbeats;
-            $this->setFileContent($content);
+        $file = $this->getFile();
+        $content = json_decode($file->fpassthru());
+echo 'Trying to detach: ' . var_export(array('hash' => $hash, 'heartbeat' => $heartbeat), true) . PHP_EOL;
+        if (isset($content['heartbeats'])){
+            unset($content['heartbeats'][$hash]);
+            $file->fwrite(json_encode($content));
+            $file->fflush();
+            $file->flock(LOCK_UN);
+            unset($file);
         }
 
         return $this;
@@ -121,9 +127,11 @@ class Monitor extends HeartbeatMonitor
      */
     public function getAll()
     {
-        $content = $this->getFileContent();
+        $file = $this->getFile();
+        $content = json_decode($file->fpassthru());
+        unset($file);
 
-        return (isset($content->heartbeats)) ? $content->heartbeats : array();
+        return (isset($content['heartbeats'])) ? $content['heartbeats'] : array();
     }
 
     /**
@@ -131,10 +139,15 @@ class Monitor extends HeartbeatMonitor
      */
     public function detachAll()
     {
-        $content = (array) $this->getFileContent();
-        unset($content['heartbeats']);
-        $content = (object) $content;
-        $this->setFileContent($content);
+        $file = $this->getFile();
+        $content = json_decode($file->fpassthru());
+        if (isset($content['heartbeats'])){
+            unset($content['heartbeats']);
+            $file->fwrite(json_encode($content));
+            $file->fflush();
+            $file->flock(LOCK_UN);
+            unset($file);
+        }
 
         return $this;
     }
@@ -145,10 +158,11 @@ class Monitor extends HeartbeatMonitor
     public function listen()
     {
         $currentTimestamp = time();
-        $content = $this->getFileContent();
+        $file = $this->getFile();
+        $content = json_decode($file->fpassthru());
 
-        if (isset($content->heartbeats)) {
-            foreach ($content->heartbeats as $heartbeatData) {
+        if (isset($content['heartbeats'])) {
+            foreach ($content['heartbeats'] as $heartbeatData) {
                 $identity = new Identity();
                 $identity->setId($heartbeatData->pid);
                 $heartbeat = new Heartbeat($identity);
@@ -172,27 +186,6 @@ class Monitor extends HeartbeatMonitor
     }
 
     /**
-     * @return stdClass
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-22
-     */
-    protected function getFileContent()
-    {
-        return $this->file->getContent($this->fileName);
-    }
-
-    /**
-     * @param stdClass $content
-     * @return int
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-22
-     */
-    protected function setFileContent(stdClass $content)
-    {
-        return $this->file->setContent($this->fileName, $content);
-    }
-
-    /**
      * @return bool
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
@@ -200,5 +193,18 @@ class Monitor extends HeartbeatMonitor
     protected function removeFile()
     {
         return file_exists($this->fileName) ? unlink($this->fileName) : true;
+    }
+
+    /**
+     * @return \SplFileObject
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
+    protected function getFile()
+    {
+        $file = new \SplFileObject($this->fileName, 'c+');
+        $file->flock(LOCK_EX);
+
+        return $file;
     }
 }
