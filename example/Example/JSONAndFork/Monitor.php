@@ -269,8 +269,14 @@ echo 'beats: ' . implode(', ', array_keys($content['heartbeats'])) . PHP_EOL;
                         'memoryUsage' => $heartbeat->getMemoryUsage()
                     );
                 } catch (RuntimeException $exception) {
+                    $heartbeats[$hash] = array(
+                        'pid' => $heartbeatData['pid'],
+                        'uptime' => $heartbeat->getUptime(),
+                        'memoryUsage' => $heartbeat->getMemoryUsage()
+                    );
                     $heartbeat->handleHeartAttack($exception);
                     if ($exception instanceof CriticalRuntimeException) {
+                        unset($heartbeats[$hash]);
                         $this->detach($heartbeat);
                     }
                 }

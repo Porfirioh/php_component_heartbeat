@@ -129,7 +129,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     {
         $currentTime = time();
         if (!is_null($this->failsOnBeatNumber)
-            && ($this->currentBeatNumber >= $this->failsOnBeatNumber)) {
+            && ($this->currentBeatNumber == $this->failsOnBeatNumber)) {
             if ($this->failsCritical) {
                 $currentTime -= 6;
             } else {
