@@ -157,6 +157,7 @@ class Client
      */
     public function andRun()
     {
+        set_time_limit(2 * $this->numberOfLoops);
         $monitor = new Monitor();
         $monitor->attach($this->heartbeat);
         while ($this->currentLoop < $this->numberOfLoops) {
