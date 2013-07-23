@@ -11,6 +11,7 @@ use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
 use Net\Bazzline\Component\Heartbeat\RuntimeException;
 use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
+use Net\Bazzline\Component\Utility\Json;
 use stdClass;
 
 /**
@@ -22,6 +23,13 @@ use stdClass;
  */
 class Monitor extends HeartbeatMonitor
 {
+    /**
+     * @var Json
+     * @author sleibelt
+     * @since 2013-07-23
+     */
+    protected $file;
+
     /**
      * @var string
      * @author stev leibelt <artodeto@arcor.de>
@@ -36,6 +44,7 @@ class Monitor extends HeartbeatMonitor
     public function __construct()
     {
         $this->fileName = 'monitor.json';
+        $this->file = new Json();
         parent::__construct();
     }
 
@@ -158,10 +167,7 @@ class Monitor extends HeartbeatMonitor
      */
     protected function getFileContent()
     {
-        $content = (file_exists($this->fileName))
-            ? json_decode(file_get_contents($this->fileName)) : new stdClass();
-
-        return $content;
+        return $this->file->getContent($this->fileName);
     }
 
     /**
@@ -172,7 +178,7 @@ class Monitor extends HeartbeatMonitor
      */
     protected function setFileContent(stdClass $content)
     {
-        return file_put_contents($this->fileName, json_encode($content));
+        return $this->file->setContent($this->fileName, $content);
     }
 
     /**
