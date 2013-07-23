@@ -162,6 +162,7 @@ class Client
         while ($this->currentLoop < $this->numberOfLoops) {
             $this->heartbeat->beat();
             sleep(1);
+            $this->currentLoop++;
         }
         //$this->heartbeat->getIdentity()->getId();
         $monitor->detach($this->heartbeat);
