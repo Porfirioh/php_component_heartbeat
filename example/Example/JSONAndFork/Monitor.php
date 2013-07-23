@@ -105,7 +105,9 @@ class Monitor extends HeartbeatMonitor
     {
         $hash = spl_object_hash($heartbeat);
         $content = $this->getFileContent();
-        unset($content->heartbeats[$hash]);
+        $heartbeats = (array) $content->heartbeats;
+        unset($heartbeats[$hash]);
+        $content->heartbeats = $heartbeats;
         $this->setFileContent($content);
 
         return $this;

@@ -129,6 +129,7 @@ class Example
      */
     public function printSettings()
     {
+        echo PHP_EOL;
         echo str_repeat('-', 40) . PHP_EOL;
         echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
         echo 'loops: ' . $this->loops . PHP_EOL;
@@ -149,9 +150,8 @@ class Example
             echo 'loop: ' . $this->currentLoop . '/' . $this->loops . PHP_EOL;
             $this->monitor->listen();
             sleep($this->sleep);
+            echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
             $this->currentLoop++;
         }
-
-        echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
     }
 }
