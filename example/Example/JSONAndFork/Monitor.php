@@ -253,6 +253,7 @@ echo 'content:: ' . var_export($content, true) . PHP_EOL;
         if (isset($content['heartbeats'])
             && !empty($content['heartbeats'])) {
             $heartbeats = array();
+echo 'beats: ' . implode(', ', array_keys($content['heartbeats'])) . PHP_EOL;
             foreach ($content['heartbeats'] as $hash => $heartbeatData) {
                 $identity = new Identity();
                 $identity->setId($heartbeatData['pid']);
@@ -274,6 +275,7 @@ echo 'content:: ' . var_export($content, true) . PHP_EOL;
                     }
                 }
             }
+            $content['heartbeats'] = $heartbeats;
             $this->setFileContent($content);
         }
 

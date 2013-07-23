@@ -100,7 +100,8 @@ class Example
      */
     public function setupProcesses($numberOfProcesses = 3, $numberOfWarning = 0, $numberOfCritical = 0)
     {
-        $loopsPerClient = $this->loops - 1;
+        //$loopsPerClient = $this->loops - 1;
+        $loopsPerClient = $this->loops;
         for ($i = 0; $i < $numberOfProcesses; $i++) {
             $fails = 0;
             $failsCritical = 0;
@@ -117,7 +118,7 @@ class Example
             $processCall = __DIR__ . '/Client.php ' .  $pid . ' ' . $loopsPerClient . ' ' . $fails . ' ' . $failsCritical;
             echo 'Process call: ' . $processCall . PHP_EOL;
             exec('php ' . $processCall . '  > /dev/null &');
-            usleep(500000);
+            //usleep(500000);
         }
 
         return $this;
