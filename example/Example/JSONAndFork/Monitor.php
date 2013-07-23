@@ -6,6 +6,7 @@
 
 namespace Example\JSONAndFork;
 
+use ___PHPSTORM_HELPERS\object;
 use Net\Bazzline\Component\Heartbeat\HeartbeatInterface;
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
 use Net\Bazzline\Component\Heartbeat\RuntimeException;
@@ -105,10 +106,12 @@ class Monitor extends HeartbeatMonitor
     {
         $hash = spl_object_hash($heartbeat);
         $content = $this->getFileContent();
-        $heartbeats = (array) $content->heartbeats;
-        unset($heartbeats[$hash]);
-        $content->heartbeats = $heartbeats;
-        $this->setFileContent($content);
+        if (isset($content->heartbeats)){
+            $heartbeats = (array) $content->heartbeats;
+            unset($heartbeats[$hash]);
+            $content->heartbeats = $heartbeats;
+            $this->setFileContent($content);
+        }
 
         return $this;
     }
@@ -120,7 +123,7 @@ class Monitor extends HeartbeatMonitor
     {
         $content = $this->getFileContent();
 
-        return $content->heartbeats;
+        return (isset($content->heartbeats)) ? $content->heartbeats : array();
     }
 
     /**
@@ -128,8 +131,9 @@ class Monitor extends HeartbeatMonitor
      */
     public function detachAll()
     {
-        $content = $this->getFileContent();
-        $content->heartbeats = array();
+        $content = (array) $this->getFileContent();
+        unset($content['heartbeats']);
+        $content = (object) $content;
         $this->setFileContent($content);
 
         return $this;
@@ -143,19 +147,21 @@ class Monitor extends HeartbeatMonitor
         $currentTimestamp = time();
         $content = $this->getFileContent();
 
-        foreach ($content->heartbeats as $heartbeatData) {
-            $identity = new Identity();
-            $identity->setId($heartbeatData->pid);
-            $heartbeat = new Heartbeat($identity);
-            /**
-             * @var $heartbeat HeartbeatInterface
-             */
-            try {
-                $heartbeat->knock();
-            } catch (RuntimeException $exception) {
-                $heartbeat->handleHeartAttack($exception);
-                if ($exception instanceof CriticalRuntimeException) {
-                    $this->detach($heartbeat);
+        if (isset($content->heartbeats)) {
+            foreach ($content->heartbeats as $heartbeatData) {
+                $identity = new Identity();
+                $identity->setId($heartbeatData->pid);
+                $heartbeat = new Heartbeat($identity);
+                /**
+                 * @var $heartbeat HeartbeatInterface
+                 */
+                try {
+                    $heartbeat->knock();
+                } catch (RuntimeException $exception) {
+                    $heartbeat->handleHeartAttack($exception);
+                    if ($exception instanceof CriticalRuntimeException) {
+                        $this->detach($heartbeat);
+                    }
                 }
             }
         }
