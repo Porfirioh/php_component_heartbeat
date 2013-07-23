@@ -17,7 +17,7 @@ if ($argc != 5) {
     exit(1);
 }
 
-$pid = (int) $argv[1];
+$pid = $argv[1];
 $numberOfLoops = (int) $argv[2];
 $fails = (bool) $argv[3];
 $failsCritical = (bool) $argv[4];

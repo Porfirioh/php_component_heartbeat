@@ -102,25 +102,21 @@ class Example
     {
         $loopsPerClient = $this->loops - 1;
         for ($i = 0; $i < $numberOfProcesses; $i++) {
-            $fails = false;
-            $failsCritical = false;
+            $fails = 0;
+            $failsCritical = 0;
             if ($numberOfWarning > 0) {
-                $fails = true;
+                $fails = 1;
                 $numberOfWarning--;
             } else if ($numberOfCritical > 0) {
-                $fails = true;
-                $failsCritical = true;
+                $fails = 1;
+                $failsCritical = 1;
                 $numberOfCritical--;
             }
 
             $pid = 'process_' . $i;
-            $processStarted = exec('php ' . __DIR__ . '/Client.php ' .
-                $pid . ' ' .
-                $loopsPerClient . ' ' .
-                $fails . ' ' .
-                $failsCritical . ' ' .
-                '  1>/dev/null &');
-            echo 'Called client with pid "' . $pid . '": ' . $processStarted . PHP_EOL;
+            $processCall = __DIR__ . '/Client.php ' .  $pid . ' ' . $loopsPerClient . ' ' . $fails . ' ' . $failsCritical;
+            echo 'Process call: ' . $processCall . PHP_EOL;
+            exec('php ' . $processCall . '  > /dev/null &');
         }
 
         return $this;
