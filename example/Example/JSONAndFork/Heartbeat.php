@@ -12,6 +12,7 @@ use Net\Bazzline\Component\Heartbeat\RuntimeException;
 use Net\Bazzline\Component\Heartbeat\WarningRuntimeException;
 use Net\Bazzline\Component\ProcessIdentity\IdentityAwareInterface;
 use Net\Bazzline\Component\ProcessIdentity\IdentityInterface;
+use Net\Bazzline\Component\Utility\Json;
 use stdClass;
 
 /**
@@ -36,6 +37,13 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
      * @since 2013-07-22
      */
     protected $identity;
+
+    /**
+     * @var Json
+     * @author sleibelt
+     * @since 2013-07-23
+     */
+    protected $file;
 
     /**
      * @var string
@@ -73,6 +81,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     public function __construct(IdentityInterface $identity)
     {
         $this->setIdentity($identity);
+        $this->file = new Json();
         $this->fileName = $this->getIdentity()->getId() . '.json';
         $this->lastTimeStamp = time();
         $this->currentBeatNumber = 0;
@@ -96,9 +105,9 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
                 'no data process file (' . $this->fileName . ') for data exchange found'
             );
         }
-        $file = json_decode(file_get_contents($this->fileName));
+        $content = $this->getFileContent();
 
-        $timeDifference = $this->lastTimeStamp - $file->timestamp;
+        $timeDifference = $this->lastTimeStamp - $content->timestamp;
         if ($timeDifference >= 5) {
             throw new CriticalRuntimeException(
                 'time difference is greater five seconds'
@@ -110,7 +119,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
         }
         $this->lastTimeStamp = time();
 
-        return $file->timestamp;
+        return $content->timestamp;
     }
 
     /**
@@ -128,17 +137,13 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
             }
         }
 
-        $file = (file_exists($this->fileName))
-            ? json_decode(file_get_contents($this->fileName)) : new stdClass();
-        if (!is_object($file)) {
-            $file = new stdClass();
-        }
-        $file->timestamp = $currentTime;
-        $file->uptime = $this->getUptime();
-        $file->memoryUsage = $this->getMemoryUsage();
-        $file->currentBeatNumber = $this->currentBeatNumber;
+        $content = $this->getFileContent();
+        $content->timestamp = $currentTime;
+        $content->uptime = $this->getUptime();
+        $content->memoryUsage = $this->getMemoryUsage();
+        $content->currentBeatNumber = $this->currentBeatNumber;
+        $this->setFileContent($content);
 
-        file_put_contents($this->fileName, json_encode($file));
         $this->currentBeatNumber++;
 
         return $this;
@@ -162,7 +167,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
             if (file_exists($this->fileName)) {
                 echo $indent . str_repeat('-', 10) . PHP_EOL;
                 echo $indent . 'Removing file ' . $this->fileName . PHP_EOL;
-                unlink ($this->fileName);
+                $this->removeFile();
             }
         }
         echo $indent . str_repeat('-', 20) . PHP_EOL;
@@ -202,5 +207,36 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
         $this->failsCritical = $failsCritical;
 
         return $this;
+    }
+
+    /**
+     * @return stdClass
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
+    protected function getFileContent()
+    {
+        return $this->file->getContent($this->fileName);
+    }
+
+    /**
+     * @param stdClass $content
+     * @return int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
+    protected function setFileContent(stdClass $content)
+    {
+        return $this->file->setContent($this->fileName, $content);
+    }
+
+    /**
+     * @return bool
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
+    protected function removeFile()
+    {
+        return file_exists($this->fileName) ? unlink($this->fileName) : true;
     }
 }

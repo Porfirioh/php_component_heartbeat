@@ -43,8 +43,8 @@ class Monitor extends HeartbeatMonitor
      */
     public function __construct()
     {
-        $this->fileName = 'monitor.json';
         $this->file = new Json();
+        $this->fileName = 'monitor.json';
         parent::__construct();
     }
 
