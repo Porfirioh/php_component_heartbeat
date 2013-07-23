@@ -248,7 +248,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
      */
     protected function getFileContent()
     {
-        return $this->file->getContent($this->fileName);
+        return $this->file->getContent($this->fileName, false);
     }
 
     /**
