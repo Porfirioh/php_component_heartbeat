@@ -7,7 +7,6 @@
 
 namespace Example\JSONAndFork;
 
-use Example\JSONBasedImplementation\Monitor;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
@@ -22,13 +21,12 @@ $numberOfLoops = (int) $argv[2];
 $fails = (bool) $argv[3];
 $failsCritical = (bool) $argv[4];
 
-echo 'pid: ' . $pid . PHP_EOL;
-
 Client::create()
     ->setPid($pid)
     ->setNumberOfLoops($numberOfLoops)
     ->setFails($fails)
     ->setFailsCritical($failsCritical)
+    ->printStatistic()
     ->andRun();
 
 /**
@@ -147,6 +145,22 @@ class Client
         if ($failsCritical) {
             $this->heartbeat->setFailsOnBeatNumber(rand(1, ($this->numberOfLoops - 1)), true);
         }
+
+        return $this;
+    }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-22
+     */
+    public function printStatistic()
+    {
+        echo PHP_EOL;
+        echo str_repeat('-', 40) . PHP_EOL;
+        echo 'pid: ' . $this->pid . PHP_EOL;
+        echo 'Should fail: ' . ($this->heartbeat->shouldFail() ? 'yes' : 'no') . PHP_EOL;
+        echo 'Should fail critical: ' . ($this->heartbeat->shouldFailCritical() ? 'yes' : 'no') . PHP_EOL;
+        echo str_repeat('-', 40) . PHP_EOL;
 
         return $this;
     }
