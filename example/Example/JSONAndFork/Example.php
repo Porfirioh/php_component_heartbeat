@@ -104,9 +104,10 @@ class Example
         //$loopsPerClient = $this->loops - 1;
         //$loopsPerClient = $this->loops;
         for ($i = 0; $i < $numberOfProcesses; $i++) {
-            $loopsPerClient = $this->loops + $numberOfProcesses - $i - 1;
+            $loopsPerClient = $this->loops + $numberOfProcesses - $i;
             $fails = 0;
             $failsCritical = 0;
+            $failsAtLoop = rand($this->loops, $loopsPerClient);
             if ($numberOfWarning > 0) {
                 $fails = 1;
                 $numberOfWarning--;
@@ -117,7 +118,7 @@ class Example
             }
 
             $pid = 'process_' . $i;
-            $processCall = __DIR__ . '/Client.php ' .  $pid . ' ' . $loopsPerClient . ' ' . $fails . ' ' . $failsCritical;
+            $processCall = __DIR__ . '/Client.php ' .  $pid . ' ' . $loopsPerClient . ' ' . $fails . ' ' . $failsCritical . ' ' . $failsAtLoop;
             echo 'Process call: ' . $processCall . PHP_EOL;
             exec('php ' . $processCall . '  > /dev/null &');
             //usleep(500000);

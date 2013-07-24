@@ -107,7 +107,8 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
         }
         $content = $this->getFileContent();
 
-        $timeDifference = $this->lastTimeStamp - $content->timestamp;
+        $timeDifference = (isset($content->timestamp))
+            ? ($this->lastTimeStamp - $content->timestamp) : 0;
         if ($timeDifference >= 5) {
             throw new CriticalRuntimeException(
                 'time difference is greater five seconds'
