@@ -41,6 +41,20 @@ class Example
     /**
      * @var int
      * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-24
+     */
+    protected $numberOfExpectedFails;
+
+    /**
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-24
+     */
+    protected $numberOfExpectedFailsCritical;
+
+    /**
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
      */
     protected $sleep;
@@ -66,6 +80,8 @@ class Example
         $this->monitor = new Monitor();
         $this->monitor->createFile();
         $this->sleep = 1;
+        $this->numberOfExpectedFails = 0;
+        $this->numberOfExpectedFailsCritical = 0;
     }
 
     /**
@@ -111,10 +127,13 @@ class Example
             if ($numberOfWarning > 0) {
                 $fails = 1;
                 $numberOfWarning--;
+                $this->numberOfExpectedFails++;
             } else if ($numberOfCritical > 0) {
                 $fails = 1;
                 $failsCritical = 1;
                 $numberOfCritical--;
+                $this->numberOfExpectedFails++;
+                $this->numberOfExpectedFailsCritical++;
             }
 
             $pid = 'process_' . $i;
@@ -140,6 +159,8 @@ class Example
         echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
         echo 'loops: ' . $this->loops . PHP_EOL;
         echo 'sleep: ' . $this->sleep . PHP_EOL;
+        echo 'number of expected fails: ' . $this->numberOfExpectedFails . PHP_EOL;
+        echo 'number of expected fails critical: ' . $this->numberOfExpectedFailsCritical . PHP_EOL;
         echo str_repeat('-', 40) . PHP_EOL;
         echo PHP_EOL;
 
