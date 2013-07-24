@@ -190,7 +190,6 @@ class Client
             sleep(1);
             $this->currentLoop++;
         }
-        //$this->heartbeat->getIdentity()->getId();
         $monitor->detach($this->heartbeat);
     }
 }

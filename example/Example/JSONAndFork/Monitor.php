@@ -67,49 +67,15 @@ class Monitor extends HeartbeatMonitor
         /**
          * @var Heartbeat $heartbeat
          */
-        //$hash = spl_object_hash($heartbeat);
         $hash = $heartbeat->getIdentity()->getId();
         $content = $this->getFileContent();
-        /*
-        $file = $this->getFile();
-        $fileContent = '';
-        while(!$file->eof()) {
-            $fileContent .= $file->fgets();
-        }
-        $content = json_decode($fileContent, true);
         $this->exitOnJsonLastError();
-echo 'content: ' . var_export($content, true) . PHP_EOL;
-        */
-        $this->exitOnJsonLastError();
-        /*
-        if (!is_array($content)
-            || empty($content)) {
-            $content = array();
-        }
-        */
-//echo 'Trying to attach: ' . var_export(array('hash' => $hash, 'heartbeat' => $heartbeat->getIdentity()->getId()), true) . PHP_EOL;
-        /*
-        if (!isset($content['heartbeats'])) {
-            $content['heartbeats'] = array();
-        }
-        */
         $content['heartbeats'][$hash] = array(
             'pid' => $heartbeat->getIdentity()->getId(),
             'uptime' => $heartbeat->getUptime(),
             'memoryUsage' => $heartbeat->getMemoryUsage()
         );
         $this->setFileContent($content);
-        /*
-        $fileContent = json_encode($content);
-echo __LINE__ . PHP_EOL;
-echo 'content: ' . var_export($content, true) . PHP_EOL;
-echo 'file content: ' . var_export($fileContent, true) . PHP_EOL;
-        $this->exitOnJsonLastError();
-        $file->fwrite($fileContent);
-        $file->fflush();
-        $file->flock(LOCK_UN);
-        unset($file);
-        */
 
         return $this;
     }
@@ -122,34 +88,11 @@ echo 'file content: ' . var_export($fileContent, true) . PHP_EOL;
         /**
          * @var Heartbeat $heartbeat
          */
-        //$hash = spl_object_hash($heartbeat);
         $hash = $heartbeat->getIdentity()->getId();
         $content = $this->getFileContent();
-        /*
-        $file = $this->getFile();
-        $fileContent = '';
-        while(!$file->eof()) {
-            $fileContent .= $file->fgets();
-        }
-        $content = json_decode($fileContent, true);
-        */
-//echo 'Trying to detach: ' . var_export(array('hash' => $hash, 'heartbeat' => $heartbeat->getIdentity()->getId()), true) . PHP_EOL;
         if (isset($content['heartbeats'])){
             unset($content['heartbeats'][$hash]);
-            $fileContent = json_encode($content);
-/*
-echo __LINE__ . PHP_EOL;
-echo 'content: ' . var_export($content, true) . PHP_EOL;
-echo 'file content: ' . var_export($fileContent, true) . PHP_EOL;
-*/
             $this->setFileContent($content);
-            /*
-            $this->exitOnJsonLastError();
-            $file->fwrite($fileContent);
-            $file->fflush();
-            $file->flock(LOCK_UN);
-            unset($file);
-            */
         }
 
         return $this;
@@ -161,24 +104,6 @@ echo 'file content: ' . var_export($fileContent, true) . PHP_EOL;
     public function getAll()
     {
         $content = $this->getFileContent();
-        /*
-        $file = $this->getFile();
-        $fileContent = '';
-        while(!$file->eof()) {
-            $fileContent .= $file->fgets();
-        }
-        $content = json_decode($fileContent, true);
-        $file->flock(LOCK_UN);
-        unset($file);
-        */
-/*
-echo __LINE__ . PHP_EOL;
-echo '====' . PHP_EOL;
-//echo 'fileContent:: ' . var_export($fileContent, true) . PHP_EOL;
-echo 'content:: ' . var_export($content, true) . PHP_EOL;
-echo 'json last error:: ' . var_export(json_last_error(), true) . PHP_EOL;
-echo '====' . PHP_EOL;
-*/
         $this->exitOnJsonLastError();
 
         return (!is_null($content) && isset($content['heartbeats']) && !empty($content['heartbeats'])) ? $content['heartbeats'] : array();
@@ -190,34 +115,11 @@ echo '====' . PHP_EOL;
     public function detachAll()
     {
         $content = $this->getFileContent();
-        /*
-        $file = $this->getFile();
-        $fileContent = '';
-        while(!$file->eof()) {
-            $fileContent .= $file->fgets();
-        }
-        $content = json_decode($fileContent, true);
-        */
         $this->exitOnJsonLastError();
         if (!is_null($content) && isset($content['heartbeats'])){
             $content['heartbeats'] = array();
-            $fileContent = json_encode($content);
-/*
-echo __LINE__ . PHP_EOL;
-echo 'fileContent:: ' . var_export($fileContent, true) . PHP_EOL;
-echo 'content:: ' . var_export($content, true) . PHP_EOL;
-*/
             $this->setFileContent($content);
-            /*
             $this->exitOnJsonLastError();
-            $file->fwrite($fileContent);
-            */
-            $this->exitOnJsonLastError();
-            /*
-            $file->fflush();
-            $file->flock(LOCK_UN);
-            unset($file);
-            */
         }
 
         return $this;
@@ -230,20 +132,12 @@ echo 'content:: ' . var_export($content, true) . PHP_EOL;
     {
         $currentTimestamp = time();
         $content = $this->getFileContent();
-        /*
-        $file = $this->getFile();
-        $fileContent = '';
-        while(!$file->eof()) {
-            $fileContent .= $file->fgets();
-        }
-        $content = json_decode($fileContent, true);
-        */
         $this->exitOnJsonLastError();
 
         if (isset($content['heartbeats'])
             && !empty($content['heartbeats'])) {
             $heartbeats = array();
-echo 'beats: ' . implode(', ', array_keys($content['heartbeats'])) . PHP_EOL;
+            echo 'beats: ' . implode(', ', array_keys($content['heartbeats'])) . PHP_EOL;
             foreach ($content['heartbeats'] as $hash => $heartbeatData) {
                 $identity = new Identity();
                 $identity->setId($heartbeatData['pid']);
