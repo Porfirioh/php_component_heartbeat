@@ -78,7 +78,7 @@ class Example
     public function __construct()
     {
         $this->monitor = new Monitor();
-        $this->monitor->createFile();
+        $this->monitor->detachAll();
         $this->sleep = 1;
         $this->numberOfExpectedFails = 0;
         $this->numberOfExpectedFailsCritical = 0;

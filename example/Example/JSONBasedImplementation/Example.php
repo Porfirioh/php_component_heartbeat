@@ -125,6 +125,7 @@ class Example
     public function setupMonitor()
     {
         $this->monitor = new Monitor();
+        $this->monitor->detachAll();
 
         return $this;
     }

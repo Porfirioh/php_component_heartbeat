@@ -48,16 +48,6 @@ class Monitor extends HeartbeatMonitor
     }
 
     /**
-     * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-22
-     */
-    public function createFile()
-    {
-        return $this;
-    }
-
-    /**
      * @return $this;
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
