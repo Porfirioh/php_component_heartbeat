@@ -123,7 +123,7 @@ class Example
             $loopsPerClient = $this->loops + $numberOfProcesses - $i;
             $fails = 0;
             $failsCritical = 0;
-            $failsAtLoop = rand($this->loops, $loopsPerClient);
+            $failsAtLoop = rand($this->loops, $loopsPerClient - 1);
             if ($numberOfWarning > 0) {
                 $fails = 1;
                 $numberOfWarning--;
