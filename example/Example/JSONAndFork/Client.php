@@ -11,7 +11,7 @@ use Net\Bazzline\Component\ProcessIdentity\Identity;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
-if ($argc != 5) {
+if ($argc < 5) {
     echo 'No valid arguments supplied' . PHP_EOL;
     exit(1);
 }
@@ -20,12 +20,13 @@ $pid = $argv[1];
 $numberOfLoops = (int) $argv[2];
 $fails = (bool) $argv[3];
 $failsCritical = (bool) $argv[4];
+$failsAtLoop = (isset($argv[5]) ? (int) $argv[5] : null;
 
 Client::create()
     ->setPid($pid)
     ->setNumberOfLoops($numberOfLoops)
-    ->setFails($fails)
-    ->setFailsCritical($failsCritical)
+    ->setFails($fails, $failsAtLoop)
+    ->setFailsCritical($failsCritical, $failsAtLoop)
     ->printStatistic()
     ->andRun();
 
@@ -120,30 +121,38 @@ class Client
     }
 
     /**
-     * @param $fails
+     * @param bool $fails
+     * @param null|int $atLoop
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
      */
-    public function setFails($fails)
+    public function setFails($fails, $atLoop = null)
     {
         if ($fails) {
-            $this->heartbeat->setFailsOnBeatNumber(rand(1, ($this->numberOfLoops - 1)));
+            if (is_null($atLoop)) {
+                $atLoop = rand(1, ($this->numberOfLoops - 1));
+            }
+            $this->heartbeat->setFailsOnBeatNumber($atLoop);
         }
 
         return $this;
     }
 
     /**
-     * @param $failsCritical
+     * @param bool $failsCritical
+     * @param null|int $atLoop
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
      */
-    public function setFailsCritical($failsCritical)
+    public function setFailsCritical($failsCritical, $atLoop = null)
     {
         if ($failsCritical) {
-            $this->heartbeat->setFailsOnBeatNumber(rand(1, ($this->numberOfLoops - 1)), true);
+            if (is_null($atLoop)) {
+                $atLoop = rand(1, ($this->numberOfLoops - 1));
+            }
+            $this->heartbeat->setFailsOnBeatNumber($atLoop, true);
         }
 
         return $this;
