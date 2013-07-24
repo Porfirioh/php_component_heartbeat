@@ -20,7 +20,7 @@ $pid = $argv[1];
 $numberOfLoops = (int) $argv[2];
 $fails = (bool) $argv[3];
 $failsCritical = (bool) $argv[4];
-$failsAtLoop = (isset($argv[5]) ? (int) $argv[5] : null;
+$failsAtLoop = (isset($argv[5])) ? (int) $argv[5] : null;
 
 Client::create()
     ->setPid($pid)
