@@ -11,6 +11,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 Example::create()
     ->setLoops(10)
     ->setupProcesses(10, 3, 2)
+    //->setupProcesses(5, 0, 4)
     ->printSettings()
     ->andRun();
 
@@ -101,8 +102,9 @@ class Example
     public function setupProcesses($numberOfProcesses = 3, $numberOfWarning = 0, $numberOfCritical = 0)
     {
         //$loopsPerClient = $this->loops - 1;
-        $loopsPerClient = $this->loops;
+        //$loopsPerClient = $this->loops;
         for ($i = 0; $i < $numberOfProcesses; $i++) {
+            $loopsPerClient = $this->loops + $numberOfProcesses - $i - 1;
             $fails = 0;
             $failsCritical = 0;
             if ($numberOfWarning > 0) {
@@ -119,6 +121,7 @@ class Example
             echo 'Process call: ' . $processCall . PHP_EOL;
             exec('php ' . $processCall . '  > /dev/null &');
             //usleep(500000);
+            sleep(1);
         }
 
         return $this;
