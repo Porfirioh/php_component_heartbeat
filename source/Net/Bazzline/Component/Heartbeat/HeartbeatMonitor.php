@@ -35,7 +35,6 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
      */
     public function __construct()
     {
-        $this->detachAll();
         $this->lastListen = time();
     }
 
