@@ -49,6 +49,20 @@ class Example
     /**
      * @var int
      * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-25
+     */
+    protected $numberOfExpectedFails;
+
+    /**
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-25
+     */
+    protected $numberOfExpectedFailsCritical;
+
+    /**
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
     protected $sleep;
@@ -147,9 +161,12 @@ class Example
 
             if ($numberOfWarning > 0) {
                 $heartbeat->setFailsOnBeatNumber(rand(1, ($this->loops - 1)));
+                $this->numberOfExpectedFails++;
                 $numberOfWarning--;
             } else if ($numberOfCritical > 0) {
                 $heartbeat->setFailsOnBeatNumber(rand(1, ($this->loops - 1)), true);
+                $this->numberOfExpectedFails++;
+                $this->numberOfExpectedFailsCritical++;
                 $numberOfCritical--;
             }
 
@@ -174,6 +191,8 @@ class Example
         echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
         echo 'loops: ' . $this->loops . PHP_EOL;
         echo 'sleep: ' . $this->sleep . PHP_EOL;
+        echo 'number of expected fails: ' . $this->numberOfExpectedFails . PHP_EOL;
+        echo 'number of expected fails critical: ' . $this->numberOfExpectedFailsCritical . PHP_EOL;
         echo str_repeat('-', 40) . PHP_EOL;
         echo PHP_EOL;
 
