@@ -210,6 +210,14 @@ class Example
             foreach ($this->processes as $process) {
                 $process->execute();
             }
+            $heartbeatIds = array();
+            foreach ($this->monitor->getAll() as $heartbeat) {
+                /**
+                 * @var Heartbeat $heartbeat
+                 */
+                $heartbeatIds[] = $heartbeat->getIdentity()->getId();
+            }
+            echo 'beats: ' . implode(', ', $heartbeatIds) . PHP_EOL;
             $this->monitor->listen();
             sleep($this->sleep);
             $this->currentLoop++;
