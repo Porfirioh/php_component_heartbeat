@@ -147,7 +147,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     /**
      * {@inheritDoc}
      */
-    public function handleHeartAttack(RuntimeException $exception)
+    public function handleHeartProblems(RuntimeException $exception)
     {
         $indent = "\t";
         echo $indent . str_repeat('-', 20) . PHP_EOL;

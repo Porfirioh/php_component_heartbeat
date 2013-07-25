@@ -46,5 +46,5 @@ interface HeartbeatInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-16
      */
-    public function handleHeartAttack(RuntimeException $exception);
+    public function handleHeartProblems(RuntimeException $exception);
 }
