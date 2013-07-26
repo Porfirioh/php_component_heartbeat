@@ -98,3 +98,11 @@ A simple example is following.
     php example/Example/JSONBasedImplementation/Example.php
 
 Investigate code if you want to.
+
+# ToDos
+
+* Implement monitor history (or interface at least)
+* Implement example with sqli for database example
+* Update MonitorTest to see if pulseable is called as expected (once for each, what happens to clients with longer pulse etc.)
+* Create wiki describes benefits and ideas behind runtime interface
+* Cleanup code to use same terms everywhere
