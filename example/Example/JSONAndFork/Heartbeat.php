@@ -89,7 +89,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
@@ -124,7 +124,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function beat()
     {
@@ -151,7 +151,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handleHeartProblems(RuntimeException $exception)
     {
@@ -178,7 +178,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getIdentity()
     {
@@ -186,7 +186,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setIdentity(IdentityInterface $identity)
     {

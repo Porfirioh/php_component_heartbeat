@@ -26,7 +26,7 @@ class Process implements HeartbeatAwareInterface
     protected $heartbeat;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getHeartbeat()
     {
@@ -34,7 +34,7 @@ class Process implements HeartbeatAwareInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setHeartbeat(HeartbeatInterface $heartbeat)
     {

@@ -47,7 +47,7 @@ abstract class HeartbeatAbstract implements HeartbeatInterface, PulseableInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getUptime()
     {
@@ -55,7 +55,7 @@ abstract class HeartbeatAbstract implements HeartbeatInterface, PulseableInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getMemoryUsage()
     {
@@ -63,7 +63,7 @@ abstract class HeartbeatAbstract implements HeartbeatInterface, PulseableInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPulse()
     {
@@ -71,7 +71,7 @@ abstract class HeartbeatAbstract implements HeartbeatInterface, PulseableInterfa
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setPulse($seconds)
     {

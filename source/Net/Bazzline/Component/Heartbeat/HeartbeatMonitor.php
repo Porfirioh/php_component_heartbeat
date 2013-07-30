@@ -39,7 +39,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function attach(HeartbeatInterface $heartbeat)
     {
@@ -60,7 +60,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function detach(HeartbeatInterface $heartbeat)
     {
@@ -79,7 +79,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getAll()
     {
@@ -94,7 +94,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function detachAll()
     {
@@ -104,7 +104,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function listen()
     {
