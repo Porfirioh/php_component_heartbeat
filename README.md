@@ -66,11 +66,13 @@ The heartbeat would create a file with a unique but identifiable name.
 The file contains all needed information's.
 For example a json file could have the following layout.
 
-    {
-        "timestamp": "1373924066",
-        "uptime": "1373924000",
-        "memoryUsage": "1329232"
-    }
+```js
+{
+    "timestamp": "1373924066",
+    "uptime": "1373924000",
+    "memoryUsage": "1329232"
+}
+```
 
 From the side of the monitor, the heartbeat would read the file content and return the right one to the monitor.
 
@@ -79,17 +81,19 @@ From the side of the monitor, the heartbeat would read the file content and retu
 To prevent read-/writelocks or multiple files across the file system you can use a database table that holds the information.
 A simple example is following.
 
-    CREATE TABLE `montior_list`
-        `id`  INT NOT NULL AUTO_INCREMENT,
-        `heartbeat_identity` VARCHAR (255) NOT NULL,
-        `timestamp` INT NOT NULL,
-        `uptime` INT NOT NULL,
-        `memory_usage` INT NOT NULL,
-        `created_at` DATETIME NOT NULL,
-        `updated_at` DATETIME NOT NULL,
-         PRIMARY KEY (`id`),
-         INDEX `createdAt` (`created_at`)
-    ) Engine=InnoDB DEFAULT CHARSET=utf8 COMMENT='my short comment';
+```sql
+CREATE TABLE `montior_list`
+    `id`  INT NOT NULL AUTO_INCREMENT,
+    `heartbeat_identity` VARCHAR (255) NOT NULL,
+    `timestamp` INT NOT NULL,
+    `uptime` INT NOT NULL,
+    `memory_usage` INT NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+     PRIMARY KEY (`id`),
+     INDEX `createdAt` (`created_at`)
+) Engine=InnoDB DEFAULT CHARSET=utf8 COMMENT='my short comment';
+```
 
 # Examples
 
@@ -101,8 +105,8 @@ Investigate code if you want to.
 
 # ToDos
 
+* Update MonitorTest to see if pulseable is called as expected (once for each, what happens to clients with longer pulse etc.)
 * Implement monitor history (or interface at least)
 * Implement example with sqli for database example
-* Update MonitorTest to see if pulseable is called as expected (once for each, what happens to clients with longer pulse etc.)
 * Create wiki describes benefits and ideas behind runtime interface
 * Cleanup code to use same terms everywhere
