@@ -4,6 +4,9 @@ php component heartbeat provides interfaces and abstract implementations to prov
 
 You should use this to implement your real heartbeat monitoring solution.
 
+The build status of the current master branch is tracked by Travis CI: 
+[![Build Status](https://travis-ci.org/stevleibelt/php_component_heartbeat.png?branch=master)](http://travis-ci.org/stevleibelt/php_component_heartbeat)
+
 ## Basic Concept
 
 The heartbeat is divided into two components, the heartbeat and the monitor.
