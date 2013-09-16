@@ -36,6 +36,14 @@ class Process implements HeartbeatClientAwareInterface
     /**
      * {@inheritdoc}
      */
+    public function hasHeartbeatClient()
+    {
+        return (!is_null($this->heartbeat));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setHeartbeatClient(ClientInterface $heartbeat)
     {
         $this->heartbeat = $heartbeat;
