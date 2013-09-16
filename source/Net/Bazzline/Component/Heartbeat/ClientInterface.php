@@ -7,7 +7,7 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatInterface
+ * Class ClientInterface
  * The knock method in each client takes care of the following situations:
  *  - How to handle timeout?
  *  - How to handle return value of null?

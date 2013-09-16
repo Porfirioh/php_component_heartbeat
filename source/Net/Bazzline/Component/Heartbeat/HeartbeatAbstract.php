@@ -20,7 +20,7 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-abstract class HeartbeatAbstract implements HeartbeatInterface, PulseableInterface, RuntimeInformationInterface
+abstract class HeartbeatAbstract implements ClientInterface, PulseableInterface, RuntimeInformationInterface
 {
     /**
      * @var integer

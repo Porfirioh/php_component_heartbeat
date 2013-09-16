@@ -18,7 +18,7 @@ interface HeartbeatAwareInterface
     /**
      * Gets a heartbeat
      *
-     * @return \Net\Bazzline\Component\Heartbeat\HeartbeatInterface
+     * @return \Net\Bazzline\Component\Heartbeat\ClientInterface
      * @throws \RuntimeException - if no heartbeat is set
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
@@ -28,10 +28,10 @@ interface HeartbeatAwareInterface
     /**
      * Sets a heartbeat
      *
-     * @param HeartbeatInterface $heartbeat
+     * @param ClientInterface $heartbeat
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    public function setHeartbeat(HeartbeatInterface $heartbeat);
+    public function setHeartbeat(ClientInterface $heartbeat);
 }

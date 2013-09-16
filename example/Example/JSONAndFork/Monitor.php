@@ -6,7 +6,7 @@
 
 namespace Example\JSONAndFork;
 
-use Net\Bazzline\Component\Heartbeat\HeartbeatInterface;
+use Net\Bazzline\Component\Heartbeat\ClientInterface;
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
 use Net\Bazzline\Component\Heartbeat\RuntimeException;
 use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
@@ -62,7 +62,7 @@ class Monitor extends HeartbeatMonitor
     /**
      * {@inheritdoc}
      */
-    public function attach(HeartbeatInterface $heartbeat)
+    public function attach(ClientInterface $heartbeat)
     {
         /**
          * @var Heartbeat $heartbeat
@@ -83,7 +83,7 @@ class Monitor extends HeartbeatMonitor
     /**
      * {@inheritdoc}
      */
-    public function detach(HeartbeatInterface $heartbeat)
+    public function detach(ClientInterface $heartbeat)
     {
         /**
          * @var Heartbeat $heartbeat
