@@ -7,7 +7,7 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatAwareInterface
+ * Class HeartbeatClientAwareInterface
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
@@ -16,7 +16,7 @@ namespace Net\Bazzline\Component\Heartbeat;
 interface HeartbeatClientAwareInterface
 {
     /**
-     * Gets a heartbeat
+     * Gets a heartbeat client
      *
      * @return \Net\Bazzline\Component\Heartbeat\ClientInterface
      * @throws \RuntimeException - if no heartbeat is set
@@ -26,7 +26,16 @@ interface HeartbeatClientAwareInterface
     public function getHeartbeatClient();
 
     /**
-     * Sets a heartbeat
+     * Validates if heartbeat client is set or not
+     *
+     * @return bool
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-16
+     */
+    public function hasHeartbeatClient();
+
+    /**
+     * Sets a heartbeat client
      *
      * @param ClientInterface $heartbeat
      * @return $this
