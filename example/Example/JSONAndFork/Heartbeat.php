@@ -7,7 +7,8 @@
 namespace Example\JSONAndFork;
 
 use Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient;
-use Net\Bazzline\Component\Heartbeat\RuntimeCriticalException;
+use Net\Bazzline\Component\Heartbeat\RuntimeException;
+use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\Heartbeat\WarningRuntimeException;
 use Net\Bazzline\Component\ProcessIdentity\IdentityAwareInterface;
 use Net\Bazzline\Component\ProcessIdentity\IdentityInterface;
@@ -92,7 +93,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
-     * @throws RuntimeCriticalException|WarningRuntimeException
+     * @throws CriticalRuntimeException|WarningRuntimeException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
      */
@@ -100,7 +101,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
     {
         if (!file_exists($this->fileName)) {
             //this should never happen, have you done a beat before?
-            throw new RuntimeCriticalException(
+            throw new CriticalRuntimeException(
                 'no data process file (' . $this->fileName . ') for data exchange found'
             );
         }
@@ -109,7 +110,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
         $timeDifference = (isset($content->timestamp))
             ? ($this->lastTimeStamp - $content->timestamp) : 0;
         if ($timeDifference >= 5) {
-            throw new RuntimeCriticalException(
+            throw new CriticalRuntimeException(
                 'time difference is greater five seconds'
             );
         } else if ($timeDifference >= 2) {
@@ -152,19 +153,19 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
     /**
      * {@inheritdoc}
      */
-    public function handleException(RuntimeCriticalException $exception)
+    public function handleException(RuntimeException $exception)
     {
         $indent = "\t";
         echo PHP_EOL;
         echo $indent . str_repeat('-', 20) . PHP_EOL;
-        if ($exception instanceof RuntimeCriticalException) {
+        if ($exception instanceof CriticalRuntimeException) {
             echo $indent . 'Heartbeat with identity ' . $this->getIdentity()->getId() . ' had a heart attack.' . PHP_EOL;
         } else {
             echo $indent . 'Heartbeat with identity ' . $this->getIdentity()->getId() . ' had an arrythmia.' . PHP_EOL;
         }
         echo $indent . 'Exception class ' . get_class($exception) . PHP_EOL;
         echo $indent . 'Exception message ' . $exception->getMessage() . PHP_EOL;
-        if ($exception instanceof RuntimeCriticalException) {
+        if ($exception instanceof CriticalRuntimeException) {
             if (file_exists($this->fileName)) {
                 echo $indent . str_repeat('-', 10) . PHP_EOL;
                 echo $indent . 'Removing file ' . $this->fileName . PHP_EOL;

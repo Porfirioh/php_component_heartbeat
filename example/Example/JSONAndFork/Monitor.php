@@ -8,6 +8,7 @@ namespace Example\JSONAndFork;
 
 use Net\Bazzline\Component\Heartbeat\HeartbeatClientInterface;
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
+use Net\Bazzline\Component\Heartbeat\RuntimeException;
 use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
 use Net\Bazzline\Component\Utility\Json;
@@ -151,14 +152,14 @@ class Monitor extends HeartbeatMonitor
                         'uptime' => $heartbeat->getUptime(),
                         'memoryUsage' => $heartbeat->getMemoryUsage()
                     );
-                } catch (RuntimeCriticalException $exception) {
+                } catch (RuntimeException $exception) {
                     $heartbeats[$hash] = array(
                         'pid' => $heartbeatData['pid'],
                         'uptime' => $heartbeat->getUptime(),
                         'memoryUsage' => $heartbeat->getMemoryUsage()
                     );
                     $heartbeat->handleException($exception);
-                    if ($exception instanceof RuntimeCriticalException) {
+                    if ($exception instanceof CriticalRuntimeException) {
                         unset($heartbeats[$hash]);
                         $this->detach($heartbeat);
                     }
