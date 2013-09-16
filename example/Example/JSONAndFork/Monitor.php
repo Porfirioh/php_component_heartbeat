@@ -8,7 +8,7 @@ namespace Example\JSONAndFork;
 
 use Net\Bazzline\Component\Heartbeat\HeartbeatClientInterface;
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
-use Net\Bazzline\Component\Heartbeat\RuntimeCriticalException;
+use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
 use Net\Bazzline\Component\Utility\Json;
 

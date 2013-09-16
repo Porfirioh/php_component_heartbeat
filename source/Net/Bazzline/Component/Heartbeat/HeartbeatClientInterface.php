@@ -23,7 +23,7 @@ interface HeartbeatClientInterface
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
-     * @throws RuntimeException|RuntimeCriticalException|WarningRuntimeException
+     * @throws RuntimeException|CriticalRuntimeException|WarningRuntimeException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
@@ -41,7 +41,7 @@ interface HeartbeatClientInterface
     /**
      * Handles case if knock throws an error
      *
-     * @param RuntimeException|RuntimeCriticalException|WarningRuntimeException $exception
+     * @param RuntimeException|CriticalRuntimeException|WarningRuntimeException $exception
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-16

@@ -104,7 +104,7 @@ class HeartbeatMonitorTest extends TestCase
      */
     private function getNewHeartbeat()
     {
-        $heartbeat = Mockery::mock('Net\Bazzline\Component\Heartbeat\HeartbeatAbstract');
+        $heartbeat = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient');
         $heartbeat->shouldReceive('getPulse')
             ->andReturn(15)
             ->once()
