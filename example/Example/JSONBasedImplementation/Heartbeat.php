@@ -6,7 +6,6 @@
 
 namespace Example\JSONBasedImplementation;
 
-use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient;
 use Net\Bazzline\Component\Heartbeat\RuntimeCriticalException;
 use Net\Bazzline\Component\Heartbeat\RuntimeWarningException;
@@ -84,7 +83,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
-     * @throws RuntimeCriticalException|CriticalRuntimeException|RuntimeWarningException
+     * @throws RuntimeCriticalException|RuntimeWarningException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
@@ -100,7 +99,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
 
         $timeDifference = $this->lastTimeStamp - $file->timestamp;
         if ($timeDifference >= 5) {
-            throw new CriticalRuntimeException(
+            throw new RuntimeCriticalException(
                 'time difference is greater five seconds'
             );
         } else if ($timeDifference >= 2) {
@@ -151,14 +150,14 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
     {
         $indent = "\t";
         echo $indent . str_repeat('-', 20) . PHP_EOL;
-        if ($exception instanceof CriticalRuntimeException) {
+        if ($exception instanceof RuntimeCriticalException) {
             echo $indent . 'Heartbeat with identity ' . $this->getIdentity()->getId() . ' had a heart attack.' . PHP_EOL;
         } else {
             echo $indent . 'Heartbeat with identity ' . $this->getIdentity()->getId() . ' had an arrythmia.' . PHP_EOL;
         }
         echo $indent . 'Exception class ' . get_class($exception) . PHP_EOL;
         echo $indent . 'Exception message ' . $exception->getMessage() . PHP_EOL;
-        if ($exception instanceof CriticalRuntimeException) {
+        if ($exception instanceof RuntimeCriticalException) {
             if (file_exists($this->fileName)) {
                 echo $indent . str_repeat('-', 10) . PHP_EOL;
                 echo $indent . 'Removing file ' . $this->fileName . PHP_EOL;

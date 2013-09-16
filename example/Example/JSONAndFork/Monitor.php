@@ -9,7 +9,6 @@ namespace Example\JSONAndFork;
 use Net\Bazzline\Component\Heartbeat\HeartbeatClientInterface;
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
 use Net\Bazzline\Component\Heartbeat\RuntimeCriticalException;
-use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
 use Net\Bazzline\Component\Utility\Json;
 
@@ -159,7 +158,7 @@ class Monitor extends HeartbeatMonitor
                         'memoryUsage' => $heartbeat->getMemoryUsage()
                     );
                     $heartbeat->handleException($exception);
-                    if ($exception instanceof CriticalRuntimeException) {
+                    if ($exception instanceof RuntimeCriticalException) {
                         unset($heartbeats[$hash]);
                         $this->detach($heartbeat);
                     }
@@ -184,11 +183,22 @@ class Monitor extends HeartbeatMonitor
         return file_exists($this->fileName) ? unlink($this->fileName) : true;
     }
 
+    /**
+     * @return array|\stdClass
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
     protected function getFileContent()
     {
         return $this->file->getContent($this->fileName, true);
     }
 
+    /**
+     * @param $content
+     * @return bool|int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-23
+     */
     protected function setFileContent($content)
     {
         return $this->file->setContent($this->fileName, $content);
