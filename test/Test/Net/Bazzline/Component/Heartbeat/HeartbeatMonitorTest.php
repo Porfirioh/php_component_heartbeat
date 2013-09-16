@@ -10,6 +10,13 @@ use PHPUnit_Framework_TestCase;
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
 use Mockery;
 
+/**
+ * Class HeartbeatMonitorTest
+ *
+ * @package Test\Net\Bazzline\Component\Heartbeat
+ * @author stev leibelt <artodeto@arcor.de>
+ * @since 2013-07-17
+ */
 class HeartbeatMonitorTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -92,7 +99,7 @@ class HeartbeatMonitorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\HeartbeatInterface
+     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\ClientInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
