@@ -15,6 +15,13 @@ Example::create()
     ->printSettings()
     ->andRun();
 
+/**
+ * Class Example
+ *
+ * @package Example\JSONAndFork
+ * @author stev leibelt <artodeto@arcor.de>
+ * @since 2013-07-22
+ */
 class Example
 {
     /**
