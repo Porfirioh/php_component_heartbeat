@@ -6,7 +6,6 @@
 
 namespace Test\Net\Bazzline\Component\Heartbeat;
 
-use PHPUnit_Framework_TestCase;
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
 use Mockery;
 
@@ -17,7 +16,7 @@ use Mockery;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-17
  */
-class HeartbeatMonitorTest extends PHPUnit_Framework_TestCase
+class HeartbeatMonitorTest extends TestCase
 {
     /**
      * @author stev leibelt <artodeto@arcor.de>
