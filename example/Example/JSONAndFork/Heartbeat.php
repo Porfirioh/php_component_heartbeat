@@ -9,7 +9,7 @@ namespace Example\JSONAndFork;
 use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient;
 use Net\Bazzline\Component\Heartbeat\RuntimeException;
-use Net\Bazzline\Component\Heartbeat\WarningRuntimeException;
+use Net\Bazzline\Component\Heartbeat\RuntimeWarningException;
 use Net\Bazzline\Component\ProcessIdentity\IdentityAwareInterface;
 use Net\Bazzline\Component\ProcessIdentity\IdentityInterface;
 use Net\Bazzline\Component\Utility\Json;
@@ -93,7 +93,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
-     * @throws RuntimeException|CriticalRuntimeException|WarningRuntimeException
+     * @throws RuntimeException|CriticalRuntimeException|RuntimeWarningException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
      */
@@ -114,7 +114,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
                 'time difference is greater five seconds'
             );
         } else if ($timeDifference >= 2) {
-            throw new WarningRuntimeException(
+            throw new RuntimeWarningException(
                 'time difference is greater two seconds'
             );
         }

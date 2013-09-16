@@ -9,7 +9,7 @@ The build status of the current master branch is tracked by Travis CI:
 
 ## Basic Concept
 
-The heartbeat is divided into two components, the client and the monitor.
+The heartbeat is divided into two components, the heartbeat client and the heartbeat monitor.
 
 The main idea is to provide a heartbeat over parallel running threads or on different locations.
 
