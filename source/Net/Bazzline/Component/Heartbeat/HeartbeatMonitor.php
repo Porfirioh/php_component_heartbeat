@@ -41,7 +41,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     /**
      * {@inheritdoc}
      */
-    public function attach(ClientInterface $heartbeat)
+    public function attach(HeartbeatClientInterface $heartbeat)
     {
         $pulse = $this->getPulse($heartbeat);
         $hash = spl_object_hash($heartbeat);
@@ -62,7 +62,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     /**
      * {@inheritdoc}
      */
-    public function detach(ClientInterface $heartbeat)
+    public function detach(HeartbeatClientInterface $heartbeat)
     {
         $pulse = $this->getPulse($heartbeat);
         $hash = spl_object_hash($heartbeat);
@@ -116,7 +116,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
             if ($maximumPulse <= $pulse) {
                 foreach ($this->heartbeats[$pulse] as $heartbeat) {
                     /**
-                     * @var $heartbeat ClientInterface
+                     * @var $heartbeat HeartbeatClientInterface
                      */
                     try {
                         $heartbeat->knock();
@@ -136,12 +136,12 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     }
 
     /**
-     * @param ClientInterface $heartbeat
+     * @param HeartbeatClientInterface $heartbeat
      * @return int
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    private function getPulse(ClientInterface $heartbeat)
+    private function getPulse(HeartbeatClientInterface $heartbeat)
     {
         if ($heartbeat instanceof PulseableInterface) {
             $pulse = $heartbeat->getPulse();

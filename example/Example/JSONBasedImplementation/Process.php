@@ -7,7 +7,7 @@
 namespace Example\JSONBasedImplementation;
 
 use Net\Bazzline\Component\Heartbeat\HeartbeatClientAwareInterface;
-use Net\Bazzline\Component\Heartbeat\ClientInterface;
+use Net\Bazzline\Component\Heartbeat\HeartbeatClientInterface;
 
 /**
  * Class Process
@@ -44,7 +44,7 @@ class Process implements HeartbeatClientAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function setHeartbeatClient(ClientInterface $heartbeat)
+    public function setHeartbeatClient(HeartbeatClientInterface $heartbeat)
     {
         $this->heartbeat = $heartbeat;
 

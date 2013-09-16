@@ -98,7 +98,7 @@ class HeartbeatMonitorTest extends TestCase
     }
 
     /**
-     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\ClientInterface
+     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\HeartbeatClientInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
