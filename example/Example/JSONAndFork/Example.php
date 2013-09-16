@@ -124,6 +124,7 @@ class Example
      */
     public function setupProcesses($numberOfProcesses = 3, $numberOfWarning = 0, $numberOfCritical = 0)
     {
+        echo 'Calling process with parameters pid loopsPerClient fails(1/0) failsCritical(1/0) failsAtLoop' . PHP_EOL;
         for ($i = 0; $i < $numberOfProcesses; $i++) {
             $loopsPerClient = $this->loops + $numberOfProcesses - $i;
             $fails = 0;
