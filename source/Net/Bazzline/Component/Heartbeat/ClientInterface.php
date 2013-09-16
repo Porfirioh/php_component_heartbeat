@@ -46,5 +46,5 @@ interface ClientInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-16
      */
-    public function handleHeartProblems(RuntimeException $exception);
+    public function handleException(RuntimeException $exception);
 }

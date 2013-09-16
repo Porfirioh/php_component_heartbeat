@@ -7,7 +7,7 @@
 namespace Example\JSONAndFork;
 
 use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
-use Net\Bazzline\Component\Heartbeat\HeartbeatAbstract;
+use Net\Bazzline\Component\Heartbeat\AbstractClient;
 use Net\Bazzline\Component\Heartbeat\RuntimeException;
 use Net\Bazzline\Component\Heartbeat\WarningRuntimeException;
 use Net\Bazzline\Component\ProcessIdentity\IdentityAwareInterface;
@@ -22,7 +22,7 @@ use stdClass;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-22
  */
-class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
+class Heartbeat extends AbstractClient implements IdentityAwareInterface
 {
     /**
      * @var int
@@ -153,7 +153,7 @@ class Heartbeat extends HeartbeatAbstract implements IdentityAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function handleHeartProblems(RuntimeException $exception)
+    public function handleException(RuntimeException $exception)
     {
         $indent = "\t";
         echo PHP_EOL;

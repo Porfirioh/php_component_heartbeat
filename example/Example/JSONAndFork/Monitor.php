@@ -158,7 +158,7 @@ class Monitor extends HeartbeatMonitor
                         'uptime' => $heartbeat->getUptime(),
                         'memoryUsage' => $heartbeat->getMemoryUsage()
                     );
-                    $heartbeat->handleHeartProblems($exception);
+                    $heartbeat->handleException($exception);
                     if ($exception instanceof CriticalRuntimeException) {
                         unset($heartbeats[$hash]);
                         $this->detach($heartbeat);
