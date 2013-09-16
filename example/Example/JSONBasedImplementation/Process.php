@@ -28,7 +28,7 @@ class Process implements HeartbeatClientAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function getHeartbeat()
+    public function getHeartbeatClient()
     {
         return $this->heartbeat;
     }
@@ -36,7 +36,7 @@ class Process implements HeartbeatClientAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function setHeartbeat(ClientInterface $heartbeat)
+    public function setHeartbeatClient(ClientInterface $heartbeat)
     {
         $this->heartbeat = $heartbeat;
 

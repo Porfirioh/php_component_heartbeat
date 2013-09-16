@@ -23,7 +23,7 @@ interface HeartbeatClientAwareInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    public function getHeartbeat();
+    public function getHeartbeatClient();
 
     /**
      * Sets a heartbeat
@@ -33,5 +33,5 @@ interface HeartbeatClientAwareInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    public function setHeartbeat(ClientInterface $heartbeat);
+    public function setHeartbeatClient(ClientInterface $heartbeat);
 }

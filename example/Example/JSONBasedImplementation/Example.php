@@ -97,7 +97,7 @@ class Example
     {
         foreach ($this->processes as $process)
         {
-            $fileName = $process->getHeartbeat()->getIdentity()->getId() . '.json';
+            $fileName = $process->getHeartbeatClient()->getIdentity()->getId() . '.json';
             if (file_exists($fileName)) {
                 unlink($fileName);
             }
@@ -171,7 +171,7 @@ class Example
             }
 
             $process = new Process();
-            $process->setHeartbeat($heartbeat);
+            $process->setHeartbeatClient($heartbeat);
             $this->processes[] = $process;
 
             $this->monitor->attach($heartbeat);
