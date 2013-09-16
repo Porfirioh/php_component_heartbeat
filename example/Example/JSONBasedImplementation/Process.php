@@ -6,7 +6,7 @@
 
 namespace Example\JSONBasedImplementation;
 
-use Net\Bazzline\Component\Heartbeat\HeartbeatAwareInterface;
+use Net\Bazzline\Component\Heartbeat\HeartbeatClientAwareInterface;
 use Net\Bazzline\Component\Heartbeat\ClientInterface;
 
 /**
@@ -16,7 +16,7 @@ use Net\Bazzline\Component\Heartbeat\ClientInterface;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-17
  */
-class Process implements HeartbeatAwareInterface
+class Process implements HeartbeatClientAwareInterface
 {
     /**
      * @var Heartbeat
