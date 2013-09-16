@@ -15,4 +15,4 @@ use RuntimeException as ParentClass;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-17
  */
-class RuntimeException extends ParentClass {}
+class RuntimeCriticalException extends ParentClass {}

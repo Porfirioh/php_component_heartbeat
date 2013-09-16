@@ -8,7 +8,7 @@ namespace Example\JSONBasedImplementation;
 
 use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient;
-use Net\Bazzline\Component\Heartbeat\RuntimeException;
+use Net\Bazzline\Component\Heartbeat\RuntimeCriticalException;
 use Net\Bazzline\Component\Heartbeat\RuntimeWarningException;
 use Net\Bazzline\Component\ProcessIdentity\IdentityAwareInterface;
 use Net\Bazzline\Component\ProcessIdentity\IdentityInterface;
@@ -84,7 +84,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
      * This method returns the current timestamp as heartbeat.
      *
      * @return integer - timestamp of last beat
-     * @throws RuntimeException|CriticalRuntimeException|RuntimeWarningException
+     * @throws RuntimeCriticalException|CriticalRuntimeException|RuntimeWarningException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
@@ -92,7 +92,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
     {
         if (!file_exists($this->fileName)) {
             //this should never happen, have you done a beat before?
-            throw new RuntimeException(
+            throw new RuntimeCriticalException(
                 'no data process file (' . $this->fileName . ') for data exchange found'
             );
         }
@@ -147,7 +147,7 @@ class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterfac
     /**
      * {@inheritdoc}
      */
-    public function handleException(RuntimeException $exception)
+    public function handleException(RuntimeCriticalException $exception)
     {
         $indent = "\t";
         echo $indent . str_repeat('-', 20) . PHP_EOL;
