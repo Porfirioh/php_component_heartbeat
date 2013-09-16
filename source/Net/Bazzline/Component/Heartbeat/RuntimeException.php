@@ -1,16 +1,18 @@
 <?php
 /**
  * @author stev leibelt <artodeto@arcor.de>
- * @since 2013-07-17
+ * @since 2013-09-16
  */
 
 namespace Net\Bazzline\Component\Heartbeat;
 
+use RuntimeException as ParentException;
+
 /**
- * Class WarningRuntimeException
+ * Class RuntimeException
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
- * @since 2013-07-17
+ * @since 2013-09-16
  */
-class RuntimeWarningException extends RuntimeCriticalException {}
+class RuntimeException extends ParentException {}
