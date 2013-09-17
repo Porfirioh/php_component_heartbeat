@@ -1,4 +1,4 @@
-<phpunit bootstrap="test/bootstrap.php"
+<phpunit bootstrap="tests/bootstrap.php"
          cacheTokens="false"
          colors="true"
          convertErrorsToExceptions="true"
@@ -11,7 +11,7 @@
 
     <testsuites>
         <testsuite name="Heartbeat Test Suite">
-            <directory>test/</directory>
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
 
