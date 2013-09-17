@@ -169,7 +169,7 @@ class Monitor extends HeartbeatMonitor
             $this->setFileContent($content);
         }
 
-        $this->lastListenTimestamp = $currentTimestamp;
+        $this->initialTimestamp = $currentTimestamp;
 
         return $this;
     }

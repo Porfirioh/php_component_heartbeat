@@ -108,7 +108,7 @@ Investigate code if you want to.
 
 # ToDos
 
-* Update MonitorTest to see if pulseable is called as expected (once for each, what happens to clients with longer pulse etc.)
+* Remove real sleep by mocking "time()", update algorithm that it can handle a sleep > 1 second
 * Implement monitor history (or interface at least)
 * Implement example with sqli for database example
 * Create wiki describes benefits and ideas behind runtime interface

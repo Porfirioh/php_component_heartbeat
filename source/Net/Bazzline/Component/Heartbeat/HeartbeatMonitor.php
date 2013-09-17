@@ -27,7 +27,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
-    protected $lastListenTimestamp;
+    protected $initialTimestamp;
 
     /**
      * @author stev leibelt <artodeto@arcor.de>
@@ -35,7 +35,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
      */
     public function __construct()
     {
-        $this->lastListen = time();
+        $this->initialTimestamp = time();
     }
 
     /**
@@ -115,11 +115,26 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     public function listen()
     {
         $currentTimestamp = time();
-        $maximumPulse = $currentTimestamp - $this->lastListenTimestamp;
-        $availablePulses = array_keys($this->clientsPerPulse);
+        //calculate seconds between last run and current time
+        //the result is the minimal number of seconds that should be passed
+        // before a next knock/request is done on the client
+        $timeDifference = $currentTimestamp - $this->initialTimestamp;
+        $pulses = array_keys($this->clientsPerPulse);
+echo var_export(array(
+        'initial' => $this->initialTimestamp,
+        'current' => $currentTimestamp,
+        'diff' => $timeDifference
+    ), true) . PHP_EOL;
 
-        foreach ($availablePulses as $pulse) {
-            if ($maximumPulse <= $pulse) {
+        //iterate over all available pulse/minimum number of passed seconds
+        foreach ($pulses as $pulse) {
+            //if pulse is smaller or equal to the maximum pulse, it should be
+            // knocked
+            $knockClientsForThisPulse = (($pulse == 0)
+                || (($timeDifference % $pulse) === 0));
+            if ($knockClientsForThisPulse) {
+                //knock each attached client at current pulse
+echo 'pulse ' . $pulse . PHP_EOL;
                 foreach ($this->clientsPerPulse[$pulse] as $clients) {
                     /**
                      * @var $clients HeartbeatClientInterface
@@ -135,8 +150,6 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
                 }
             }
         }
-
-        $this->lastListenTimestamp = $currentTimestamp;
 
         return $this;
     }
