@@ -16,11 +16,11 @@ namespace Net\Bazzline\Component\Heartbeat;
 class HeartbeatMonitor implements HeartbeatMonitorInterface
 {
     /**
-     * @var array
+     * @var array[$pulse => $clients]
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
-    protected $heartbeats;
+    protected $clientsPerPulse;
 
     /**
      * @var int
@@ -41,20 +41,23 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     /**
      * {@inheritdoc}
      */
-    public function attach(HeartbeatClientInterface $heartbeat)
+    public function attach(HeartbeatClientInterface $client)
     {
-        $pulse = $this->getPulse($heartbeat);
-        $hash = spl_object_hash($heartbeat);
+        $pulse = $this->getPulse($client);
+        $hash = spl_object_hash($client);
 
-        if (!isset($this->heartbeats[$pulse])) {
-            $this->heartbeats[$pulse] = array();
+        //no entries available for this pulse, create a empty array for it
+        if (!isset($this->clientsPerPulse[$pulse])) {
+            $this->clientsPerPulse[$pulse] = array();
         }
-        if (isset($this->heartbeats[$pulse][$hash])) {
+        //prevent from adding the same object twice
+        if (isset($this->clientsPerPulse[$pulse][$hash])) {
             throw new InvalidArgumentException(
                 'Can not add already attached heartbeat'
             );
         }
-        $this->heartbeats[$pulse][$hash] = $heartbeat;
+        //add client to array by provided pulse and hash
+        $this->clientsPerPulse[$pulse][$hash] = $client;
 
         return $this;
     }
@@ -67,13 +70,16 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
         $pulse = $this->getPulse($heartbeat);
         $hash = spl_object_hash($heartbeat);
 
-        if ((!isset($this->heartbeats[$pulse]))
-            || (!isset($this->heartbeats[$pulse][$hash]))) {
+        //validate if an entry for the provided pulse exist
+        //validate if an entry for the provided pulse and hash exists
+        if ((!isset($this->clientsPerPulse[$pulse]))
+            || (!isset($this->clientsPerPulse[$pulse][$hash]))) {
             throw new InvalidArgumentException(
                 'Can not detach not attached heartbeat'
             );
         }
-        unset($this->heartbeats[$pulse][$hash]);
+        //remove client from array
+        unset($this->clientsPerPulse[$pulse][$hash]);
 
         return $this;
     }
@@ -84,9 +90,9 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     public function getAll()
     {
         $heartbeats = array();
-        foreach ($this->heartbeats as $heartbeatsPerPulse) {
-            foreach ($heartbeatsPerPulse as $heartbeat) {
-                $heartbeats[] = $heartbeat;
+        foreach ($this->clientsPerPulse as $pulse => $clients) {
+            foreach ($clients as $client) {
+                $heartbeats[] = $client;
             }
         }
 
@@ -98,7 +104,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
      */
     public function detachAll()
     {
-        $this->heartbeats = array();
+        $this->clientsPerPulse = array();
 
         return $this;
     }
@@ -110,20 +116,20 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     {
         $currentTimestamp = time();
         $maximumPulse = $currentTimestamp - $this->lastListenTimestamp;
-        $availablePulses = array_keys($this->heartbeats);
+        $availablePulses = array_keys($this->clientsPerPulse);
 
         foreach ($availablePulses as $pulse) {
             if ($maximumPulse <= $pulse) {
-                foreach ($this->heartbeats[$pulse] as $heartbeat) {
+                foreach ($this->clientsPerPulse[$pulse] as $clients) {
                     /**
-                     * @var $heartbeat HeartbeatClientInterface
+                     * @var $clients HeartbeatClientInterface
                      */
                     try {
-                        $heartbeat->knock();
+                        $clients->knock();
                     } catch (RuntimeException $exception) {
-                        $heartbeat->handleException($exception);
+                        $clients->handleException($exception);
                         if ($exception instanceof CriticalRuntimeException) {
-                            $this->detach($heartbeat);
+                            $this->detach($clients);
                         }
                     }
                 }
@@ -136,15 +142,15 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     }
 
     /**
-     * @param HeartbeatClientInterface $heartbeat
+     * @param HeartbeatClientInterface $client
      * @return int
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    private function getPulse(HeartbeatClientInterface $heartbeat)
+    private function getPulse(HeartbeatClientInterface $client)
     {
-        if ($heartbeat instanceof PulseableInterface) {
-            $pulse = $heartbeat->getPulse();
+        if ($client instanceof PulseableInterface) {
+            $pulse = $client->getPulse();
         } else {
             $pulse = 0;
         }
