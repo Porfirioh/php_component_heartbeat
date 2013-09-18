@@ -230,7 +230,7 @@ echo 'pulse ' . $pulse . PHP_EOL;
             $pulse = $client->getPulse();
         }
 
-        $pulse = (!isset($pulse) || is_null($pulse) || $pulse == 0) ? 1 : $pulse;
+        $pulse = (!isset($pulse) || is_null($pulse) || $pulse <= 0) ? 1 : $pulse;
 
         return $pulse;
     }
