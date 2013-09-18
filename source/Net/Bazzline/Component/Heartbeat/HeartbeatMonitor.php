@@ -13,7 +13,7 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-class HeartbeatMonitor implements HeartbeatMonitorInterface
+class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInterface
 {
     /**
      * @var array[$pulse => $clients]
@@ -37,6 +37,13 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     protected $lastTimestampDifference;
 
     /**
+     * @var TimestampInterface
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    protected $timestamp;
+
+    /**
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
@@ -44,6 +51,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     {
         $this->initialTimestamp = time();
         $this->lastTimestampDifference = 0;
+        $this->timestamp = new Timestamp();
     }
 
     /**
@@ -158,6 +166,51 @@ echo 'pulse ' . $pulse . PHP_EOL;
                 }
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return null|TimestampInterface
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
+    /**
+     * @return bool
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    public function hasTimestamp()
+    {
+        return (!is_null($this->timestamp));
+    }
+
+    /**
+     * @return $this
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    public function removeTimestamp()
+    {
+        $this->timestamp = null;
+
+        return $this;
+    }
+
+    /**
+     * @param TimestampInterface $timestamp
+     * @return mixed
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    public function setTimestamp(TimestampInterface $timestamp)
+    {
+        $this->timestamp = $timestamp;
 
         return $this;
     }
