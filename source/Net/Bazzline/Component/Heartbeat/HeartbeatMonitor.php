@@ -105,49 +105,8 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     public function listen()
     {
-        $availablePulses = array_keys($this->clientsPerPulse);
-        $pulsesToKnock = array();
-        if ($this->hasTimestamp()) {
-            $timeDifference = $this->timestamp->getTimestampDifference();
-            echo var_export(array(
-                    'initial' => $this->timestamp->getInitialTimestamp(),
-                    'current' => $this->timestamp->getCurrentTimestamp(),
-                    'diff' => $timeDifference
-                ), true) . PHP_EOL;
-            //calculate which pulses should be called
-            foreach ($availablePulses as $pulse) {
-                //calculate seconds between last run and current time
-                //the result is the minimal number of seconds that should be passed
-                // before a next knock/request is done on the client
-                //if pulse is smaller or equal to the maximum pulse, it should be
-                // knocked
-                $knockClientsForThisPulse = (($pulse == 0)
-                    || (($timeDifference % $pulse) === 0));
-                if ($knockClientsForThisPulse) {
-                    $pulsesToKnock[] = $pulse;
-                }
-            }
-        } else {
-            $pulsesToKnock = $availablePulses;
-        }
-
-        //iterate over all available pulse/minimum number of passed seconds
-        foreach ($pulsesToKnock as $pulse) {
-echo 'pulse ' . $pulse . PHP_EOL;
-            foreach ($this->clientsPerPulse[$pulse] as $clients) {
-                /**
-                 * @var $clients HeartbeatClientInterface
-                 */
-                try {
-                    $clients->knock();
-                } catch (RuntimeException $exception) {
-                    $clients->handleException($exception);
-                    if ($exception instanceof CriticalRuntimeException) {
-                        $this->detach($clients);
-                    }
-                }
-            }
-        }
+        $pulses = $this->getKnockablePulses();
+        $this->knockPulses($pulses);
 
         return $this;
     }
@@ -198,12 +157,74 @@ echo 'pulse ' . $pulse . PHP_EOL;
     }
 
     /**
+     * @return array
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    protected function getKnockablePulses()
+    {
+        $availablePulses = array_keys($this->clientsPerPulse);
+        $knockablePulses = array();
+        if ($this->hasTimestamp()) {
+            $timeDifference = $this->timestamp->getTimestampDifference();
+echo var_export(array(
+        'initial' => $this->timestamp->getInitialTimestamp(),
+        'current' => $this->timestamp->getCurrentTimestamp(),
+        'diff' => $timeDifference
+    ), true) . PHP_EOL;
+            //calculate which pulses should be called
+            foreach ($availablePulses as $pulse) {
+                //calculate seconds between last run and current time
+                //the result is the minimal number of seconds that should be passed
+                // before a next knock/request is done on the client
+                //if pulse is smaller or equal to the maximum pulse, it should be
+                // knocked
+                $knockClientsForThisPulse = (($pulse == 0)
+                    || (($timeDifference % $pulse) === 0));
+                if ($knockClientsForThisPulse) {
+                    $knockablePulses[] = $pulse;
+                }
+            }
+        } else {
+            $knockablePulses = $availablePulses;
+        }
+
+        return $knockablePulses;
+    }
+
+    /**
+     * @param array $pulses
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    protected function knockPulses(array $pulses)
+    {
+        //iterate over all available pulse/minimum number of passed seconds
+        foreach ($pulses as $pulse) {
+echo 'pulse ' . $pulse . PHP_EOL;
+            foreach ($this->clientsPerPulse[$pulse] as $clients) {
+                /**
+                 * @var $clients HeartbeatClientInterface
+                 */
+                try {
+                    $clients->knock();
+                } catch (RuntimeException $exception) {
+                    $clients->handleException($exception);
+                    if ($exception instanceof CriticalRuntimeException) {
+                        $this->detach($clients);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * @param HeartbeatClientInterface $client
      * @return int
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    private function getPulse(HeartbeatClientInterface $client)
+    protected function getPulse(HeartbeatClientInterface $client)
     {
         if ($client instanceof PulseableInterface) {
             $pulse = $client->getPulse();
