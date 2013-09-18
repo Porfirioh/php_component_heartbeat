@@ -228,9 +228,9 @@ echo 'pulse ' . $pulse . PHP_EOL;
     {
         if ($client instanceof PulseableInterface) {
             $pulse = $client->getPulse();
-        } else {
-            $pulse = 0;
         }
+
+        $pulse = (!isset($pulse) || is_null($pulse) || $pulse == 0) ? 1 : $pulse;
 
         return $pulse;
     }
