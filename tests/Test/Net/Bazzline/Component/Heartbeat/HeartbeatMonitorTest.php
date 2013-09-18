@@ -230,10 +230,7 @@ class HeartbeatMonitorTest extends TestCase
         $monitor->attach($twoSecondPulseClient);
 
         $monitor->listen();
-        //we have to wait at least six seconds to trigger $clientThree two times
-        //sleep(4);
         $monitor->listen();
-        //sleep(2);
         $monitor->listen();
     }
 }
