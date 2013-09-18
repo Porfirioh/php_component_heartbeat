@@ -6,6 +6,7 @@
 
 namespace Example\JSONBasedImplementation;
 
+use Net\Bazzline\Component\Heartbeat\Timestamp;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
@@ -139,6 +140,7 @@ class Example
     public function setupMonitor()
     {
         $this->monitor = new Monitor();
+        $this->monitor->setTimestamp(new Timestamp());
         $this->monitor->detachAll();
 
         return $this;

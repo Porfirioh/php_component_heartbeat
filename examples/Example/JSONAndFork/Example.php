@@ -6,6 +6,8 @@
 
 namespace Example\JSONAndFork;
 
+use Net\Bazzline\Component\Heartbeat\Timestamp;
+
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 Example::create()
@@ -85,6 +87,7 @@ class Example
     public function __construct()
     {
         $this->monitor = new Monitor();
+        $this->monitor->setTimestamp(new Timestamp());
         $this->monitor->detachAll();
         $this->sleep = 1;
         $this->numberOfExpectedFails = 0;
