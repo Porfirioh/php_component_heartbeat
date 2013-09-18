@@ -46,6 +46,18 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\TimestampInterface
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    protected function getNewMockTimestamp()
+    {
+        $timestamp = Mockery::mock('Net\Bazzline\Component\Heartbeat\Timestamp');
+
+        return $timestamp;
+    }
+
+    /**
      * @return HeartbeatMonitor
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
