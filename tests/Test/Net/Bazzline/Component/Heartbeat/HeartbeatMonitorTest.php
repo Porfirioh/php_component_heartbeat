@@ -35,7 +35,7 @@ class HeartbeatMonitorTest extends TestCase
     public function testAttachHeartbeat()
     {
         $monitor = $this->getNewMonitor();
-        $client = $this->getNewHeartbeatClient();
+        $client = $this->getNewMockHeartbeatClient();
 
         $this->assertEquals(
             $monitor,
@@ -52,7 +52,7 @@ class HeartbeatMonitorTest extends TestCase
     public function testAttachSameHeartbeatTwice()
     {
         $monitor = $this->getNewMonitor();
-        $client = $this->getNewHeartbeatClient();
+        $client = $this->getNewMockHeartbeatClient();
         $client->shouldReceive('getPulse')
             ->andReturn(15)
             ->twice();
@@ -70,7 +70,7 @@ class HeartbeatMonitorTest extends TestCase
     public function testDetachWithNotAttachedHeartbeat()
     {
         $monitor = $this->getNewMonitor();
-        $client = $this->getNewHeartbeatClient();
+        $client = $this->getNewMockHeartbeatClient();
 
         $this->assertEquals(
             $monitor,
@@ -85,7 +85,7 @@ class HeartbeatMonitorTest extends TestCase
     public function testDetach()
     {
         $monitor = $this->getNewMonitor();
-        $client = $this->getNewHeartbeatClient();
+        $client = $this->getNewMockHeartbeatClient();
         $client->shouldReceive('getPulse')
             ->andReturn(15)
             ->twice();
@@ -106,14 +106,14 @@ class HeartbeatMonitorTest extends TestCase
     {
         $monitor = $this->getNewMonitor();
 
-        $threeSecondPulseClient = $this->getNewHeartbeatClient();
+        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
         $threeSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(3)
             ->once();
         $threeSecondPulseClient->shouldReceive('knock')
             ->twice();
 
-        $zeroSecondPulseClient = $this->getNewHeartbeatClient();
+        $zeroSecondPulseClient = $this->getNewMockHeartbeatClient();
         $zeroSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(0)
             ->once();
@@ -135,14 +135,14 @@ class HeartbeatMonitorTest extends TestCase
     {
         $monitor = $this->getNewMonitor();
 
-        $threeSecondPulseClient = $this->getNewHeartbeatClient();
+        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
         $threeSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(3)
             ->once();
         $threeSecondPulseClient->shouldReceive('knock')
             ->once();
 
-        $zeroSecondPulseClient = $this->getNewHeartbeatClient();
+        $zeroSecondPulseClient = $this->getNewMockHeartbeatClient();
         $zeroSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(0)
             ->once();
@@ -167,14 +167,14 @@ class HeartbeatMonitorTest extends TestCase
     {
         $monitor = $this->getNewMonitor();
 
-        $threeSecondPulseClient = $this->getNewHeartbeatClient();
+        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
         $threeSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(3)
             ->once();
         $threeSecondPulseClient->shouldReceive('knock')
             ->twice();
 
-        $zeroSecondPulseClient = $this->getNewHeartbeatClient();
+        $zeroSecondPulseClient = $this->getNewMockHeartbeatClient();
         $zeroSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(0)
             ->once();
@@ -201,28 +201,28 @@ class HeartbeatMonitorTest extends TestCase
         $monitor = $this->getNewMonitor();
 
 echo __METHOD__ . PHP_EOL;
-        $threeSecondPulseClient = $this->getNewHeartbeatClient();
+        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
         $threeSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(3)
             ->once();
         $threeSecondPulseClient->shouldReceive('knock')
             ->times(2);
 
-        $oneSecondPulseClient = $this->getNewHeartbeatClient();
+        $oneSecondPulseClient = $this->getNewMockHeartbeatClient();
         $oneSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(1)
             ->once();
         $oneSecondPulseClient->shouldReceive('knock')
             ->times(3);
 
-        $sixSecondPulseClient = $this->getNewHeartbeatClient();
+        $sixSecondPulseClient = $this->getNewMockHeartbeatClient();
         $sixSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(6)
             ->once();
         $sixSecondPulseClient->shouldReceive('knock')
             ->twice();
 
-        $twoSecondPulseClient = $this->getNewHeartbeatClient();
+        $twoSecondPulseClient = $this->getNewMockHeartbeatClient();
         $twoSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(2)
             ->once();
@@ -247,7 +247,7 @@ echo __METHOD__ . PHP_EOL;
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    private function getNewHeartbeatClient()
+    private function getNewMockHeartbeatClient()
     {
         $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient');
         $client->shouldReceive('getPulse')
