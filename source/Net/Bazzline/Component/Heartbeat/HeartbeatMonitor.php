@@ -30,12 +30,20 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface
     protected $initialTimestamp;
 
     /**
+     * @var
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    protected $lastTimestampDifference;
+
+    /**
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
     public function __construct()
     {
         $this->initialTimestamp = time();
+        $this->lastTimestampDifference = 0;
     }
 
     /**
