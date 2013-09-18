@@ -121,6 +121,11 @@ class HeartbeatMonitorTest extends TestCase
     public function testListenWithTwoClientsAndWithOneSleep()
     {
         $monitor = $this->getNewMonitor();
+        $timestamp = $this->getNewMockTimestamp();
+        $timestamp->shouldReceive('getTimestampDifference')
+            ->andReturnValues(array(0, 1))
+            ->twice();
+        $monitor->setTimestamp($timestamp);
 
         $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
         $threeSecondPulseClient->shouldReceive('getPulse')
@@ -140,9 +145,6 @@ class HeartbeatMonitorTest extends TestCase
         $monitor->attach($zeroSecondPulseClient);
 
         $monitor->listen();
-        //since the internal heartbeat monitor measures with a accuracy of one
-        // second, we have to wait at least one second
-        sleep(1);
         $monitor->listen();
     }
 
@@ -153,6 +155,11 @@ class HeartbeatMonitorTest extends TestCase
     public function testListenWithTwoClientsAndTwoSleeps()
     {
         $monitor = $this->getNewMonitor();
+        $timestamp = $this->getNewMockTimestamp();
+        $timestamp->shouldReceive('getTimestampDifference')
+            ->andReturnValues(array(0, 2, 1))
+            ->times(3);
+        $monitor->setTimestamp($timestamp);
 
         $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
         $threeSecondPulseClient->shouldReceive('getPulse')
@@ -172,10 +179,7 @@ class HeartbeatMonitorTest extends TestCase
         $monitor->attach($zeroSecondPulseClient);
 
         $monitor->listen();
-        //we have to wait at least three second to trigger $clientOne two times
-        sleep(2);
         $monitor->listen();
-        sleep(1);
         $monitor->listen();
     }
 
@@ -186,8 +190,12 @@ class HeartbeatMonitorTest extends TestCase
     public function testListenWithFourClientsAndThreeSleeps()
     {
         $monitor = $this->getNewMonitor();
+        $timestamp = $this->getNewMockTimestamp();
+        $timestamp->shouldReceive('getTimestampDifference')
+            ->andReturnValues(array(0, 4, 2))
+            ->times(3);
+        $monitor->setTimestamp($timestamp);
 
-echo __METHOD__ . PHP_EOL;
         $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
         $threeSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(3)
@@ -223,9 +231,9 @@ echo __METHOD__ . PHP_EOL;
 
         $monitor->listen();
         //we have to wait at least six seconds to trigger $clientThree two times
-        sleep(4);
+        //sleep(4);
         $monitor->listen();
-        sleep(2);
+        //sleep(2);
         $monitor->listen();
     }
 }

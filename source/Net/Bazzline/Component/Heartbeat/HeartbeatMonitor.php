@@ -105,7 +105,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     public function listen()
     {
-        $pulses = $this->getKnockablePulses();
+        $pulses = $this->getPulses();
         $this->knockPulses($pulses);
 
         return $this;
@@ -161,15 +161,15 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
      */
-    protected function getKnockablePulses()
+    protected function getPulses()
     {
         $availablePulses = array_keys($this->clientsPerPulse);
-        $knockablePulses = array();
+        $pulses = array();
         if ($this->hasTimestamp()) {
             $timeDifference = $this->timestamp->getTimestampDifference();
 echo var_export(array(
-        'initial' => $this->timestamp->getInitialTimestamp(),
-        'current' => $this->timestamp->getCurrentTimestamp(),
+        //'initial' => $this->timestamp->getInitialTimestamp(),
+        //'current' => $this->timestamp->getCurrentTimestamp(),
         'diff' => $timeDifference
     ), true) . PHP_EOL;
             //calculate which pulses should be called
@@ -182,14 +182,14 @@ echo var_export(array(
                 $knockClientsForThisPulse = (($pulse == 0)
                     || (($timeDifference % $pulse) === 0));
                 if ($knockClientsForThisPulse) {
-                    $knockablePulses[] = $pulse;
+                    $pulses[] = $pulse;
                 }
             }
         } else {
-            $knockablePulses = $availablePulses;
+            $pulses = $availablePulses;
         }
 
-        return $knockablePulses;
+        return $pulses;
     }
 
     /**
