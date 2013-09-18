@@ -7,6 +7,7 @@
 namespace Test\Net\Bazzline\Component\Heartbeat;
 
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
+use Net\Bazzline\Component\Heartbeat\HeartbeatMonitorFactory;
 use Mockery;
 
 /**
@@ -264,7 +265,8 @@ echo __METHOD__ . PHP_EOL;
      */
     private function getNewMonitor()
     {
-        $monitor = new HeartbeatMonitor();
+        $factory = new HeartbeatMonitorFactory();
+        $monitor = $factory->create();
 
         return $monitor;
     }
