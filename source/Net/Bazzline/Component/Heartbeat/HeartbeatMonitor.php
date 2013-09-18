@@ -23,20 +23,6 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     protected $clientsPerPulse;
 
     /**
-     * @var int
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-14
-     */
-    protected $initialTimestamp;
-
-    /**
-     * @var
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-09-18
-     */
-    protected $lastTimestampDifference;
-
-    /**
      * @var TimestampInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
@@ -49,8 +35,6 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     public function __construct()
     {
-        $this->initialTimestamp = time();
-        $this->lastTimestampDifference = 0;
         $this->timestamp = new Timestamp();
     }
 
@@ -130,14 +114,16 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     public function listen()
     {
-        $currentTimestamp = time();
+        //@todo
+        //do this complicated stuff only, if a timestamp is attached
+        $currentTimestamp = $this->timestamp->getCurrentTimestamp();
         //calculate seconds between last run and current time
         //the result is the minimal number of seconds that should be passed
         // before a next knock/request is done on the client
-        $timeDifference = $currentTimestamp - $this->initialTimestamp;
+        $timeDifference = $this->timestamp->getTimestampDifference();
         $pulses = array_keys($this->clientsPerPulse);
 echo var_export(array(
-        'initial' => $this->initialTimestamp,
+        'initial' => $this->timestamp->getInitialTimestamp(),
         'current' => $currentTimestamp,
         'diff' => $timeDifference
     ), true) . PHP_EOL;
