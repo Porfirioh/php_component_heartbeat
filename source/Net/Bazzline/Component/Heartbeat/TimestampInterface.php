@@ -34,7 +34,7 @@ interface TimestampInterface
      * If null is provided, the current timestamp is used.
      *
      * @param null|int $time
-     * @return mixed
+     * @return int
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
      */
@@ -45,7 +45,7 @@ interface TimestampInterface
      * If null is provided, the current timestamp is used.
      *
      * @param null|int $time
-     * @return mixed
+     * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-19
      */
