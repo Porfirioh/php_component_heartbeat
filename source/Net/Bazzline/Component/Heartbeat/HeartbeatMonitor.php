@@ -23,6 +23,13 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     protected $clientsPerPulse;
 
     /**
+     * @var int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    protected $lastTimestampValue;
+
+    /**
      * @var TimestampInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
@@ -167,11 +174,11 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
         $pulses = array();
         if ($this->hasTimestamp()) {
             $timeDifference = $this->timestamp->getTimestampDifference();
+/*
 echo var_export(array(
-        //'initial' => $this->timestamp->getInitialTimestamp(),
-        //'current' => $this->timestamp->getCurrentTimestamp(),
         'diff' => $timeDifference
     ), true) . PHP_EOL;
+*/
             //calculate which pulses should be called
             foreach ($availablePulses as $pulse) {
                 //calculate seconds between last run and current time
@@ -179,8 +186,11 @@ echo var_export(array(
                 // before a next knock/request is done on the client
                 //if pulse is smaller or equal to the maximum pulse, it should be
                 // knocked
+                /*
                 $knockClientsForThisPulse = (($pulse == 0)
                     || (($timeDifference % $pulse) === 0));
+                */
+                $knockClientsForThisPulse = (($timeDifference % $pulse) === 0);
                 if ($knockClientsForThisPulse) {
                     $pulses[] = $pulse;
                 }
@@ -201,7 +211,7 @@ echo var_export(array(
     {
         //iterate over all available pulse/minimum number of passed seconds
         foreach ($pulses as $pulse) {
-echo 'pulse ' . $pulse . PHP_EOL;
+//echo 'pulse ' . $pulse . PHP_EOL;
             foreach ($this->clientsPerPulse[$pulse] as $clients) {
                 /**
                  * @var $clients HeartbeatClientInterface
