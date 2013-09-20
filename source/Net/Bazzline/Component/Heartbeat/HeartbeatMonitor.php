@@ -170,12 +170,13 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     protected function getPulses()
     {
-        //if time difference > 1 second, 
+        //first step, we need to get all available pulse times
+        $availablePulses = array_keys($this->clientsPerPulse);
+        $pulses = array();
+        //if time difference > 1 second,
         // get back all pulses by using step of 1 second
         // to calculate all available pulses
         //only get back each pulse once
-        $availablePulses = array_keys($this->clientsPerPulse);
-        $pulses = array();
         if ($this->hasTimestamp()) {
             $timeDifference = $this->timestamp->getTimestampDifference();
 /*
