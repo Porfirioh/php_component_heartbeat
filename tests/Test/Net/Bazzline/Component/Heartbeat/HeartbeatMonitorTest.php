@@ -89,7 +89,7 @@ class HeartbeatMonitorTest extends TestCase
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-17
      */
-    public function testListenWithTwoClientsAndWithoutSleep()
+    public function AtestListenWithTwoClientsAndWithoutSleep()
     {
         $monitor = $this->getNewMonitor();
 
@@ -118,7 +118,7 @@ class HeartbeatMonitorTest extends TestCase
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-17
      */
-    public function testListenWithTwoClientsAndWithOneSleep()
+    public function AtestListenWithTwoClientsAndWithOneSleep()
     {
         $monitor = $this->getNewMonitor();
         $timestamp = $this->getNewMockTimestamp();

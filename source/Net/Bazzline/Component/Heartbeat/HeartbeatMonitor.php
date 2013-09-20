@@ -172,7 +172,6 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     {
         //first step, we need to get all available pulse times
         $availablePulses = array_keys($this->clientsPerPulse);
-        $pulses = array();
         //if time difference > 1 second,
         // get back all pulses by using step of 1 second
         // to calculate all available pulses
@@ -183,11 +182,9 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
             $pulsesAsKeys = array();
             $timeDifference = $this->timestamp->getTimestampDifference();
             while ($timeDifference > 0) {
-/*
 echo var_export(array(
         'diff' => $timeDifference
     ), true) . PHP_EOL;
-*/
                 //calculate which pulses should be called
                 foreach ($availablePulses as $pulse) {
                     if (!isset($pulsesAsKeys[$pulse])) {
