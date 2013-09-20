@@ -178,28 +178,37 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
         // to calculate all available pulses
         //only get back each pulse once
         if ($this->hasTimestamp()) {
+            //to speed things up, we create a second array with all pulse
+            // intervals as keys
+            $pulsesAsKeys = array();
             $timeDifference = $this->timestamp->getTimestampDifference();
+            while ($timeDifference > 0) {
 /*
 echo var_export(array(
         'diff' => $timeDifference
     ), true) . PHP_EOL;
 */
-            //calculate which pulses should be called
-            foreach ($availablePulses as $pulse) {
-                //calculate seconds between last run and current time
-                //the result is the minimal number of seconds that should be passed
-                // before a next knock/request is done on the client
-                //if pulse is smaller or equal to the maximum pulse, it should be
-                // knocked
-                /*
-                $knockClientsForThisPulse = (($pulse == 0)
-                    || (($timeDifference % $pulse) === 0));
-                */
-                $knockClientsForThisPulse = (($timeDifference % $pulse) === 0);
-                if ($knockClientsForThisPulse) {
-                    $pulses[] = $pulse;
+                //calculate which pulses should be called
+                foreach ($availablePulses as $pulse) {
+                    if (!isset($pulsesAsKeys[$pulse])) {
+                        //calculate seconds between last run and current time
+                        //the result is the minimal number of seconds that should be passed
+                        // before a next knock/request is done on the client
+                        //if pulse is smaller or equal to the maximum pulse, it should be
+                        // knocked
+                        /*
+                        $knockClientsForThisPulse = (($pulse == 0)
+                            || (($timeDifference % $pulse) === 0));
+                        */
+                        $knockClientsForThisPulse = (($timeDifference % $pulse) === 0);
+                        if ($knockClientsForThisPulse) {
+                            $pulsesAsKeys[$pulse] = true;
+                        }
+                    }
                 }
+                $timeDifference--;
             }
+            $pulses = array_keys($pulsesAsKeys);
         } else {
             $pulses = $availablePulses;
         }
