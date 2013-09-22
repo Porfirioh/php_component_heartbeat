@@ -29,4 +29,11 @@ interface PulseAwareInterface
      * @since 2013-07-11
      */
     public function setPulse($seconds);
+
+    /**
+     * @return bool
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-22
+     */
+    public function hasPulse();
 }
