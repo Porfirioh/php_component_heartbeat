@@ -260,7 +260,7 @@ echo var_export(array(
      */
     protected function getPulse(HeartbeatClientInterface $client)
     {
-        if ($client instanceof PulseableInterface) {
+        if ($client instanceof PulseAwareInterface) {
             $pulse = $client->getPulse();
         }
 

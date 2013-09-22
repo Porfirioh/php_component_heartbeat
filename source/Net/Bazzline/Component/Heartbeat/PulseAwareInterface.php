@@ -13,7 +13,7 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-interface PulseableInterface
+interface PulseAwareInterface
 {
     /**
      * @return null|int - tells how often (in seconds) the knock should be called
