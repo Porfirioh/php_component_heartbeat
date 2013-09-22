@@ -6,7 +6,7 @@
 
 namespace Example\JSONBasedImplementation;
 
-use Net\Bazzline\Component\Heartbeat\Timestamp;
+use Net\Bazzline\Component\Utility\Timestamp;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';

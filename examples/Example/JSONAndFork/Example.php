@@ -6,7 +6,7 @@
 
 namespace Example\JSONAndFork;
 
-use Net\Bazzline\Component\Heartbeat\Timestamp;
+use Net\Bazzline\Component\Utility\Timestamp;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 

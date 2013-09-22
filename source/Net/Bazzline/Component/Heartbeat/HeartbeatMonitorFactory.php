@@ -6,6 +6,8 @@
 
 namespace Net\Bazzline\Component\Heartbeat;
 
+use Net\Bazzline\Component\Utility\Timestamp;
+
 /**
  * Class HeartbeatMonitorFactory
  *

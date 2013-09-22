@@ -46,13 +46,13 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\TimestampInterface
+     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Utility\TimestampInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
      */
     protected function getNewMockTimestamp()
     {
-        $timestamp = Mockery::mock('Net\Bazzline\Component\Heartbeat\Timestamp');
+        $timestamp = Mockery::mock('Net\Bazzline\Component\Utility\Timestamp');
 
         return $timestamp;
     }
