@@ -7,7 +7,7 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class PulseableInterface
+ * Class PulseAwareInterface
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
@@ -16,19 +16,19 @@ namespace Net\Bazzline\Component\Heartbeat;
 interface PulseAwareInterface
 {
     /**
-     * @return null|int - tells how often (in seconds) the knock should be called
+     * @return PulseInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
     public function getPulse();
 
     /**
-     * @param int $seconds - sets how often (in seconds) the knock should be called)
+     * @param PulseInterface $pulse
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
-    public function setPulse($seconds);
+    public function setPulse($pulse);
 
     /**
      * @return bool
