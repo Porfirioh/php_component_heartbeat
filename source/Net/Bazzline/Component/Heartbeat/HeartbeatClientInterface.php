@@ -17,7 +17,7 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-11
  */
-interface HeartbeatClientInterface
+interface HeartbeatClientInterface extends PulseAwareInterface
 {
     /**
      * This method returns the current timestamp as heartbeat.
