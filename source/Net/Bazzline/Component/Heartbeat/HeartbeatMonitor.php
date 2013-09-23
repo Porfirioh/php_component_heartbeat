@@ -173,14 +173,14 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     protected function getPulses()
     {
-        //instead of doing fanzy calculation, we should simple rember
+        //instead of doing fancy calculation, we should simple remember
         // (for each) pulse interval, when it was last triggered or
         // when it should be triggered next time (and then simple check
-        // if current timestamp is less or equal then caluclated/expected
+        // if current timestamp is less or equal then calculated/expected
         // pulse time).
         //
         //this would also simplify adaptation when implementing a database
-        // based monitor. thats why we should implement a "calculateNextPulseTimestamp",
+        // based monitor. that's why we should implement a "calculateNextPulseTimestamp",
         // "storeNextPulseTimestamp" and so on.
         //----
         //first step, we need to get all available pulse times
