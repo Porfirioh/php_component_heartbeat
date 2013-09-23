@@ -73,10 +73,20 @@ abstract class AbstractHeartbeatClient implements HeartbeatClientInterface, Puls
     /**
      * {@inheritdoc}
      */
-    public function setPulse($seconds)
+    public function setPulse(PulseInterface $pulse)
     {
-        $this->pulse = (int) $seconds;
+        $this->pulse = $pulse;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-22
+     */
+    public function hasPulse()
+    {
+        return (!is_null($this->pulse));
     }
 }

@@ -16,7 +16,7 @@ namespace Net\Bazzline\Component\Heartbeat;
 interface PulseAwareInterface
 {
     /**
-     * @return PulseInterface
+     * @return null|PulseInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
@@ -28,7 +28,7 @@ interface PulseAwareInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-11
      */
-    public function setPulse($pulse);
+    public function setPulse(PulseInterface $pulse);
 
     /**
      * @return bool
