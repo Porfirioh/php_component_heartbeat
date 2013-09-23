@@ -37,9 +37,29 @@ class TestCase extends PHPUnit_Framework_TestCase
     protected function getNewMockHeartbeatClient()
     {
         $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient');
+        $client->shouldReceive('hasPulse')
+            ->never()
+            ->byDefault();
         $client->shouldReceive('getPulse')
-            ->andReturn(15)
-            ->once()
+            ->never()
+            ->byDefault();
+
+        return $client;
+    }
+
+    /**
+     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClientWithPulse
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-17
+     */
+    protected function getNewMockHeartbeatClientWithPulse()
+    {
+        $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient');
+        $client->shouldReceive('hasPulse')
+            ->never()
+            ->byDefault();
+        $client->shouldReceive('getPulse')
+            ->never()
             ->byDefault();
 
         return $client;
@@ -58,6 +78,18 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\Pulse
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-24
+     */
+    protected function getNewMockPulse()
+    {
+        $pulse = Mockery::mock('Net\Bazzline\Component\Heartbeat\Pulse');
+
+        return $pulse;
+    }
+
+    /**
      * @return HeartbeatMonitor
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
@@ -68,4 +100,5 @@ class TestCase extends PHPUnit_Framework_TestCase
         $monitor = $factory->create();
 
         return $monitor;
-    }}
+    }
+}

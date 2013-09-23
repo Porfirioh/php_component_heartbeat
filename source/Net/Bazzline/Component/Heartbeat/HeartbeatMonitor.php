@@ -8,6 +8,7 @@ namespace Net\Bazzline\Component\Heartbeat;
 
 use Net\Bazzline\Component\Utility\TimestampInterface;
 use Net\Bazzline\Component\Utility\TimestampAwareInterface;
+use SplObjectStorage;
 
 /**
  * Class HeartbeatMonitor
@@ -19,11 +20,11 @@ use Net\Bazzline\Component\Utility\TimestampAwareInterface;
 class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInterface
 {
     /**
-     * @var array[$pulse => $clients]
+     * @var SplObjectStorage
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
-    protected $clientsPerPulse;
+    protected $storage;
 
     /**
      * @var int
@@ -40,25 +41,28 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     protected $timestamp;
 
     /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-18
+     */
+    public function __construct()
+    {
+        //use this method to centralize storage creation
+        $this->detachAll();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function attach(HeartbeatClientInterface $client)
     {
-        $pulse = $this->getPulse($client);
-        $hash = spl_object_hash($client);
-
-        //no entries available for this pulse, create a empty array for it
-        if (!isset($this->clientsPerPulse[$pulse])) {
-            $this->clientsPerPulse[$pulse] = array();
-        }
         //prevent from adding the same object twice
-        if (isset($this->clientsPerPulse[$pulse][$hash])) {
+        if ($this->storage->contains($client)) {
             throw new InvalidArgumentException(
                 'Can not add already attached heartbeat'
             );
         }
         //add client to array by provided pulse and hash
-        $this->clientsPerPulse[$pulse][$hash] = $client;
+        $this->storage->attach($client);
 
         return $this;
     }
@@ -66,21 +70,17 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     /**
      * {@inheritdoc}
      */
-    public function detach(HeartbeatClientInterface $heartbeat)
+    public function detach(HeartbeatClientInterface $client)
     {
-        $pulse = $this->getPulse($heartbeat);
-        $hash = spl_object_hash($heartbeat);
-
         //validate if an entry for the provided pulse exist
         //validate if an entry for the provided pulse and hash exists
-        if ((!isset($this->clientsPerPulse[$pulse]))
-            || (!isset($this->clientsPerPulse[$pulse][$hash]))) {
+        if (!$this->storage->contains($client)) {
             throw new InvalidArgumentException(
                 'Can not detach not attached heartbeat'
             );
         }
         //remove client from array
-        unset($this->clientsPerPulse[$pulse][$hash]);
+        $this->storage->detach($client);
 
         return $this;
     }
@@ -90,14 +90,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     public function getAll()
     {
-        $heartbeats = array();
-        foreach ($this->clientsPerPulse as $pulse => $clients) {
-            foreach ($clients as $client) {
-                $heartbeats[] = $client;
-            }
-        }
-
-        return $heartbeats;
+        return (array) $this->storage;
     }
 
     /**
@@ -105,7 +98,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     public function detachAll()
     {
-        $this->clientsPerPulse = array();
+        $this->storage = new SplObjectStorage();
 
         return $this;
     }
@@ -115,8 +108,9 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      */
     public function listen()
     {
-        $pulses = $this->getPulses();
-        $this->knockPulses($pulses);
+        $clients = $this->getClientsToKnock();
+        $this->knockClients($clients);
+        $this->updateClientsAfterKnocking($clients);
 
         return $this;
     }
@@ -171,7 +165,37 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
      */
-    protected function getPulses()
+    protected function getClientsToKnock()
+    {
+        $this->storage->rewind();
+
+        if ($this->hasTimestamp()) {
+            $clientsToKnock = array();
+            $currentTimestamp = $this->timestamp->getCurrentTimestamp();
+echo 'current timestamp ' . $currentTimestamp . PHP_EOL;
+            foreach ($this->storage as $client) {
+                /**
+                 * @var HeartbeatClientInterface $client
+                 */
+                $nextKnockTimestamp = $this->getNextKnockTimestamp($client);
+echo 'next knock timestamp ' . $nextKnockTimestamp . PHP_EOL;
+                if ($nextKnockTimestamp <= $currentTimestamp) {
+                    $clientsToKnock[] = $client;
+                }
+            }
+        } else {
+            $clientsToKnock = array($this->storage);
+        }
+
+        return $clientsToKnock;
+    }
+
+    /**
+     * @return array
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-24
+     */
+    protected function legacyCode()
     {
         //instead of doing fancy calculation, we should simple remember
         // (for each) pulse interval, when it was last triggered or
@@ -184,7 +208,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
         // "storeNextPulseTimestamp" and so on.
         //----
         //first step, we need to get all available pulse times
-        $availablePulses = array_keys($this->clientsPerPulse);
+        $availablePulses = array_keys($this->storage);
         //if time difference > 1 second,
         // get back all pulses by using step of 1 second
         // to calculate all available pulses
@@ -227,26 +251,44 @@ echo var_export(array(
     }
 
     /**
-     * @param array $pulses
+     * @param array $clients
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
      */
-    protected function knockPulses(array $pulses)
+    protected function knockClients(array $clients)
     {
-        //iterate over all available pulse/minimum number of passed seconds
-        foreach ($pulses as $pulse) {
-//echo 'pulse ' . $pulse . PHP_EOL;
-            foreach ($this->clientsPerPulse[$pulse] as $clients) {
+        //iterate over all available clients
+        foreach ($clients as $client) {
+            /**
+             * @var HeartbeatClientInterface $client
+             */
+            try {
+                $client->knock();
+            } catch (RuntimeException $exception) {
+                $client->handleException($exception);
+                if ($exception instanceof CriticalRuntimeException) {
+                    $this->detach($client);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param array $clients
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-34
+     */
+    protected function updateClientsAfterKnocking(array $clients)
+    {
+        if ($this->hasTimestamp()) {
+            //iterate over all available clients
+            foreach ($clients as $client) {
                 /**
-                 * @var $clients HeartbeatClientInterface
+                 * @var HeartbeatClientInterface $client
                  */
-                try {
-                    $clients->knock();
-                } catch (RuntimeException $exception) {
-                    $clients->handleException($exception);
-                    if ($exception instanceof CriticalRuntimeException) {
-                        $this->detach($clients);
-                    }
+                if ($client instanceof PulseAwareInterface
+                    && $client->hasPulse()) {
+                    $client->getPulse()->setLastPulsedTimestamp();
                 }
             }
         }
@@ -267,5 +309,29 @@ echo var_export(array(
         $pulse = (!isset($pulse) || is_null($pulse) || $pulse <= 0) ? 1 : $pulse;
 
         return $pulse;
+    }
+
+    /**
+     * @param HeartbeatClientInterface $client
+     * @return int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-07-15
+     */
+    protected function getNextKnockTimestamp(HeartbeatClientInterface $client)
+    {
+        if ($client instanceof PulseAwareInterface
+            && $client->hasPulse()) {
+echo 'has pulse' . PHP_EOL;
+            $timestamp = $client->getPulse()->getLastPulsedTimestamp();
+        }
+
+        //do we have a timestamp object and get the current timestamp or should we use zero?
+        $default = ($this->hasTimestamp()) ? $this->timestamp->getCurrentTimestamp() : 0;
+
+        //do we have a valid timestamp or should we use the default value?
+        $timestamp = (!isset($timestamp) || $timestamp < 0) ? $default : $timestamp;
+echo 'timestamp ' . $timestamp . PHP_EOL;
+
+        return $timestamp;
     }
 }

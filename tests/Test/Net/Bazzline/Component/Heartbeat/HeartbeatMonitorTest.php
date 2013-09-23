@@ -40,9 +40,6 @@ class HeartbeatMonitorTest extends TestCase
     {
         $monitor = $this->getNewMonitor();
         $client = $this->getNewMockHeartbeatClient();
-        $client->shouldReceive('getPulse')
-            ->andReturn(15)
-            ->twice();
 
         $monitor->attach($client);
         $monitor->attach($client);
@@ -73,9 +70,6 @@ class HeartbeatMonitorTest extends TestCase
     {
         $monitor = $this->getNewMonitor();
         $client = $this->getNewMockHeartbeatClient();
-        $client->shouldReceive('getPulse')
-            ->andReturn(15)
-            ->twice();
 
         $monitor->attach($client);
 
@@ -155,24 +149,65 @@ class HeartbeatMonitorTest extends TestCase
     public function testListenWithTwoClientsAndTwoSleeps()
     {
 echo __METHOD__ . PHP_EOL;
+        $currentTimestamp = time();
+        $currentTimestampPlusOneSecond = $currentTimestamp + 1;
+        $currentTimestampPlusThreeSeconds = $currentTimestamp + 3;
         $monitor = $this->getNewMonitor();
         $timestamp = $this->getNewMockTimestamp();
-        $timestamp->shouldReceive('getTimestampDifference')
-            ->andReturnValues(array(0, 2, 1))
-            ->times(3);
+        $timestamp->shouldReceive('getCurrentTimestamp')
+            ->andReturnValues(
+                array(
+                    //return value for first listen call
+                    $currentTimestamp, $currentTimestamp, $currentTimestamp,
+                    //return value for second listen call
+                    $currentTimestampPlusOneSecond, $currentTimestampPlusOneSecond, $currentTimestampPlusOneSecond,
+                    //return value for third listen call
+                    $currentTimestampPlusThreeSeconds, $currentTimestampPlusThreeSeconds, $currentTimestampPlusThreeSeconds
+                )
+            )
+            ->times(9);
         $monitor->setTimestamp($timestamp);
 
-        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
+        $threeSecondPulse = $this->getNewMockPulse();
+        $threeSecondPulse->shouldReceive('getLastPulsedTimestamp')
+            ->andReturnValues(array($currentTimestamp, $currentTimestamp + 3, $currentTimestamp + 6))
+            ->times(3);
+        $threeSecondPulse->shouldReceive('setLastPulsedTimestamp')
+            ->with($currentTimestamp)
+            ->once();
+        $threeSecondPulse->shouldReceive('setLastPulsedTimestamp')
+            ->with($currentTimestampPlusThreeSeconds)
+            ->once();
+        $threeSecondPulseClient = $this->getNewMockHeartbeatClientWithPulse();
+        $threeSecondPulseClient->shouldReceive('hasPulse')
+            ->andReturn(true)
+            ->times(4);
         $threeSecondPulseClient->shouldReceive('getPulse')
-            ->andReturn(3)
-            ->once();
+            ->andReturn($threeSecondPulse)
+            ->times(4);
         $threeSecondPulseClient->shouldReceive('knock')
-            ->twice();
+            ->times(2);
 
-        $zeroSecondPulseClient = $this->getNewMockHeartbeatClient();
-        $zeroSecondPulseClient->shouldReceive('getPulse')
-            ->andReturn(0)
+        $zeroSecondPulse = $this->getNewMockPulse();
+        $zeroSecondPulse->shouldReceive('getLastPulsedTimestamp')
+            ->andReturnValues(array($currentTimestamp, $currentTimestampPlusOneSecond, $currentTimestampPlusThreeSeconds))
+            ->times(3);
+        $zeroSecondPulse->shouldReceive('setLastPulsedTimestamp')
+            ->with($currentTimestamp)
             ->once();
+        $zeroSecondPulse->shouldReceive('setLastPulsedTimestamp')
+            ->with($currentTimestampPlusOneSecond)
+            ->once();
+        $zeroSecondPulse->shouldReceive('setLastPulsedTimestamp')
+            ->with($currentTimestampPlusThreeSeconds)
+            ->once();
+        $zeroSecondPulseClient = $this->getNewMockHeartbeatClientWithPulse();
+        $zeroSecondPulseClient->shouldReceive('hasPulse')
+            ->andReturn(true)
+            ->times(6);
+        $zeroSecondPulseClient->shouldReceive('getPulse')
+            ->andReturn($zeroSecondPulse)
+            ->times(6);
         $zeroSecondPulseClient->shouldReceive('knock')
             ->times(3);
 
