@@ -35,7 +35,7 @@ class Pulse implements PulseInterface
      */
     public function __construct()
     {
-        $this->interval = 0;
+        $this->setInterval(0);
     }
 
     /**
@@ -45,7 +45,7 @@ class Pulse implements PulseInterface
      */
     public function getInterval()
     {
-        // TODO: Implement getInterval() method.
+        return $this->interval;
     }
 
     /**
@@ -56,7 +56,9 @@ class Pulse implements PulseInterface
      */
     public function setInterval($interval)
     {
-        // TODO: Implement setInterval() method.
+        $this->interval = (int) $interval;
+
+        return $this;
     }
 
     /**
@@ -66,7 +68,7 @@ class Pulse implements PulseInterface
      */
     public function getLastPulsedTimestamp()
     {
-        // TODO: Implement getLastPulsedTimestamp() method.
+        return $this->lastPulseTimestamp;
     }
 
     /**
@@ -76,6 +78,18 @@ class Pulse implements PulseInterface
      */
     public function setLastPulsedTimestamp()
     {
-        // TODO: Implement setLastPulsedTimestamp() method.
+        $this->lastPulseTimestamp = time();
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-23
+     */
+    public function getNextPulseTimestamp()
+    {
+        return ($this->lastPulseTimestamp + $this->interval);
     }
 }

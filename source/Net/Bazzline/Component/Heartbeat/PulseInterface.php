@@ -43,4 +43,11 @@ interface PulseInterface
      * @since 2013-09-22
      */
     public function setLastPulsedTimestamp();
+
+    /**
+     * @return int
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-23
+     */
+    public function getNextPulseTimestamp();
 }
