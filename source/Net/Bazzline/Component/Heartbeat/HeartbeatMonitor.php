@@ -111,6 +111,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
         $clients = $this->getClientsToKnock();
         $this->knockClients($clients);
         $this->updateClientsAfterKnocking($clients);
+echo str_repeat('-', 40) . PHP_EOL;
 
         return $this;
     }
@@ -172,13 +173,13 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
         if ($this->hasTimestamp()) {
             $clientsToKnock = array();
             $currentTimestamp = $this->timestamp->getCurrentTimestamp();
-echo 'current timestamp ' . $currentTimestamp . PHP_EOL;
+echo __LINE__ . ' current timestamp ' . $currentTimestamp . PHP_EOL;
             foreach ($this->storage as $client) {
                 /**
                  * @var HeartbeatClientInterface $client
                  */
                 $nextKnockTimestamp = $this->getNextKnockTimestamp($client);
-echo 'next knock timestamp ' . $nextKnockTimestamp . PHP_EOL;
+echo __LINE__ . ' next knock timestamp ' . $nextKnockTimestamp . PHP_EOL;
                 if ($nextKnockTimestamp <= $currentTimestamp) {
                     $clientsToKnock[] = $client;
                 }
@@ -288,7 +289,8 @@ echo var_export(array(
                  */
                 if ($client instanceof PulseAwareInterface
                     && $client->hasPulse()) {
-                    $client->getPulse()->setLastPulsedTimestamp();
+echo __LINE__ . ' setting last pulsed timestamp' . PHP_EOL;
+                    $client->getPulse()->updateLastPulsedTimestamp();
                 }
             }
         }
@@ -321,8 +323,8 @@ echo var_export(array(
     {
         if ($client instanceof PulseAwareInterface
             && $client->hasPulse()) {
-echo 'has pulse' . PHP_EOL;
-            $timestamp = $client->getPulse()->getLastPulsedTimestamp();
+            $timestamp = $client->getPulse()->getNextPulseTimestamp();
+echo __LINE__ . ' next pulse timestamp ' . $timestamp . PHP_EOL;
         }
 
         //do we have a timestamp object and get the current timestamp or should we use zero?
@@ -330,7 +332,7 @@ echo 'has pulse' . PHP_EOL;
 
         //do we have a valid timestamp or should we use the default value?
         $timestamp = (!isset($timestamp) || $timestamp < 0) ? $default : $timestamp;
-echo 'timestamp ' . $timestamp . PHP_EOL;
+echo __LINE__ . ' timestamp ' . $timestamp . PHP_EOL;
 
         return $timestamp;
     }

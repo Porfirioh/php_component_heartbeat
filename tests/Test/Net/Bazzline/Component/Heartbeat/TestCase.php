@@ -54,7 +54,7 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     protected function getNewMockHeartbeatClientWithPulse()
     {
-        $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient');
+        $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClientWithPulse');
         $client->shouldReceive('hasPulse')
             ->never()
             ->byDefault();
