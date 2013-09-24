@@ -118,6 +118,7 @@ Investigate code if you want to.
 
 * version 1.0.0
     * implement example with sqli for database example
+    * finish readme
 
 * version 0.2.0
     * implement monitor history (or interface at least)
