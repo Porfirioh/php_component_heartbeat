@@ -238,23 +238,6 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    protected function getPulse(HeartbeatClientInterface $client)
-    {
-        if ($client instanceof PulseAwareInterface) {
-            $pulse = $client->getPulse();
-        }
-
-        $pulse = (!isset($pulse) || is_null($pulse) || $pulse <= 0) ? 1 : $pulse;
-
-        return $pulse;
-    }
-
-    /**
-     * @param HeartbeatClientInterface $client
-     * @return int
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-15
-     */
     protected function getNextKnockTimestamp(HeartbeatClientInterface $client)
     {
         if ($client instanceof PulseAwareInterface
