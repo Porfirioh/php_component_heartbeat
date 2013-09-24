@@ -142,8 +142,6 @@ class HeartbeatMonitorTest extends TestCase
         $monitor->listen();
     }
 
-
-
     /**
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-17
@@ -158,17 +156,11 @@ class HeartbeatMonitorTest extends TestCase
             ->times(9); //3 times for monitor internal stuff and up to 3 times for each attached client
         $monitor->setTimestamp($timestamp);
 
-        $threeSecondPulseClient = $this->getNewMockHeartbeatClientWithPulse();
-        $threeSecondPulseClient->shouldReceive('hasPulse')
-            ->andReturn(false)
-            ->times(6);
+        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
         $threeSecondPulseClient->shouldReceive('knock')
             ->times(3);
 
-        $zeroSecondPulseClient = $this->getNewMockHeartbeatClientWithPulse();
-        $zeroSecondPulseClient->shouldReceive('hasPulse')
-            ->andReturn(false)
-            ->times(6);
+        $zeroSecondPulseClient = $this->getNewMockHeartbeatClient();
         $zeroSecondPulseClient->shouldReceive('knock')
             ->times(3);
 
@@ -181,14 +173,57 @@ class HeartbeatMonitorTest extends TestCase
     }
 
     /**
+     * When a client implements the pulse aware interface but has no pulse, he
+     *  is treated like a client that do not implement the pulse aware interface
+     *
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-17
      */
-    public function testListenWithTwoClientsAndPulseAndThreeSleeps()
+    public function testListenWithTwoClientsOfPulseAwareInterfaceAndThreeSleeps()
+    {
+        $currentTimestamp = time();
+        $monitor = $this->getNewMonitor();
+        $timestamp = $this->getNewMockTimestamp();
+        $timestamp->shouldReceive('getCurrentTimestamp')
+            ->andReturn($currentTimestamp)
+            ->times(9); //3 times for monitor internal stuff and up to 3 times for each attached client
+        $monitor->setTimestamp($timestamp);
+
+        $firstClient = $this->getNewMockHeartbeatClientWithPulse();
+        $firstClient->shouldReceive('hasPulse')
+            ->andReturn(false)
+            ->times(6);
+        $firstClient->shouldReceive('knock')
+            ->times(3);
+
+        $secondClient = $this->getNewMockHeartbeatClientWithPulse();
+        $secondClient->shouldReceive('hasPulse')
+            ->andReturn(false)
+            ->times(6);
+        $secondClient->shouldReceive('knock')
+            ->times(3);
+
+        $monitor->attach($firstClient);
+        $monitor->attach($secondClient);
+
+        $monitor->listen();
+        $monitor->listen();
+        $monitor->listen();
+    }
+
+    /**
+     * If a client implements the pulse aware interface and has a pulse, we can
+     *  use the pulse to use knock in wished intervals
+     *
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-17
+     */
+    public function testListenWithTwoClientsOfPulseAwareInterfaceAndPulseAndThreeSleeps()
     {
         $currentTimestamp = time();
         $currentTimestampPlusOneSecond = $currentTimestamp + 1;
         $currentTimestampPlusThreeSeconds = $currentTimestamp + 3;
+        $currentTimestampPlusFourSeconds = $currentTimestamp + 4;
         $monitor = $this->getNewMonitor();
         $timestamp = $this->getNewMockTimestamp();
         $timestamp->shouldReceive('getCurrentTimestamp')
@@ -199,7 +234,7 @@ class HeartbeatMonitorTest extends TestCase
                     //return value for second listen call
                     $currentTimestampPlusOneSecond, $currentTimestampPlusOneSecond,
                     //return value for third listen call
-                    $currentTimestampPlusThreeSeconds, $currentTimestampPlusThreeSeconds,
+                    $currentTimestampPlusFourSeconds, $currentTimestampPlusFourSeconds
                 )
             )
             ->times(9); //3 times for monitor internal stuff and up to 3 times for each attached client
