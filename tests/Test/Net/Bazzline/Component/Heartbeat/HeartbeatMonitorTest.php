@@ -81,6 +81,44 @@ class HeartbeatMonitorTest extends TestCase
 
     /**
      * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-24
+     */
+    public function getAll()
+    {
+        $monitor = $this->getNewMonitor();
+        $firstClient = $this->getNewMockHeartbeatClient();
+        $secondClient = $this->getNewMockHeartbeatClient();
+
+        $monitor->attach($firstClient);
+        $monitor->attach($secondClient);
+
+        $expectedGetAll = array($firstClient, $secondClient);
+
+        $this->assertEquals($expectedGetAll, $monitor->getAll());
+    }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-24
+     */
+    public function detachAll()
+    {
+        $monitor = $this->getNewMonitor();
+        $firstClient = $this->getNewMockHeartbeatClient();
+        $secondClient = $this->getNewMockHeartbeatClient();
+
+        $expectedGetAll = array();
+        $this->assertEquals($expectedGetAll, $monitor->getAll());
+
+        $monitor->attach($firstClient);
+        $monitor->attach($secondClient);
+        $monitor->detachAll();
+
+        $this->assertEquals($expectedGetAll, $monitor->getAll());
+    }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-17
      */
     public function testListenWithTwoClientsAndThreeSleeps()
