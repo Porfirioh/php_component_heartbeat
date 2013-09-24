@@ -111,7 +111,6 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
         $clients = $this->getClientsToKnock();
         $this->knockClients($clients);
         $this->updateClientsAfterKnocking($clients);
-echo str_repeat('-', 40) . PHP_EOL;
 
         return $this;
     }
@@ -173,13 +172,11 @@ echo str_repeat('-', 40) . PHP_EOL;
         if ($this->hasTimestamp()) {
             $clientsToKnock = array();
             $currentTimestamp = $this->timestamp->getCurrentTimestamp();
-echo __LINE__ . ' current timestamp ' . $currentTimestamp . PHP_EOL;
             foreach ($this->storage as $client) {
                 /**
                  * @var HeartbeatClientInterface $client
                  */
                 $nextKnockTimestamp = $this->getNextKnockTimestamp($client);
-echo __LINE__ . ' next knock timestamp ' . $nextKnockTimestamp . PHP_EOL;
                 if ($nextKnockTimestamp <= $currentTimestamp) {
                     $clientsToKnock[] = $client;
                 }
@@ -203,7 +200,6 @@ echo __LINE__ . ' next knock timestamp ' . $nextKnockTimestamp . PHP_EOL;
             /**
              * @var HeartbeatClientInterface $client
              */
-echo __LINE__ . ' ' . __METHOD__ . PHP_EOL;
             try {
                 $client->knock();
             } catch (RuntimeException $exception) {
@@ -228,10 +224,8 @@ echo __LINE__ . ' ' . __METHOD__ . PHP_EOL;
                 /**
                  * @var HeartbeatClientInterface $client
                  */
-echo __LINE__ . ' ' . __METHOD__ . PHP_EOL;
                 if ($client instanceof PulseAwareInterface
                     && $client->hasPulse()) {
-echo __LINE__ . ' setting last pulsed timestamp' . PHP_EOL;
                     $client->getPulse()->updateLastPulsedTimestamp();
                 }
             }
@@ -263,11 +257,9 @@ echo __LINE__ . ' setting last pulsed timestamp' . PHP_EOL;
      */
     protected function getNextKnockTimestamp(HeartbeatClientInterface $client)
     {
-echo __LINE__ . ' ' . __METHOD__ . PHP_EOL;
         if ($client instanceof PulseAwareInterface
             && $client->hasPulse()) {
             $timestamp = $client->getPulse()->getNextPulseTimestamp();
-echo __LINE__ . ' next pulse timestamp ' . $timestamp . PHP_EOL;
         }
 
         //do we have a timestamp object and get the current timestamp or should we use zero?
@@ -275,7 +267,6 @@ echo __LINE__ . ' next pulse timestamp ' . $timestamp . PHP_EOL;
 
         //do we have a valid timestamp or should we use the default value?
         $timestamp = (!isset($timestamp) || $timestamp < 0) ? $default : $timestamp;
-echo __LINE__ . ' timestamp ' . $timestamp . PHP_EOL;
 
         return $timestamp;
     }
