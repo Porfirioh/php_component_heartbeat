@@ -83,69 +83,6 @@ class HeartbeatMonitorTest extends TestCase
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-17
      */
-    public function AtestListenWithTwoClientsAndWithoutSleep()
-    {
-        $monitor = $this->getNewMonitor();
-
-        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
-        $threeSecondPulseClient->shouldReceive('getPulse')
-            ->andReturn(3)
-            ->once();
-        $threeSecondPulseClient->shouldReceive('knock')
-            ->twice();
-
-        $zeroSecondPulseClient = $this->getNewMockHeartbeatClient();
-        $zeroSecondPulseClient->shouldReceive('getPulse')
-            ->andReturn(0)
-            ->once();
-        $zeroSecondPulseClient->shouldReceive('knock')
-            ->twice();
-
-        $monitor->attach($threeSecondPulseClient);
-        $monitor->attach($zeroSecondPulseClient);
-
-        $monitor->listen();
-        $monitor->listen();
-    }
-
-    /**
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-09-17
-     */
-    public function AtestListenWithTwoClientsAndWithOneSleep()
-    {
-        $monitor = $this->getNewMonitor();
-        $timestamp = $this->getNewMockTimestamp();
-        $timestamp->shouldReceive('getTimestampDifference')
-            ->andReturnValues(array(0, 1))
-            ->twice();
-        $monitor->setTimestamp($timestamp);
-
-        $firstClient = $this->getNewMockHeartbeatClient();
-        $firstClient->shouldReceive('getPulse')
-            ->andReturn(3)
-            ->once();
-        $firstClient->shouldReceive('knock')
-            ->once();
-
-        $secondClient = $this->getNewMockHeartbeatClient();
-        $secondClient->shouldReceive('getPulse')
-            ->andReturn(0)
-            ->once();
-        $secondClient->shouldReceive('knock')
-            ->twice();
-
-        $monitor->attach($firstClient);
-        $monitor->attach($secondClient);
-
-        $monitor->listen();
-        $monitor->listen();
-    }
-
-    /**
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-09-17
-     */
     public function testListenWithTwoClientsAndThreeSleeps()
     {
         $currentTimestamp = time();
