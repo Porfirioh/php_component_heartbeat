@@ -192,66 +192,6 @@ echo __LINE__ . ' next knock timestamp ' . $nextKnockTimestamp . PHP_EOL;
     }
 
     /**
-     * @return array
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-09-24
-     */
-    protected function legacyCode()
-    {
-        //instead of doing fancy calculation, we should simple remember
-        // (for each) pulse interval, when it was last triggered or
-        // when it should be triggered next time (and then simple check
-        // if current timestamp is less or equal then calculated/expected
-        // pulse time).
-        //
-        //this would also simplify adaptation when implementing a database
-        // based monitor. that's why we should implement a "calculateNextPulseTimestamp",
-        // "storeNextPulseTimestamp" and so on.
-        //----
-        //first step, we need to get all available pulse times
-        $availablePulses = array_keys($this->storage);
-        //if time difference > 1 second,
-        // get back all pulses by using step of 1 second
-        // to calculate all available pulses
-        //only get back each pulse once
-        if ($this->hasTimestamp()) {
-            //to speed things up, we create a second array with all pulse
-            // intervals as keys
-            $pulsesAsKeys = array();
-            $timeDifference = $this->timestamp->getTimestampDifference();
-            while ($timeDifference > 0) {
-echo var_export(array(
-        'diff' => $timeDifference
-    ), true) . PHP_EOL;
-                //calculate which pulses should be called
-                foreach ($availablePulses as $pulse) {
-                    if (!isset($pulsesAsKeys[$pulse])) {
-                        //calculate seconds between last run and current time
-                        //the result is the minimal number of seconds that should be passed
-                        // before a next knock/request is done on the client
-                        //if pulse is smaller or equal to the maximum pulse, it should be
-                        // knocked
-                        /*
-                        $knockClientsForThisPulse = (($pulse == 0)
-                            || (($timeDifference % $pulse) === 0));
-                        */
-                        $knockClientsForThisPulse = (($timeDifference % $pulse) === 0);
-                        if ($knockClientsForThisPulse) {
-                            $pulsesAsKeys[$pulse] = true;
-                        }
-                    }
-                }
-                $timeDifference--;
-            }
-            $pulses = array_keys($pulsesAsKeys);
-        } else {
-            $pulses = $availablePulses;
-        }
-
-        return $pulses;
-    }
-
-    /**
      * @param array $clients
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
@@ -263,6 +203,7 @@ echo var_export(array(
             /**
              * @var HeartbeatClientInterface $client
              */
+echo __LINE__ . ' ' . __METHOD__ . PHP_EOL;
             try {
                 $client->knock();
             } catch (RuntimeException $exception) {
@@ -287,6 +228,7 @@ echo var_export(array(
                 /**
                  * @var HeartbeatClientInterface $client
                  */
+echo __LINE__ . ' ' . __METHOD__ . PHP_EOL;
                 if ($client instanceof PulseAwareInterface
                     && $client->hasPulse()) {
 echo __LINE__ . ' setting last pulsed timestamp' . PHP_EOL;
@@ -321,6 +263,7 @@ echo __LINE__ . ' setting last pulsed timestamp' . PHP_EOL;
      */
     protected function getNextKnockTimestamp(HeartbeatClientInterface $client)
     {
+echo __LINE__ . ' ' . __METHOD__ . PHP_EOL;
         if ($client instanceof PulseAwareInterface
             && $client->hasPulse()) {
             $timestamp = $client->getPulse()->getNextPulseTimestamp();

@@ -142,13 +142,50 @@ class HeartbeatMonitorTest extends TestCase
         $monitor->listen();
     }
 
+
+
     /**
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-17
      */
-    public function testListenWithTwoClientsAndTwoSleeps()
+    public function testListenWithTwoClientsAndThreeSleeps()
     {
-echo __METHOD__ . PHP_EOL;
+        $currentTimestamp = time();
+        $monitor = $this->getNewMonitor();
+        $timestamp = $this->getNewMockTimestamp();
+        $timestamp->shouldReceive('getCurrentTimestamp')
+            ->andReturn($currentTimestamp)
+            ->times(9); //3 times for monitor internal stuff and up to 3 times for each attached client
+        $monitor->setTimestamp($timestamp);
+
+        $threeSecondPulseClient = $this->getNewMockHeartbeatClientWithPulse();
+        $threeSecondPulseClient->shouldReceive('hasPulse')
+            ->andReturn(false)
+            ->times(6);
+        $threeSecondPulseClient->shouldReceive('knock')
+            ->times(3);
+
+        $zeroSecondPulseClient = $this->getNewMockHeartbeatClientWithPulse();
+        $zeroSecondPulseClient->shouldReceive('hasPulse')
+            ->andReturn(false)
+            ->times(6);
+        $zeroSecondPulseClient->shouldReceive('knock')
+            ->times(3);
+
+        $monitor->attach($threeSecondPulseClient);
+        $monitor->attach($zeroSecondPulseClient);
+
+        $monitor->listen();
+        $monitor->listen();
+        $monitor->listen();
+    }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-17
+     */
+    public function testListenWithTwoClientsAndPulseAndThreeSleeps()
+    {
         $currentTimestamp = time();
         $currentTimestampPlusOneSecond = $currentTimestamp + 1;
         $currentTimestampPlusThreeSeconds = $currentTimestamp + 3;
