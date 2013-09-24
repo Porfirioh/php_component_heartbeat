@@ -121,22 +121,22 @@ class HeartbeatMonitorTest extends TestCase
             ->twice();
         $monitor->setTimestamp($timestamp);
 
-        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
-        $threeSecondPulseClient->shouldReceive('getPulse')
+        $firstClient = $this->getNewMockHeartbeatClient();
+        $firstClient->shouldReceive('getPulse')
             ->andReturn(3)
             ->once();
-        $threeSecondPulseClient->shouldReceive('knock')
+        $firstClient->shouldReceive('knock')
             ->once();
 
-        $zeroSecondPulseClient = $this->getNewMockHeartbeatClient();
-        $zeroSecondPulseClient->shouldReceive('getPulse')
+        $secondClient = $this->getNewMockHeartbeatClient();
+        $secondClient->shouldReceive('getPulse')
             ->andReturn(0)
             ->once();
-        $zeroSecondPulseClient->shouldReceive('knock')
+        $secondClient->shouldReceive('knock')
             ->twice();
 
-        $monitor->attach($threeSecondPulseClient);
-        $monitor->attach($zeroSecondPulseClient);
+        $monitor->attach($firstClient);
+        $monitor->attach($secondClient);
 
         $monitor->listen();
         $monitor->listen();
