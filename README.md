@@ -7,6 +7,10 @@ You should use this to implement your real heartbeat monitoring solution.
 The build status of the current master branch is tracked by Travis CI: 
 [![Build Status](https://travis-ci.org/stevleibelt/php_component_heartbeat.png?branch=master)](http://travis-ci.org/stevleibelt/php_component_heartbeat)
 
+## Common Terms
+
+@todo
+
 ## Basic Concept
 
 The heartbeat is divided into two components, the heartbeat client and the heartbeat monitor.
@@ -46,7 +50,7 @@ If the process is finished, it would use the monitor to detach the heartbeat fro
 
 #### From The Perspective Of The Monitor (The Observer)
 
-The monitor would take a look to the monitorable heartbeats and tries to knock each heartbeat. If the knock method of the heartbeat returns nothing or throws an exception, the monitor needs to take care. It is recommended to use the heartbeat method *handleHeartAttack*. This method should take care of cleaning up a died process.
+The monitor would take a look to the attached heartbeat clients and tries to knock each heartbeat. If the knock method of the heartbeat returns nothing or throws an exception, the monitor needs to take care. It is recommended to use the heartbeat method *handleHeartAttack*. This method should take care of cleaning up a died process.
 
 ## What Do You Need To Do
 
@@ -104,11 +108,24 @@ CREATE TABLE `montior_list`
 
     php example/Example/JSONBasedImplementation/Example.php
 
+## JSON Base Implementation With Process Forking
+
+    php example/Example/JSONAndFork/Example.php
+
 Investigate code if you want to.
 
-# ToDos
+# To Do
 
-* Implement monitor history (or interface at least)
-* Implement example with sqli for database example
-* Create wiki describes benefits and ideas behind runtime interface
-* Cleanup code to use same terms everywhere
+* version 1.0.0
+    * implement example with sqli for database example
+
+* version 0.2.0
+    * implement monitor history (or interface at least)
+    * create wiki describes benefits and ideas behind runtime interface
+    * cleanup code to use same terms everywhere
+* version 0.1.0
+    * cover following classes with unittests
+        * AbstractHeartbeatClient
+        * AbstractHeartbeatClientWithPulse
+        * HeartbeatMonitorFactory
+        * Pulse
