@@ -127,7 +127,7 @@ Investigate code if you want to.
     * create wiki describes benefits and ideas behind runtime interface
     * cleanup code to use same terms everywhere
 * version 0.1.0
-    * cover following classes with unittests
+    * cover following classes with unit tests
         * AbstractHeartbeatClient
         * AbstractHeartbeatClientWithPulse
         * HeartbeatMonitorFactory
