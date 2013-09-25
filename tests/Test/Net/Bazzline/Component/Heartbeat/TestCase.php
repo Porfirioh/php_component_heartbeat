@@ -96,9 +96,19 @@ class TestCase extends PHPUnit_Framework_TestCase
      */
     protected function getNewMonitor()
     {
-        $factory = new HeartbeatMonitorFactory();
+        $factory = $this->getNewMonitorFactory();
         $monitor = $factory->create();
 
         return $monitor;
+    }
+
+    /**
+     * @return HeartbeatMonitorFactory
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-25
+     */
+    protected function getNewMonitorFactory()
+    {
+        return new HeartbeatMonitorFactory();
     }
 }
