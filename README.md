@@ -114,6 +114,19 @@ CREATE TABLE `montior_list`
 
 Investigate code if you want to.
 
+# Install
+
+## Via Git
+
+    cd my/path/to/other/git/repositories
+    mkdir -p stevleibelt/php_component_heartbeat/
+    cd stevleibelt/php_component_heartbeat
+    git clone https://github.com/stevleibelt/php_component_heartbeat .
+
+## Via Composer
+
+    require "net_bazzline/component_heartbeat": "dev-master"
+
 # To Do
 
 * version 1.0.0
