@@ -130,4 +130,3 @@ Investigate code if you want to.
     * cover following classes with unit tests
         * AbstractHeartbeatClient
         * AbstractHeartbeatClientWithPulse
-        * Pulse
