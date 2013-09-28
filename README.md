@@ -114,8 +114,6 @@ CREATE TABLE `montior_list`
 
 Investigate code if you want to.
 
-# History
-
 # To Do
 
 * version 1.0.0
@@ -126,6 +124,8 @@ Investigate code if you want to.
     * implement monitor history (or interface at least)
     * create wiki describes benefits and ideas behind runtime interface
     * cleanup code to use same terms everywhere
-* version 0.1.0
+
+# Version History
+
+* [0.1.0](https://github.com/stevleibelt/php_component_heartbeat/tree/0.1.0)
     * cover following classes with unit tests
-        * AbstractHeartbeatClient
