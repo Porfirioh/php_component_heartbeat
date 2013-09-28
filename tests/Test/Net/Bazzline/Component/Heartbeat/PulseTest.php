@@ -30,4 +30,17 @@ class PulseTest extends TestCase
         $this->assertEquals($expectedInitialInterval, $pulse->getInterval());
         $this->assertEquals($expectedNextPulsedTimestamp, $pulse->getNextPulseTimestamp());
     }
+
+    /**
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-29
+     */
+    public function testSetAndGetInterval()
+    {
+        $pulse = $this->getNewPulse();
+        $interval = 3;
+
+        $this->assertEquals($pulse, $pulse->setInterval($interval));
+        $this->assertEquals($interval, $pulse->getInterval());
+    }
 }
