@@ -122,4 +122,24 @@ class TestCase extends PHPUnit_Framework_TestCase
     {
         return new Pulse();
     }
+
+    /**
+     * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-29
+     */
+    protected function getNewAbstractHeartbeatClient()
+    {
+        return Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient[knock,beat,handleException]');
+    }
+
+    /**
+     * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClientWithPulse
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-09-29
+     */
+    protected function getNewAbstractHeartbeatClientWithPulse()
+    {
+        return Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClientWithPulse[knock,beat,handleException]');
+    }
 }

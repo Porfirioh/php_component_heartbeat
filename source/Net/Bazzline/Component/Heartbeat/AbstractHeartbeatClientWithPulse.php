@@ -30,23 +30,6 @@ abstract class AbstractHeartbeatClientWithPulse extends AbstractHeartbeatClient 
     protected $pulse;
 
     /**
-     * @var integer
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-14
-     */
-    protected $startTime;
-
-    /**
-     * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-14
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->pulse = 5;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getPulse()
