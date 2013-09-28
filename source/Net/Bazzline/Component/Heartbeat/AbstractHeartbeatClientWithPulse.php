@@ -20,7 +20,7 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-abstract class AbstractHeartbeatClientWithPulse implements HeartbeatClientInterface, PulseAwareInterface, RuntimeInformationInterface
+abstract class AbstractHeartbeatClientWithPulse extends AbstractHeartbeatClient implements PulseAwareInterface
 {
     /**
      * @var integer
@@ -42,24 +42,8 @@ abstract class AbstractHeartbeatClientWithPulse implements HeartbeatClientInterf
      */
     public function __construct()
     {
+        parent::__construct();
         $this->pulse = 5;
-        $this->startTime = time();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUptime()
-    {
-        return (time() - $this->startTime);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMemoryUsage()
-    {
-        return memory_get_usage(true);
     }
 
     /**
