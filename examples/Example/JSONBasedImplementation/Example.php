@@ -41,7 +41,7 @@ class Example
     protected $loops;
 
     /**
-     * @var \Net\Bazzline\Component\Heartbeat\HeartbeatMonitor
+     * @var Monitor
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
@@ -207,6 +207,7 @@ class Example
      */
     public function andRun()
     {
+        echo str_repeat('-', 40) . PHP_EOL;
         while ($this->currentLoop < $this->loops) {
             echo 'loop: ' . $this->currentLoop . '/' . $this->loops . PHP_EOL;
             foreach ($this->processes as $process) {
@@ -226,5 +227,13 @@ class Example
         }
 
         echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
+
+        echo str_repeat('-', 40) . PHP_EOL;
+        echo 'Outputting collected history events' . PHP_EOL;
+        echo PHP_EOL;
+        foreach ($this->monitor->getHeartbeatClientHistory()->getEntries() as $entry) {
+            echo var_export($entry, true) . PHP_EOL;
+        }
+        echo str_repeat('-', 40) . PHP_EOL;
     }
 }
