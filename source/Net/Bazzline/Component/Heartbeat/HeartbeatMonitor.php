@@ -193,7 +193,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
      */
-    protected function knockClients(array $clients)
+    private function knockClients(array $clients)
     {
         //iterate over all available clients
         foreach ($clients as $client) {
@@ -216,7 +216,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-34
      */
-    protected function updateClientsAfterKnocking(array $clients)
+    private function updateClientsAfterKnocking(array $clients)
     {
         if ($this->hasTimestamp()) {
             //iterate over all available clients
@@ -224,12 +224,32 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
                 /**
                  * @var HeartbeatClientInterface $client
                  */
+                $this->preUpdateClientAfterKnocking($client);
                 if ($client instanceof PulseAwareInterface
                     && $client->hasPulse()) {
                     $client->getPulse()->updateLastPulsedTimestamp();
                 }
+                $this->postUpdateClientAfterKnocking($client);
             }
         }
+    }
+
+    /**
+     * @param HeartbeatClientInterface $client
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-10-01
+     */
+    protected function preUpdateClientAfterKnocking(HeartbeatClientInterface $client)
+    {
+    }
+
+    /**
+     * @param HeartbeatClientInterface $client
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-10-01
+     */
+    protected function postUpdateClientAfterKnocking(HeartbeatClientInterface $client)
+    {
     }
 
     /**
