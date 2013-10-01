@@ -13,7 +13,7 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-10-01
  */
-interface HeartbeatClientHistoryEventInterface
+interface HeartbeatClientHistoryEntryInterface
 {
     /**
      * @return string

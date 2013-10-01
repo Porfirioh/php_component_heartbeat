@@ -230,9 +230,16 @@ class Example
 
         echo str_repeat('-', 40) . PHP_EOL;
         echo 'Outputting collected history events' . PHP_EOL;
+        echo 'name - status - timestamp - identifier' . PHP_EOL;
         echo PHP_EOL;
         foreach ($this->monitor->getHeartbeatClientHistory()->getEntries() as $entry) {
-            echo var_export($entry, true) . PHP_EOL;
+            /**
+             * @var \Net\Bazzline\Component\Heartbeat\HeartbeatClientHistoryEntryInterface $entry
+             */
+            echo $entry->getName() . ' - ' .
+                $entry->getStatus() . ' - ' .
+                $entry->getTimestamp() . ' - ' .
+                $entry->getIdentifier() . PHP_EOL;
         }
         echo str_repeat('-', 40) . PHP_EOL;
     }

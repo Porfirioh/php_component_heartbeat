@@ -26,7 +26,7 @@ interface HeartbeatClientHistoryInterface
     public function addEntry(HeartbeatClientInterface $heartbeatClient, $exception = null);
 
     /**
-     * @return array
+     * @return array|HeartbeatClientHistoryEntryInterface[]
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-10-01
      */
