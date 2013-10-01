@@ -37,7 +37,7 @@ class HeartbeatMonitorWithHistory extends HeartbeatMonitor implements HeartbeatC
     }
 
     /**
-     * @return null|HeartbeatClientInterface $heartbeatClient
+     * @return null|HeartbeatClientHistoryInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
@@ -47,12 +47,12 @@ class HeartbeatMonitorWithHistory extends HeartbeatMonitor implements HeartbeatC
     }
 
     /**
-     * @param HeartbeatClientInterface $heartbeatClient
+     * @param HeartbeatClientHistoryInterface $heartbeatClient
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
-    public function setHeartbeatClientHistory(HeartbeatClientInterface $heartbeatClient)
+    public function setHeartbeatClientHistory(HeartbeatClientHistoryInterface $heartbeatClient)
     {
         $this->heartbeatClientHistory = $heartbeatClient;
 

@@ -24,4 +24,11 @@ interface HeartbeatClientHistoryInterface
      * @since 2013-09-29
      */
     public function addEntry(HeartbeatClientInterface $heartbeatClient, $exception = null);
+
+    /**
+     * @return array
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-10-01
+     */
+    public function getEntries();
 }
