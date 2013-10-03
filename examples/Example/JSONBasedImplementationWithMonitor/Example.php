@@ -4,7 +4,7 @@
  * @since 2013-07-17 
  */
 
-namespace Example\JSONBasedImplementation;
+namespace Example\JSONBasedImplementationWithMonitor;
 
 use Net\Bazzline\Component\Utility\Timestamp;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
@@ -12,8 +12,8 @@ use Net\Bazzline\Component\ProcessIdentity\Identity;
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 Example::create()
-    ->setLoops(10)
-    ->setupProcesses(10, 3, 2)
+    ->setLoops(3)
+    ->setupProcesses(5, 3, 1)
     ->printSettings()
     ->andRun();
 

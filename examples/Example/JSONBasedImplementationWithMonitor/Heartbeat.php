@@ -4,7 +4,7 @@
  * @since 2013-07-17 
  */
 
-namespace Example\JSONBasedImplementation;
+namespace Example\JSONBasedImplementationWithMonitor;
 
 use Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient;
 use Net\Bazzline\Component\Heartbeat\RuntimeException;
