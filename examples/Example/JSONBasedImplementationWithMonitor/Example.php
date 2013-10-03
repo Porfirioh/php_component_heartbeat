@@ -227,6 +227,20 @@ class Example
         }
 
         echo 'number of heartbeats: ' . count($this->monitor->getAll()) . PHP_EOL;
+
+        echo str_repeat('-', 40) . PHP_EOL;
+        echo 'Outputting collected history events' . PHP_EOL;
+        echo 'name - status - timestamp - identifier' . PHP_EOL;
+        echo PHP_EOL;
+        foreach ($this->monitor->getHeartbeatClientHistory()->getEntries() as $entry) {
+            /**
+             * @var \Net\Bazzline\Component\Heartbeat\HeartbeatClientHistoryEntryInterface $entry
+             */
+            echo $entry->getName() . ' - ' .
+                $entry->getStatus() . ' - ' .
+                $entry->getTimestamp() . ' - ' .
+                $entry->getIdentifier() . PHP_EOL;
+        }
         echo str_repeat('-', 40) . PHP_EOL;
     }
 }
