@@ -189,6 +189,19 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     }
 
     /**
+     * @param HeartbeatClientInterface $client
+     * @param RuntimeException $exception
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-10-05
+     */
+    protected function handleClientException(HeartbeatClientInterface $client, RuntimeException $exception)
+    {
+        if ($exception instanceof CriticalRuntimeException) {
+            $this->detach($client);
+        }
+    }
+
+    /**
      * @param array $clients
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-18
@@ -204,9 +217,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
                 $client->knock();
             } catch (RuntimeException $exception) {
                 $client->handleException($exception);
-                if ($exception instanceof CriticalRuntimeException) {
-                    $this->detach($client);
-                }
+                $this->handleClientException($client, $exception);
             }
         }
     }
