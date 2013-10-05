@@ -67,10 +67,32 @@ class HeartbeatMonitorWithHistory extends HeartbeatMonitor implements HeartbeatC
      */
     protected function preUpdateClientAfterKnocking(HeartbeatClientInterface $client)
     {
+        $this->addEntry($client);
+    }
+
+    /**
+     * @param HeartbeatClientInterface $client
+     * @param RuntimeException $exception
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-10-05
+     */
+    protected function handleClientException(HeartbeatClientInterface $client, RuntimeException $exception)
+    {
+        parent::handleClientException($client, $exception);
+        $this->addEntry($client, $exception);
+    }
+
+    /**
+     * @param HeartbeatClientInterface $client
+     * @param RuntimeException $exception
+     * @author stev leibelt <artodeto@arcor.de>
+     * @since 2013-10-05
+     */
+    private function addEntry(HeartbeatClientInterface $client, RuntimeException $exception = null)
+    {
         if ($this->hasHeartbeatClientHistory()) {
-            $this
-                ->heartbeatClientHistory
-                ->addEntry($client);
+            $this->heartbeatClientHistory
+                ->addEntry($client, $exception);
         }
     }
 }
