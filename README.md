@@ -134,10 +134,10 @@ Investigate code if you want to.
     * finish readme
 
 * version 0.2.0
-    * rename components to *monitor*, *client*, *clientHistory*
-    * implement monitor history
-    * create wiki describes benefits and ideas behind runtime interface
     * cleanup code to use same terms everywhere
+    * create wiki describes benefits and ideas behind runtime interface
+    * implement monitor history (done)
+    * rename components to *monitor*, *client*, *clientHistory*
 
 # Version History
 
