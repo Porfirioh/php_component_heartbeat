@@ -22,7 +22,7 @@ class HeartbeatMonitorTest extends TestCase
     public function testAttachHeartbeat()
     {
         $monitor = $this->getNewMonitor();
-        $client = $this->getNewMockHeartbeatClient();
+        $client = $this->getNewMockClient();
 
         $this->assertEquals(
             $monitor,
@@ -39,7 +39,7 @@ class HeartbeatMonitorTest extends TestCase
     public function testAttachSameHeartbeatTwice()
     {
         $monitor = $this->getNewMonitor();
-        $client = $this->getNewMockHeartbeatClient();
+        $client = $this->getNewMockClient();
 
         $monitor->attach($client);
         $monitor->attach($client);
@@ -54,7 +54,7 @@ class HeartbeatMonitorTest extends TestCase
     public function testDetachWithNotAttachedHeartbeat()
     {
         $monitor = $this->getNewMonitor();
-        $client = $this->getNewMockHeartbeatClient();
+        $client = $this->getNewMockClient();
 
         $this->assertEquals(
             $monitor,
@@ -69,7 +69,7 @@ class HeartbeatMonitorTest extends TestCase
     public function testDetach()
     {
         $monitor = $this->getNewMonitor();
-        $client = $this->getNewMockHeartbeatClient();
+        $client = $this->getNewMockClient();
 
         $monitor->attach($client);
 
@@ -86,8 +86,8 @@ class HeartbeatMonitorTest extends TestCase
     public function getAll()
     {
         $monitor = $this->getNewMonitor();
-        $firstClient = $this->getNewMockHeartbeatClient();
-        $secondClient = $this->getNewMockHeartbeatClient();
+        $firstClient = $this->getNewMockClient();
+        $secondClient = $this->getNewMockClient();
 
         $monitor->attach($firstClient);
         $monitor->attach($secondClient);
@@ -104,8 +104,8 @@ class HeartbeatMonitorTest extends TestCase
     public function detachAll()
     {
         $monitor = $this->getNewMonitor();
-        $firstClient = $this->getNewMockHeartbeatClient();
-        $secondClient = $this->getNewMockHeartbeatClient();
+        $firstClient = $this->getNewMockClient();
+        $secondClient = $this->getNewMockClient();
 
         $expectedGetAll = array();
         $this->assertEquals($expectedGetAll, $monitor->getAll());
@@ -131,11 +131,11 @@ class HeartbeatMonitorTest extends TestCase
             ->times(9); //3 times for monitor internal stuff and up to 3 times for each attached client
         $monitor->setTimestamp($timestamp);
 
-        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
+        $threeSecondPulseClient = $this->getNewMockClient();
         $threeSecondPulseClient->shouldReceive('knock')
             ->times(3);
 
-        $zeroSecondPulseClient = $this->getNewMockHeartbeatClient();
+        $zeroSecondPulseClient = $this->getNewMockClient();
         $zeroSecondPulseClient->shouldReceive('knock')
             ->times(3);
 
@@ -164,14 +164,14 @@ class HeartbeatMonitorTest extends TestCase
             ->times(9); //3 times for monitor internal stuff and up to 3 times for each attached client
         $monitor->setTimestamp($timestamp);
 
-        $firstClient = $this->getNewMockHeartbeatClientWithPulse();
+        $firstClient = $this->getNewMockClientWithPulse();
         $firstClient->shouldReceive('hasPulse')
             ->andReturn(false)
             ->times(6);
         $firstClient->shouldReceive('knock')
             ->times(3);
 
-        $secondClient = $this->getNewMockHeartbeatClientWithPulse();
+        $secondClient = $this->getNewMockClientWithPulse();
         $secondClient->shouldReceive('hasPulse')
             ->andReturn(false)
             ->times(6);
@@ -221,7 +221,7 @@ class HeartbeatMonitorTest extends TestCase
             ->times(3);
         $threeSecondPulse->shouldReceive('updateLastPulsedTimestamp')
             ->times(2);
-        $threeSecondPulseClient = $this->getNewMockHeartbeatClientWithPulse();
+        $threeSecondPulseClient = $this->getNewMockClientWithPulse();
         $threeSecondPulseClient->shouldReceive('hasPulse')
             ->andReturn(true)
             ->times(5);
@@ -237,7 +237,7 @@ class HeartbeatMonitorTest extends TestCase
             ->times(3);
         $zeroSecondPulse->shouldReceive('updateLastPulsedTimestamp')
             ->times(3);
-        $zeroSecondPulseClient = $this->getNewMockHeartbeatClientWithPulse();
+        $zeroSecondPulseClient = $this->getNewMockClientWithPulse();
         $zeroSecondPulseClient->shouldReceive('hasPulse')
             ->andReturn(true)
             ->times(6);
@@ -268,28 +268,28 @@ class HeartbeatMonitorTest extends TestCase
             ->times(3);
         $monitor->setTimestamp($timestamp);
 
-        $threeSecondPulseClient = $this->getNewMockHeartbeatClient();
+        $threeSecondPulseClient = $this->getNewMockClient();
         $threeSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(3)
             ->once();
         $threeSecondPulseClient->shouldReceive('knock')
             ->times(2);
 
-        $oneSecondPulseClient = $this->getNewMockHeartbeatClient();
+        $oneSecondPulseClient = $this->getNewMockClient();
         $oneSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(1)
             ->once();
         $oneSecondPulseClient->shouldReceive('knock')
             ->times(3);
 
-        $sixSecondPulseClient = $this->getNewMockHeartbeatClient();
+        $sixSecondPulseClient = $this->getNewMockClient();
         $sixSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(6)
             ->once();
         $sixSecondPulseClient->shouldReceive('knock')
             ->twice();
 
-        $twoSecondPulseClient = $this->getNewMockHeartbeatClient();
+        $twoSecondPulseClient = $this->getNewMockClient();
         $twoSecondPulseClient->shouldReceive('getPulse')
             ->andReturn(2)
             ->once();

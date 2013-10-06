@@ -21,7 +21,7 @@ class AbstractHeartbeatClientWithPulseTest extends TestCase
      */
     public function testConstruct()
     {
-        $client = $this->getNewAbstractHeartbeatClientWithPulse();
+        $client = $this->getNewAbstractClientWithPulse();
         $expectedInitialPulse = null;
 
         $this->assertFalse($client->hasPulse());
@@ -34,7 +34,7 @@ class AbstractHeartbeatClientWithPulseTest extends TestCase
      */
     public function testHasGetSetPulse()
     {
-        $client = $this->getNewAbstractHeartbeatClientWithPulse();
+        $client = $this->getNewAbstractClientWithPulse();
         $pulse = $this->getNewMockPulse();
 
         $this->assertEquals($client, $client->setPulse($pulse));

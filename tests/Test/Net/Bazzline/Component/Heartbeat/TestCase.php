@@ -31,13 +31,13 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\HeartbeatClientInterface
+     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\ClientInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    protected function getNewMockHeartbeatClient()
+    protected function getNewMockClient()
     {
-        $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient');
+        $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractClient');
         $client->shouldReceive('hasPulse')
             ->never()
             ->byDefault();
@@ -49,13 +49,13 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClientWithPulse
+     * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractClientWithPulse
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
-    protected function getNewMockHeartbeatClientWithPulse()
+    protected function getNewMockClientWithPulse()
     {
-        $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClientWithPulse');
+        $client = Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractClientWithPulse');
         $client->shouldReceive('hasPulse')
             ->never()
             ->byDefault();
@@ -124,22 +124,22 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient
+     * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractClient
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
-    protected function getNewAbstractHeartbeatClient()
+    protected function getNewAbstractClient()
     {
-        return Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient[knock,beat,handleException]');
+        return Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractClient[knock,beat,handleException]');
     }
 
     /**
-     * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClientWithPulse
+     * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractClientWithPulse
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
-    protected function getNewAbstractHeartbeatClientWithPulse()
+    protected function getNewAbstractClientWithPulse()
     {
-        return Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClientWithPulse[knock,beat,handleException]');
+        return Mockery::mock('Net\Bazzline\Component\Heartbeat\AbstractClientWithPulse[knock,beat,handleException]');
     }
 }

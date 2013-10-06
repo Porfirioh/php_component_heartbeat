@@ -21,7 +21,7 @@ class AbstractHeartbeatClientTest extends TestCase
      */
     public function testGetUptime()
     {
-        $client = $this->getNewAbstractHeartbeatClient();
+        $client = $this->getNewAbstractClient();
         $expectedMaximalUptime = 1; //the test should not run longer than a second
         $expectedMinimalUptime = 0;
 
@@ -35,7 +35,7 @@ class AbstractHeartbeatClientTest extends TestCase
      */
     public function testGetMemoryUsage()
     {
-        $client = $this->getNewAbstractHeartbeatClient();
+        $client = $this->getNewAbstractClient();
         $expectedMinimalMemoryUsage = memory_get_usage(true);
 
         $this->assertGreaterThanOrEqual($expectedMinimalMemoryUsage, $client->getMemoryUsage());

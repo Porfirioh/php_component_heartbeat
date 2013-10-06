@@ -6,7 +6,7 @@
 
 namespace Example\JSONAndFork;
 
-use Net\Bazzline\Component\Heartbeat\AbstractHeartbeatClient;
+use Net\Bazzline\Component\Heartbeat\AbstractClient;
 use Net\Bazzline\Component\Heartbeat\RuntimeException;
 use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\Heartbeat\WarningRuntimeException;
@@ -22,7 +22,7 @@ use stdClass;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-22
  */
-class Heartbeat extends AbstractHeartbeatClient implements IdentityAwareInterface
+class Heartbeat extends AbstractClient implements IdentityAwareInterface
 {
     /**
      * @var int

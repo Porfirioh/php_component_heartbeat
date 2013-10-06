@@ -7,7 +7,7 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatAbstract.
+ * Class AbstractClientWithPulse.
  * This class is a heartbeat with benefits. You can use the runtime information
  *  to write statistic data in your beat method implementation.
  *
@@ -20,37 +20,40 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-abstract class AbstractHeartbeatClient implements HeartbeatClientInterface, RuntimeInformationInterface
+abstract class AbstractClientWithPulse extends AbstractClient implements PulseAwareInterface
 {
     /**
      * @var integer
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
-    protected $startTime;
+    protected $pulse;
 
     /**
+     * {@inheritdoc}
+     */
+    public function getPulse()
+    {
+        return $this->pulse;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPulse(PulseInterface $pulse)
+    {
+        $this->pulse = $pulse;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
      * @author stev leibelt <artodeto@arcor.de>
-     * @since 2013-07-14
+     * @since 2013-09-22
      */
-    public function __construct()
+    public function hasPulse()
     {
-        $this->startTime = time();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUptime()
-    {
-        return (time() - $this->startTime);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMemoryUsage()
-    {
-        return memory_get_usage(true);
+        return (!is_null($this->pulse));
     }
 }

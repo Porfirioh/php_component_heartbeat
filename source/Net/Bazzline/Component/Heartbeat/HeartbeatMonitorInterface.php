@@ -18,31 +18,31 @@ interface HeartbeatMonitorInterface
     /**
      * Adds a client to the observer
      *
-     * @param HeartbeatClientInterface $client
+     * @param ClientInterface $client
      * @throws InvalidArgumentException - if you want to attach a attached
      *  heartbeat
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
-    public function attach(HeartbeatClientInterface $client);
+    public function attach(ClientInterface $client);
 
     /**
      * Removes an attached client to the observer
      *
-     * @param HeartbeatClientInterface $client
+     * @param ClientInterface $client
      * @return $this
      * @throws InvalidArgumentException - if you want to detach a non attached
      *  heartbeat
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-14
      */
-    public function detach(HeartbeatClientInterface $client);
+    public function detach(ClientInterface $client);
 
     /**
      * Returns all attached clients
      *
-     * @return array|HeartbeatClientInterface[]
+     * @return array|ClientInterface[]
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */

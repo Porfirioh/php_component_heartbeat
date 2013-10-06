@@ -53,7 +53,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     /**
      * {@inheritdoc}
      */
-    public function attach(HeartbeatClientInterface $client)
+    public function attach(ClientInterface $client)
     {
         //prevent from adding the same object twice
         if ($this->storage->contains($client)) {
@@ -70,7 +70,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     /**
      * {@inheritdoc}
      */
-    public function detach(HeartbeatClientInterface $client)
+    public function detach(ClientInterface $client)
     {
         //validate if an entry for the provided pulse exist
         //validate if an entry for the provided pulse and hash exists
@@ -174,7 +174,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
             $currentTimestamp = $this->timestamp->getCurrentTimestamp();
             foreach ($this->storage as $client) {
                 /**
-                 * @var HeartbeatClientInterface $client
+                 * @var ClientInterface $client
                  */
                 $nextKnockTimestamp = $this->getNextKnockTimestamp($client);
                 if ($nextKnockTimestamp <= $currentTimestamp) {
@@ -189,12 +189,12 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     }
 
     /**
-     * @param HeartbeatClientInterface $client
+     * @param ClientInterface $client
      * @param RuntimeException $exception
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-10-05
      */
-    protected function handleClientException(HeartbeatClientInterface $client, RuntimeException $exception)
+    protected function handleClientException(ClientInterface $client, RuntimeException $exception)
     {
         if ($exception instanceof CriticalRuntimeException) {
             $this->detach($client);
@@ -211,7 +211,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
         //iterate over all available clients
         foreach ($clients as $client) {
             /**
-             * @var HeartbeatClientInterface $client
+             * @var ClientInterface $client
              */
             try {
                 $client->knock();
@@ -233,7 +233,7 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
             //iterate over all available clients
             foreach ($clients as $client) {
                 /**
-                 * @var HeartbeatClientInterface $client
+                 * @var ClientInterface $client
                  */
                 $this->preUpdateClientAfterKnocking($client);
                 if ($client instanceof PulseAwareInterface
@@ -246,30 +246,30 @@ class HeartbeatMonitor implements HeartbeatMonitorInterface, TimestampAwareInter
     }
 
     /**
-     * @param HeartbeatClientInterface $client
+     * @param ClientInterface $client
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-10-01
      */
-    protected function preUpdateClientAfterKnocking(HeartbeatClientInterface $client)
+    protected function preUpdateClientAfterKnocking(ClientInterface $client)
     {
     }
 
     /**
-     * @param HeartbeatClientInterface $client
+     * @param ClientInterface $client
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-10-01
      */
-    protected function postUpdateClientAfterKnocking(HeartbeatClientInterface $client)
+    protected function postUpdateClientAfterKnocking(ClientInterface $client)
     {
     }
 
     /**
-     * @param HeartbeatClientInterface $client
+     * @param ClientInterface $client
      * @return int
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    protected function getNextKnockTimestamp(HeartbeatClientInterface $client)
+    protected function getNextKnockTimestamp(ClientInterface $client)
     {
         if ($client instanceof PulseAwareInterface
             && $client->hasPulse()) {

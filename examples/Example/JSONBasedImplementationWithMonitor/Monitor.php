@@ -7,7 +7,7 @@
 namespace Example\JSONBasedImplementationWithMonitor;
 
 use Net\Bazzline\Component\Heartbeat\HeartbeatMonitorWithHistory;
-use Net\Bazzline\Component\Heartbeat\RuntimeHeartbeatClientHistory;
+use Net\Bazzline\Component\Heartbeat\RuntimeClientHistory;
 
 /**
  * Class Monitor
@@ -26,7 +26,7 @@ class Monitor extends HeartbeatMonitorWithHistory
     {
         parent::__construct();
         $this->setHeartbeatClientHistory(
-            new RuntimeHeartbeatClientHistory()
+            new RuntimeClientHistory()
         );
     }
 }

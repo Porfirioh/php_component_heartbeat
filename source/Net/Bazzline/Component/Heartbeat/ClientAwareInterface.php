@@ -13,12 +13,12 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-15
  */
-interface HeartbeatClientAwareInterface
+interface ClientAwareInterface
 {
     /**
      * Gets a heartbeat client
      *
-     * @return \Net\Bazzline\Component\Heartbeat\HeartbeatClientInterface
+     * @return \Net\Bazzline\Component\Heartbeat\ClientInterface
      * @throws \RuntimeException - if no heartbeat is set
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
@@ -37,10 +37,10 @@ interface HeartbeatClientAwareInterface
     /**
      * Sets a heartbeat client
      *
-     * @param HeartbeatClientInterface $heartbeat
+     * @param ClientInterface $heartbeat
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-15
      */
-    public function setHeartbeatClient(HeartbeatClientInterface $heartbeat);
+    public function setHeartbeatClient(ClientInterface $heartbeat);
 }

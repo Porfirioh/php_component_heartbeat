@@ -7,13 +7,13 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatClientHistory
+ * Class RuntimeClientHistory
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-09-29
  */
-class RuntimeHeartbeatClientHistory implements HeartbeatClientHistoryInterface
+class RuntimeClientHistory implements HeartbeatClientHistoryInterface
 {
     /**
      * @var array|HeartbeatClientHistoryEntryInterface[]
@@ -32,14 +32,14 @@ class RuntimeHeartbeatClientHistory implements HeartbeatClientHistoryInterface
     }
 
     /**
-     * @param HeartbeatClientInterface $heartbeatClient
+     * @param ClientInterface $heartbeatClient
      * @param null|RuntimeException $exception
      * @return $this
      * @throws InvalidArgumentException
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
-    public function addEntry(HeartbeatClientInterface $heartbeatClient, $exception = null)
+    public function addEntry(ClientInterface $heartbeatClient, $exception = null)
     {
         if (!is_null($exception)
             && !($exception instanceof RuntimeException)) {
