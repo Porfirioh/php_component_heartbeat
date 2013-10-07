@@ -6,7 +6,7 @@
 
 namespace Example\JSONBasedImplementation;
 
-use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
+use Net\Bazzline\Component\Heartbeat\Monitor as ParentMonitor;
 
 /**
  * Class Monitor
@@ -15,6 +15,6 @@ use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-17
  */
-class Monitor extends HeartbeatMonitor
+class Monitor extends ParentMonitor
 {
 }

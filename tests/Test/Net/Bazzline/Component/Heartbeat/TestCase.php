@@ -6,8 +6,8 @@
 
 namespace Test\Net\Bazzline\Component\Heartbeat;
 
-use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
-use Net\Bazzline\Component\Heartbeat\HeartbeatMonitorFactory;
+use Net\Bazzline\Component\Heartbeat\Monitor;
+use Net\Bazzline\Component\Heartbeat\MonitorFactory;
 use Mockery;
 use Net\Bazzline\Component\Heartbeat\Pulse;
 use PHPUnit_Framework_TestCase;
@@ -91,7 +91,7 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return HeartbeatMonitor
+     * @return Monitor
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-17
      */
@@ -104,13 +104,13 @@ class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return HeartbeatMonitorFactory
+     * @return MonitorFactory
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-25
      */
     protected function getNewMonitorFactory()
     {
-        return new HeartbeatMonitorFactory();
+        return new MonitorFactory();
     }
 
     /**

@@ -7,13 +7,13 @@
 namespace Test\Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatMonitorFactoryTest
+ * Class MonitorFactoryTest
  *
  * @package Test\Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-09-25
  */
-class HeartbeatMonitorFactoryTest extends TestCase
+class MonitorFactoryTest extends TestCase
 {
     /**
      * @author stev leibelt <artodeto@arcor.de>
@@ -24,7 +24,7 @@ class HeartbeatMonitorFactoryTest extends TestCase
         $factory = $this->getNewMonitorFactory();
         $monitor = $factory->create();
 
-        $this->assertInstanceOf('\Net\Bazzline\Component\Heartbeat\HeartbeatMonitor', $monitor);
+        $this->assertInstanceOf('\Net\Bazzline\Component\Heartbeat\Monitor', $monitor);
         $this->assertTrue($monitor->hasTimestamp());
     }
 }

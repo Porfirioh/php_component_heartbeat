@@ -7,13 +7,13 @@
 namespace Test\Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class AbstractHeartbeatClientWithPulseTest
+ * Class AbstractClientWithPulseTest
  *
  * @package Test\Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-09-29
  */
-class AbstractHeartbeatClientWithPulseTest extends TestCase
+class AbstractClientWithPulseTest extends TestCase
 {
     /**
      * @author stev leibelt <artodeto@arcor.de>

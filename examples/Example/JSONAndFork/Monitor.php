@@ -7,7 +7,7 @@
 namespace Example\JSONAndFork;
 
 use Net\Bazzline\Component\Heartbeat\ClientInterface;
-use Net\Bazzline\Component\Heartbeat\HeartbeatMonitor;
+use Net\Bazzline\Component\Heartbeat\Monitor as ParentMonitor;
 use Net\Bazzline\Component\Heartbeat\RuntimeException;
 use Net\Bazzline\Component\Heartbeat\CriticalRuntimeException;
 use Net\Bazzline\Component\ProcessIdentity\Identity;
@@ -20,7 +20,7 @@ use Net\Bazzline\Component\Utility\Json;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-22
  */
-class Monitor extends HeartbeatMonitor
+class Monitor extends ParentMonitor
 {
     /**
      * @var Json

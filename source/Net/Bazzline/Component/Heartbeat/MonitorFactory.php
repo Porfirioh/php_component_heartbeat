@@ -9,13 +9,13 @@ namespace Net\Bazzline\Component\Heartbeat;
 use Net\Bazzline\Component\Utility\Timestamp;
 
 /**
- * Class HeartbeatMonitorFactory
+ * Class MonitorFactory
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-09-18
  */
-class HeartbeatMonitorFactory implements FactoryInterface
+class MonitorFactory implements FactoryInterface
 {
     /**
      * @return mixed
@@ -24,10 +24,10 @@ class HeartbeatMonitorFactory implements FactoryInterface
      */
     public function create()
     {
-        $heartbeatMonitor = new HeartbeatMonitor();
+        $monitor = new Monitor();
         $timestamp = new Timestamp();
-        $heartbeatMonitor->setTimestamp($timestamp);
+        $monitor->setTimestamp($timestamp);
 
-        return $heartbeatMonitor;
+        return $monitor;
     }
 }

@@ -11,13 +11,13 @@ use Net\Bazzline\Component\Utility\TimestampAwareInterface;
 use SplObjectStorage;
 
 /**
- * Class HeartbeatMonitor
+ * Class MonitorWithHistory
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-class HeartbeatMonitorWithHistory extends HeartbeatMonitor implements HeartbeatClientHistoryAwareInterface
+class MonitorWithHistory extends Monitor implements HeartbeatClientHistoryAwareInterface
 {
     /**
      * @var HeartbeatClientHistoryInterface

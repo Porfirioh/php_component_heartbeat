@@ -41,7 +41,7 @@ class Example
     protected $loops;
 
     /**
-     * @var \Net\Bazzline\Component\Heartbeat\HeartbeatMonitor
+     * @var \Net\Bazzline\Component\Heartbeat\Monitor
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-07-22
      */

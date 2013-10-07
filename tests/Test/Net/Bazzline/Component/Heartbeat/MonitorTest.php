@@ -7,13 +7,13 @@
 namespace Test\Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatMonitorTest
+ * Class MonitorTest
  *
  * @package Test\Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-17
  */
-class HeartbeatMonitorTest extends TestCase
+class MonitorTest extends TestCase
 {
     /**
      * @author stev leibelt <artodeto@arcor.de>
@@ -259,7 +259,7 @@ class HeartbeatMonitorTest extends TestCase
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-17
      */
-    public function AtestListenWithFourClientsAndThreeSleeps()
+    public function TestListenWithFourClientsAndThreeSleeps()
     {
         $monitor = $this->getNewMonitor();
         $timestamp = $this->getNewMockTimestamp();
