@@ -137,7 +137,7 @@ Investigate code if you want to.
     * cleanup code to use same terms everywhere
     * create wiki describes benefits and ideas behind runtime interface
     * implement monitor history (done)
-    * rename components to *monitor*, *client*, *clientHistory*
+    * rename components to *monitor*, *client*, *clientHistory* (done)
 
 # Version History
 
