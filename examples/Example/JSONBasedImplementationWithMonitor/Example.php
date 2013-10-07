@@ -234,7 +234,7 @@ class Example
         echo PHP_EOL;
         foreach ($this->monitor->getHeartbeatClientHistory()->getEntries() as $entry) {
             /**
-             * @var \Net\Bazzline\Component\Heartbeat\HeartbeatClientHistoryEntryInterface $entry
+             * @var \Net\Bazzline\Component\Heartbeat\ClientHistoryEntryInterface $entry
              */
             echo $entry->getName() . ' - ' .
                 $entry->getStatus() . ' - ' .

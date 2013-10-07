@@ -13,10 +13,10 @@ namespace Net\Bazzline\Component\Heartbeat;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-09-29
  */
-class RuntimeClientHistory implements HeartbeatClientHistoryInterface
+class RuntimeClientHistory implements ClientHistoryInterface
 {
     /**
-     * @var array|HeartbeatClientHistoryEntryInterface[]
+     * @var array|ClientHistoryEntryInterface[]
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
@@ -48,7 +48,7 @@ class RuntimeClientHistory implements HeartbeatClientHistoryInterface
             );
         }
 
-        $entry = new HeartbeatClientHistoryEntry();
+        $entry = new ClientHistoryEntry();
 
         $entry->setIdentifier(spl_object_hash($heartbeatClient));
         $entry->setName(get_class($heartbeatClient));
@@ -61,7 +61,7 @@ class RuntimeClientHistory implements HeartbeatClientHistoryInterface
     }
 
     /**
-     * @return array|HeartbeatClientHistoryEntryInterface[]
+     * @return array|ClientHistoryEntryInterface[]
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */

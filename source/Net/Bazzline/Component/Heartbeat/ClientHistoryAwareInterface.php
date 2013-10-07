@@ -7,13 +7,13 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatClientHistoryAwareInterface
+ * Class ClientHistoryAwareInterface
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-09-29
  */
-interface HeartbeatClientHistoryAwareInterface
+interface ClientHistoryAwareInterface
 {
     /**
      * @return bool
@@ -23,17 +23,17 @@ interface HeartbeatClientHistoryAwareInterface
     public function hasHeartbeatClientHistory();
 
     /**
-     * @return null|HeartbeatClientHistoryInterface
+     * @return null|ClientHistoryInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
     public function getHeartbeatClientHistory();
 
     /**
-     * @param HeartbeatClientHistoryInterface $heartbeatClient
+     * @param ClientHistoryInterface $heartbeatClient
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
-    public function setHeartbeatClientHistory(HeartbeatClientHistoryInterface $heartbeatClient);
+    public function setHeartbeatClientHistory(ClientHistoryInterface $heartbeatClient);
 }

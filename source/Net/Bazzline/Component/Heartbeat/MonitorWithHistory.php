@@ -17,10 +17,10 @@ use SplObjectStorage;
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-07-14
  */
-class MonitorWithHistory extends Monitor implements HeartbeatClientHistoryAwareInterface
+class MonitorWithHistory extends Monitor implements ClientHistoryAwareInterface
 {
     /**
-     * @var HeartbeatClientHistoryInterface
+     * @var ClientHistoryInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-10-01
      */
@@ -37,7 +37,7 @@ class MonitorWithHistory extends Monitor implements HeartbeatClientHistoryAwareI
     }
 
     /**
-     * @return null|HeartbeatClientHistoryInterface
+     * @return null|ClientHistoryInterface
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
@@ -47,12 +47,12 @@ class MonitorWithHistory extends Monitor implements HeartbeatClientHistoryAwareI
     }
 
     /**
-     * @param HeartbeatClientHistoryInterface $heartbeatClient
+     * @param ClientHistoryInterface $heartbeatClient
      * @return $this
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-09-29
      */
-    public function setHeartbeatClientHistory(HeartbeatClientHistoryInterface $heartbeatClient)
+    public function setHeartbeatClientHistory(ClientHistoryInterface $heartbeatClient)
     {
         $this->heartbeatClientHistory = $heartbeatClient;
 

@@ -7,13 +7,13 @@
 namespace Net\Bazzline\Component\Heartbeat;
 
 /**
- * Class HeartbeatClientHistoryInterface
+ * Class ClientHistoryInterface
  *
  * @package Net\Bazzline\Component\Heartbeat
  * @author stev leibelt <artodeto@arcor.de>
  * @since 2013-09-29
  */
-interface HeartbeatClientHistoryInterface
+interface ClientHistoryInterface
 {
     /**
      * @param ClientInterface $heartbeatClient
@@ -26,7 +26,7 @@ interface HeartbeatClientHistoryInterface
     public function addEntry(ClientInterface $heartbeatClient, $exception = null);
 
     /**
-     * @return array|HeartbeatClientHistoryEntryInterface[]
+     * @return array|ClientHistoryEntryInterface[]
      * @author stev leibelt <artodeto@arcor.de>
      * @since 2013-10-01
      */
