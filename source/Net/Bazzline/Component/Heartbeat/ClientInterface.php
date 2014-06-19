@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-11
  */
 
@@ -14,7 +14,7 @@ namespace Net\Bazzline\Component\Heartbeat;
  *  - How to handle valid return value?
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-11
  */
 interface ClientInterface
@@ -24,7 +24,7 @@ interface ClientInterface
      *
      * @return integer - timestamp of last beat
      * @throws RuntimeException|CriticalRuntimeException|WarningRuntimeException
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-11
      */
     public function knock();
@@ -33,7 +33,7 @@ interface ClientInterface
      * This method updates the current heartbeat.
      *
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-15
      */
     public function beat();
@@ -43,7 +43,7 @@ interface ClientInterface
      *
      * @param RuntimeException|CriticalRuntimeException|WarningRuntimeException $exception
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-16
      */
     public function handleException(RuntimeException $exception);

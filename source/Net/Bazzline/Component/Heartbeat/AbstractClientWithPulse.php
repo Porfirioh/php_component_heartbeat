@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-14
  */
 
@@ -17,14 +17,14 @@ namespace Net\Bazzline\Component\Heartbeat;
  * You have to implement the handleHeartAttack method.
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-14
  */
 abstract class AbstractClientWithPulse extends AbstractClient implements PulseAwareInterface
 {
     /**
      * @var integer
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-14
      */
     protected $pulse;
@@ -49,7 +49,7 @@ abstract class AbstractClientWithPulse extends AbstractClient implements PulseAw
 
     /**
      * @return bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-22
      */
     public function hasPulse()

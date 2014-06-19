@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-17 
  */
 
@@ -19,21 +19,21 @@ use stdClass;
  * Class Heartbeat
  *
  * @package Example\JSONBasedImplementation
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-22
  */
 class Heartbeat extends AbstractClient implements IdentityAwareInterface
 {
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     protected $currentBeatNumber;
 
     /**
      * @var \Net\Bazzline\Component\ProcessIdentity\IdentityInterface
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $identity;
@@ -47,35 +47,35 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
 
     /**
      * @var string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $fileName;
 
     /**
      * @var bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $failsCritical;
 
     /**
      * @var
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $failsOnBeatNumber;
 
     /**
      * @var
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $lastTimeStamp;
 
     /**
      * @param IdentityInterface $identity
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function __construct(IdentityInterface $identity)
@@ -94,7 +94,7 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
      *
      * @return integer - timestamp of last beat
      * @throws CriticalRuntimeException|WarningRuntimeException
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function knock()
@@ -199,7 +199,7 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
      * @param int $numberOfBeats
      * @param bool $failsCritical
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function setFailsOnBeatNumber($numberOfBeats, $failsCritical = false)
@@ -212,7 +212,7 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
 
     /**
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     public function deleteFile()
@@ -224,7 +224,7 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
 
     /**
      * @return bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     public function shouldFail()
@@ -234,7 +234,7 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
 
     /**
      * @return bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     public function shouldFailCritical()
@@ -244,7 +244,7 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
 
     /**
      * @return stdClass
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     protected function getFileContent()
@@ -255,7 +255,7 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
     /**
      * @param stdClass $content
      * @return int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     protected function setFileContent(stdClass $content)
@@ -265,7 +265,7 @@ class Heartbeat extends AbstractClient implements IdentityAwareInterface
 
     /**
      * @return bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     protected function removeFile()

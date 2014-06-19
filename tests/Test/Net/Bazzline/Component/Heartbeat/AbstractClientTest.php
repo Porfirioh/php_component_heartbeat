@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-29
  */
 
@@ -10,13 +10,13 @@ namespace Test\Net\Bazzline\Component\Heartbeat;
  * Class AbstractClientTest
  *
  * @package Test\Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-29
  */
 class AbstractClientTest extends TestCase
 {
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function testGetUptime()
@@ -30,7 +30,7 @@ class AbstractClientTest extends TestCase
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function testGetMemoryUsage()

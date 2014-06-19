@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-22
  */
 
@@ -21,56 +21,56 @@ Example::create()
  * Class Example
  *
  * @package Example\JSONAndFork
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-22
  */
 class Example
 {
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $currentLoop;
 
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $loops;
 
     /**
      * @var \Net\Bazzline\Component\Heartbeat\Monitor
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $monitor;
 
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-24
      */
     protected $numberOfExpectedFails;
 
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-24
      */
     protected $numberOfExpectedFailsCritical;
 
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $sleep;
 
     /**
      * @return Example
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public static function create()
@@ -81,7 +81,7 @@ class Example
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function __construct()
@@ -95,7 +95,7 @@ class Example
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function __destruct()
@@ -106,7 +106,7 @@ class Example
     /**
      * @param int $duration
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function setLoops($duration = 20)
@@ -122,7 +122,7 @@ class Example
      * @param int $numberOfWarning
      * @param int $numberOfCritical
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function setupProcesses($numberOfProcesses = 3, $numberOfWarning = 0, $numberOfCritical = 0)
@@ -158,7 +158,7 @@ class Example
 
     /**
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function printSettings()
@@ -177,7 +177,7 @@ class Example
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     public function andRun()

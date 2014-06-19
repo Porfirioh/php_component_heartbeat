@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-15
  */
 
@@ -10,7 +10,7 @@ namespace Net\Bazzline\Component\Heartbeat;
  * Class HeartbeatClientAwareInterface
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-15
  */
 interface ClientAwareInterface
@@ -20,7 +20,7 @@ interface ClientAwareInterface
      *
      * @return \Net\Bazzline\Component\Heartbeat\ClientInterface
      * @throws \RuntimeException - if no heartbeat is set
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-15
      */
     public function getHeartbeatClient();
@@ -29,7 +29,7 @@ interface ClientAwareInterface
      * Validates if heartbeat client is set or not
      *
      * @return bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-16
      */
     public function hasHeartbeatClient();
@@ -39,7 +39,7 @@ interface ClientAwareInterface
      *
      * @param ClientInterface $heartbeat
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-15
      */
     public function setHeartbeatClient(ClientInterface $heartbeat);

@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-16
  */
 
@@ -12,7 +12,7 @@ use RuntimeException as ParentException;
  * Class RuntimeException
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-16
  */
 class RuntimeException extends ParentException {}

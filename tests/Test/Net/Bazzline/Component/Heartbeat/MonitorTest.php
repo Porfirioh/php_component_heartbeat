@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-17 
  */
 
@@ -10,13 +10,13 @@ namespace Test\Net\Bazzline\Component\Heartbeat;
  * Class MonitorTest
  *
  * @package Test\Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-17
  */
 class MonitorTest extends TestCase
 {
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     public function testAttachHeartbeat()
@@ -33,7 +33,7 @@ class MonitorTest extends TestCase
     /**
      * @expectedException \Net\Bazzline\Component\Heartbeat\InvalidArgumentException
      * @expectedExceptionMessage Can not add already attached heartbeat
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     public function testAttachSameHeartbeatTwice()
@@ -48,7 +48,7 @@ class MonitorTest extends TestCase
     /**
      * @expectedException \Net\Bazzline\Component\Heartbeat\InvalidArgumentException
      * @expectedExceptionMessage Can not detach not attached heartbeat
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     public function testDetachWithNotAttachedHeartbeat()
@@ -63,7 +63,7 @@ class MonitorTest extends TestCase
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     public function testDetach()
@@ -80,7 +80,7 @@ class MonitorTest extends TestCase
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-24
      */
     public function getAll()
@@ -98,7 +98,7 @@ class MonitorTest extends TestCase
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-24
      */
     public function detachAll()
@@ -118,7 +118,7 @@ class MonitorTest extends TestCase
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-17
      */
     public function testListenWithTwoClientsAndThreeSleeps()
@@ -151,7 +151,7 @@ class MonitorTest extends TestCase
      * When a client implements the pulse aware interface but has no pulse, he
      *  is treated like a client that do not implement the pulse aware interface
      *
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-17
      */
     public function testListenWithTwoClientsOfPulseAwareInterfaceAndThreeSleeps()
@@ -190,7 +190,7 @@ class MonitorTest extends TestCase
      * If a client implements the pulse aware interface and has a pulse, we can
      *  use the pulse to use knock in wished intervals
      *
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-17
      */
     public function testListenWithTwoClientsOfPulseAwareInterfaceAndPulseAndThreeSleeps()
@@ -256,7 +256,7 @@ class MonitorTest extends TestCase
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-17
      */
     public function TestListenWithFourClientsAndThreeSleeps()

@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-22
  */
 
@@ -10,27 +10,27 @@ namespace Net\Bazzline\Component\Heartbeat;
  * Class Pulse
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-22
  */
 class Pulse implements PulseInterface
 {
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-22
      */
     protected $interval;
 
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-22
      */
     protected $lastPulseTimestamp;
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-22
      */
     public function __construct()
@@ -40,7 +40,7 @@ class Pulse implements PulseInterface
 
     /**
      * @return int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-22
      */
     public function getInterval()
@@ -51,7 +51,7 @@ class Pulse implements PulseInterface
     /**
      * @param int $interval - in seconds
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-22
      */
     public function setInterval($interval)
@@ -63,7 +63,7 @@ class Pulse implements PulseInterface
 
     /**
      * @return int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-22
      */
     public function getLastPulsedTimestamp()
@@ -73,7 +73,7 @@ class Pulse implements PulseInterface
 
     /**
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-22
      */
     public function updateLastPulsedTimestamp()
@@ -85,7 +85,7 @@ class Pulse implements PulseInterface
 
     /**
      * @return int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-23
      */
     public function getNextPulseTimestamp()

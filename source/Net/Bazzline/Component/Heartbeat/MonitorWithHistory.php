@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-14
  */
 
@@ -14,21 +14,21 @@ use SplObjectStorage;
  * Class MonitorWithHistory
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-14
  */
 class MonitorWithHistory extends Monitor implements ClientHistoryAwareInterface
 {
     /**
      * @var ClientHistoryInterface
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     protected $heartbeatClientHistory;
 
     /**
      * @return bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function hasHeartbeatClientHistory()
@@ -38,7 +38,7 @@ class MonitorWithHistory extends Monitor implements ClientHistoryAwareInterface
 
     /**
      * @return null|ClientHistoryInterface
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function getHeartbeatClientHistory()
@@ -49,7 +49,7 @@ class MonitorWithHistory extends Monitor implements ClientHistoryAwareInterface
     /**
      * @param ClientHistoryInterface $heartbeatClient
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function setHeartbeatClientHistory(ClientHistoryInterface $heartbeatClient)
@@ -62,7 +62,7 @@ class MonitorWithHistory extends Monitor implements ClientHistoryAwareInterface
 
     /**
      * @param ClientInterface $client
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     protected function preUpdateClientAfterKnocking(ClientInterface $client)
@@ -73,7 +73,7 @@ class MonitorWithHistory extends Monitor implements ClientHistoryAwareInterface
     /**
      * @param ClientInterface $client
      * @param RuntimeException $exception
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-05
      */
     protected function handleClientException(ClientInterface $client, RuntimeException $exception)
@@ -85,7 +85,7 @@ class MonitorWithHistory extends Monitor implements ClientHistoryAwareInterface
     /**
      * @param ClientInterface $client
      * @param RuntimeException $exception
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-05
      */
     private function addEntry(ClientInterface $client, RuntimeException $exception = null)

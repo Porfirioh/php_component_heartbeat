@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-16
  */
 
@@ -16,13 +16,13 @@ use PHPUnit_Framework_TestCase;
  * Class TestCase
  *
  * @package Test\Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-16
  */
 class TestCase extends PHPUnit_Framework_TestCase
 {
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     protected function tearDown()
@@ -32,7 +32,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\ClientInterface
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     protected function getNewMockClient()
@@ -50,7 +50,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return \Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractClientWithPulse
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     protected function getNewMockClientWithPulse()
@@ -68,7 +68,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return \Mockery\MockInterface|\Net\Bazzline\Component\Utility\TimestampInterface
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     protected function getNewMockTimestamp()
@@ -80,7 +80,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\Pulse
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-24
      */
     protected function getNewMockPulse()
@@ -92,7 +92,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return Monitor
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-17
      */
     protected function getNewMonitor()
@@ -105,7 +105,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return MonitorFactory
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-25
      */
     protected function getNewMonitorFactory()
@@ -115,7 +115,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return Pulse
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     protected function getNewPulse()
@@ -125,7 +125,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractClient
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     protected function getNewAbstractClient()
@@ -135,7 +135,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     /**
      * @return Mockery\MockInterface|\Net\Bazzline\Component\Heartbeat\AbstractClientWithPulse
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     protected function getNewAbstractClientWithPulse()

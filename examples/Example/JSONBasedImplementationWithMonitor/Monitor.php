@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-17 
  */
 
@@ -13,13 +13,13 @@ use Net\Bazzline\Component\Heartbeat\RuntimeClientHistory;
  * Class Monitor
  *
  * @package Example\JSONBasedImplementation
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-17
  */
 class Monitor extends ParentMonitor
 {
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function __construct()

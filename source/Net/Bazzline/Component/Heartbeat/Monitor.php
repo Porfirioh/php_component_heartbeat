@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-14
  */
 
@@ -14,34 +14,34 @@ use SplObjectStorage;
  * Class Monitor
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-14
  */
 class Monitor implements MonitorInterface, TimestampAwareInterface
 {
     /**
      * @var SplObjectStorage
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-14
      */
     protected $storage;
 
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     protected $lastTimestampValue;
 
     /**
      * @var TimestampInterface
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     protected $timestamp;
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     public function __construct()
@@ -117,7 +117,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
 
     /**
      * @return null|TimestampInterface
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     public function getTimestamp()
@@ -127,7 +127,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
 
     /**
      * @return bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     public function hasTimestamp()
@@ -137,7 +137,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
 
     /**
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     public function removeTimestamp()
@@ -150,7 +150,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
     /**
      * @param TimestampInterface $timestamp
      * @return mixed
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     public function setTimestamp(TimestampInterface $timestamp)
@@ -162,7 +162,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
 
     /**
      * @return array
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     protected function getClientsToKnock()
@@ -191,7 +191,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
     /**
      * @param ClientInterface $client
      * @param RuntimeException $exception
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-05
      */
     protected function handleClientException(ClientInterface $client, RuntimeException $exception)
@@ -203,7 +203,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
 
     /**
      * @param array $clients
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     private function knockClients(array $clients)
@@ -224,7 +224,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
 
     /**
      * @param array $clients
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-34
      */
     private function updateClientsAfterKnocking(array $clients)
@@ -247,7 +247,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
 
     /**
      * @param ClientInterface $client
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     protected function preUpdateClientAfterKnocking(ClientInterface $client)
@@ -256,7 +256,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
 
     /**
      * @param ClientInterface $client
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     protected function postUpdateClientAfterKnocking(ClientInterface $client)
@@ -266,7 +266,7 @@ class Monitor implements MonitorInterface, TimestampAwareInterface
     /**
      * @param ClientInterface $client
      * @return int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-15
      */
     protected function getNextKnockTimestamp(ClientInterface $client)

@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-10-01
  */
 
@@ -10,42 +10,42 @@ namespace Net\Bazzline\Component\Heartbeat;
  * Class ClientHistoryEntry
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-10-01
  */
 class ClientHistoryEntry implements ClientHistoryEntryInterface
 {
     /**
      * @var string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     private $identifier;
 
     /**
      * @var string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     private $name;
 
     /**
      * @var string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     private $status;
 
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     private $timestamp;
 
     /**
      * @return string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function getIdentifier()
@@ -55,7 +55,7 @@ class ClientHistoryEntry implements ClientHistoryEntryInterface
 
     /**
      * @return string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function getName()
@@ -65,7 +65,7 @@ class ClientHistoryEntry implements ClientHistoryEntryInterface
 
     /**
      * @return string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function getStatus()
@@ -75,7 +75,7 @@ class ClientHistoryEntry implements ClientHistoryEntryInterface
 
     /**
      * @return int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function getTimestamp()
@@ -86,7 +86,7 @@ class ClientHistoryEntry implements ClientHistoryEntryInterface
     /**
      * @param string $identifier
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function setIdentifier($identifier)
@@ -99,7 +99,7 @@ class ClientHistoryEntry implements ClientHistoryEntryInterface
     /**
      * @param string $name
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function setName($name)
@@ -112,7 +112,7 @@ class ClientHistoryEntry implements ClientHistoryEntryInterface
     /**
      * @param null|RuntimeException $exception
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function setStatusByException(RuntimeException $exception = null)
@@ -131,7 +131,7 @@ class ClientHistoryEntry implements ClientHistoryEntryInterface
     /**
      * @param null|string $timestamp
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-10-01
      */
     public function setTimestamp($timestamp = null)

@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-18
  */
 
@@ -12,14 +12,14 @@ use Net\Bazzline\Component\Utility\Timestamp;
  * Class MonitorFactory
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-18
  */
 class MonitorFactory implements FactoryInterface
 {
     /**
      * @return mixed
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-18
      */
     public function create()

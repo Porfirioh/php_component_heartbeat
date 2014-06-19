@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-14
  */
 
@@ -17,20 +17,20 @@ namespace Net\Bazzline\Component\Heartbeat;
  * You have to implement the handleHeartAttack method.
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-14
  */
 abstract class AbstractClient implements ClientInterface, RuntimeInformationInterface
 {
     /**
      * @var integer
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-14
      */
     protected $startTime;
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-14
      */
     public function __construct()

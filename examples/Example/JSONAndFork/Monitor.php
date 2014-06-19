@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-22
  */
 
@@ -17,7 +17,7 @@ use Net\Bazzline\Component\Utility\Json;
  * Class Monitor
  *
  * @package Example\JSONBasedImplementation
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-22
  */
 class Monitor extends ParentMonitor
@@ -31,13 +31,13 @@ class Monitor extends ParentMonitor
 
     /**
      * @var string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $fileName;
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function __construct()
@@ -49,7 +49,7 @@ class Monitor extends ParentMonitor
 
     /**
      * @return $this;
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function deleteFile()
@@ -176,7 +176,7 @@ class Monitor extends ParentMonitor
 
     /**
      * @return bool
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected function removeFile()
@@ -186,7 +186,7 @@ class Monitor extends ParentMonitor
 
     /**
      * @return array|\stdClass
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     protected function getFileContent()
@@ -197,7 +197,7 @@ class Monitor extends ParentMonitor
     /**
      * @param $content
      * @return bool|int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     protected function setFileContent($content)
@@ -207,7 +207,7 @@ class Monitor extends ParentMonitor
 
     /**
      * @return \SplFileObject
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     protected function getFile()
@@ -219,7 +219,7 @@ class Monitor extends ParentMonitor
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-23
      */
     protected function exitOnJsonLastError()

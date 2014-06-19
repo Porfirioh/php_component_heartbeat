@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-28
  */
 
@@ -10,13 +10,13 @@ namespace Test\Net\Bazzline\Component\Heartbeat;
  * Class PulseTest
  *
  * @package Test\Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-28
  */
 class PulseTest extends TestCase
 {
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function testConstruct()
@@ -32,7 +32,7 @@ class PulseTest extends TestCase
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function testSetAndGetInterval()
@@ -45,7 +45,7 @@ class PulseTest extends TestCase
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function testGetAndUpdateLastPulsedTimestamp()

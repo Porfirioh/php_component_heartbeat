@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-29
  */
 
@@ -10,20 +10,20 @@ namespace Net\Bazzline\Component\Heartbeat;
  * Class RuntimeClientHistory
  *
  * @package Net\Bazzline\Component\Heartbeat
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-09-29
  */
 class RuntimeClientHistory implements ClientHistoryInterface
 {
     /**
      * @var array|ClientHistoryEntryInterface[]
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     protected $entries;
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function __construct()
@@ -36,7 +36,7 @@ class RuntimeClientHistory implements ClientHistoryInterface
      * @param null|RuntimeException $exception
      * @return $this
      * @throws InvalidArgumentException
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function addEntry(ClientInterface $heartbeatClient, $exception = null)
@@ -62,7 +62,7 @@ class RuntimeClientHistory implements ClientHistoryInterface
 
     /**
      * @return array|ClientHistoryEntryInterface[]
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-09-29
      */
     public function getEntries()

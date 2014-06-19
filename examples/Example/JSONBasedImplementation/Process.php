@@ -1,6 +1,6 @@
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-17
  */
 
@@ -13,14 +13,14 @@ use Net\Bazzline\Component\Heartbeat\ClientInterface;
  * Class Process
  *
  * @package Example\JSONBasedImplementation
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-17
  */
 class Process implements ClientAwareInterface
 {
     /**
      * @var Heartbeat
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-18
      */
     protected $heartbeat;
@@ -52,7 +52,7 @@ class Process implements ClientAwareInterface
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-18
      */
     public function execute()

@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 /**
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 7/22/13
  */
 
@@ -34,42 +34,42 @@ Client::create()
  * Class Client
  *
  * @package Example\JSONAndFork
- * @author stev leibelt <artodeto@arcor.de>
+ * @author stev leibelt <artodeto@bazzline.net>
  * @since 2013-07-22
  */
 class Client
 {
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $currentLoop;
 
     /**
      * @var Heartbeat
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $heartbeat;
 
     /**
      * @var int
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $numberOfLoops;
 
     /**
      * @var string
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     protected $pid;
 
     /**
      * @return Client
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public static function create()
@@ -83,7 +83,7 @@ class Client
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function __destruct()
@@ -94,7 +94,7 @@ class Client
     /**
      * @param $pid
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function setPid($pid)
@@ -110,7 +110,7 @@ class Client
     /**
      * @param $numberOfLoops
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function setNumberOfLoops($numberOfLoops)
@@ -124,7 +124,7 @@ class Client
      * @param bool $fails
      * @param null|int $atLoop
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function setFails($fails, $atLoop = null)
@@ -143,7 +143,7 @@ class Client
      * @param bool $failsCritical
      * @param null|int $atLoop
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function setFailsCritical($failsCritical, $atLoop = null)
@@ -160,7 +160,7 @@ class Client
 
     /**
      * @return $this
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function printStatistic()
@@ -177,7 +177,7 @@ class Client
     }
 
     /**
-     * @author stev leibelt <artodeto@arcor.de>
+     * @author stev leibelt <artodeto@bazzline.net>
      * @since 2013-07-22
      */
     public function andRun()
